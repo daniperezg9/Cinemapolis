@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Contacto</title>
+        
+    </head>
+    <body>
+        <h1>Cinemápolis</h1>
+        <a href="./index.html">Página principal</a>
+        <p><a href="./detalles.html">Detalles.</a></p>
+        <p><a href="./bocetos.html">Bocetos.</a></p>
+        <p><a href="./miembros.html">Miembros.</a></p>
+        <p><a href="./planificación.html">Planificación.</a></p>
+        <p><a href="./contacto.html">Contacto.</a></p>
+
+        <h1>Contacto</h1>
+        <form action="./http://FALTA.php" method="post">
+            <fieldset>
+                <legend>Información personal:</legend>
+                <p>Nombre:</p>
+                <input type="text" name="nombre" size="50" value="">
+                <br>
+                <p>Correo:</p>
+                <input type="text" name="correo" size="50" value="">  
+            </fieldset>
+            <p>Motivo del contacto:<br/>
+                <input type="radio" name="Motivo del contacto" value="evaluacion">Evaluación.
+                <input type="radio" name="Motivo del contacto" value="sugerencia">Sugerencia.
+                <input type="radio" name="Motivo del contacto" value="critica">Crítica.
+            </p> 
+            <p>Consulta</p>
+            <textarea name="texto" rows="10" cols="60"></textarea>
+            <br/>
+            <br/>
+            <p><input name="terminos" type="checkbox" value="terminos"> Marca si has entendido los terminos y condiciones.</p>
+            <br/>
+            <br/>
+            <input type="submit" value="Enviar">
+            
+            
+        </form>
+    </body>
+</html>
