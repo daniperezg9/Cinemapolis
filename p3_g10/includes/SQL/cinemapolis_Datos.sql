@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-04-2024 a las 19:17:34
+-- Tiempo de generación: 10-04-2024 a las 21:27:48
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -62,9 +62,10 @@ TRUNCATE TABLE `genero_peliculas`;
 --
 
 INSERT INTO `genero_peliculas` (`titulo`, `genero`) VALUES
-('patata', 'patata'),
-('peliculanumero1', 'peliculanumero1'),
-('peliculanumero2', 'peliculanumero2');
+('El mundo de ayer', 'Drama'),
+('Paisaje con mano invisible', 'Ciencia ficción'),
+('Sakra', 'Animación'),
+('Yakitori: Soldados de la desdicha', 'Animación');
 
 --
 -- Truncar tablas antes de insertar `lista_foros`
@@ -88,9 +89,10 @@ TRUNCATE TABLE `peliculas`;
 --
 
 INSERT INTO `peliculas` (`titulo`, `descripcion`, `fecha_estreno`, `direccion_fotografia`, `alt`) VALUES
-('patata', 'patata', '2024-03-05', 'patata', ''),
-('peliculanumero1', 'peliculanumero1', '2024-03-19', 'peliculanumero1', ''),
-('peliculanumero2', 'peliculanumero2', '2024-03-21', 'peliculanumero2', '');
+('El mundo de ayer', 'Mientras se prepara para dejar la política, Elisabeth de Raincy, presidenta de Francia, descubre que un escándalo afectará a su sucesor designado y dará la victoria al candidato de extrema derecha. ', '2023-10-11', './images/2024-04-10-21-11-38-El mundo de ayer.jpg', 'una señora mirando por la ventana'),
+('Paisaje con mano invisible', 'Adam es un artista adolescente que llega a la mayoría de edad después de una invasión alienígena. ', '2023-01-20', './images/2024-04-10-21-10-13-Paisaje con mano invisible.jpg', 'Un cangrejo con el cielo de fondo'),
+('Sakra', 'Cuando un artista marcial respetado es acusado de asesinato, emprende un viaje en busca de respuestas sobre su misterioso pasado y los enemigos que buscan destruirlo.', '2023-05-18', './images/2024-04-10-21-08-11-sakra.jpg', 'personaje principal rodeado de enemigos y amenazando con una'),
+('Yakitori: Soldados de la desdicha', 'Con la Tierra colonizada por una civilización alienígena superior, Akira solo tiene una oportunidad de tener un futuro mejor: alistarse como soldado Yakitori.', '2023-05-18', './images/2024-04-10-21-06-57-yakitori.jpg', 'personajes principales posando');
 
 --
 -- Truncar tablas antes de insertar `resenyas`
@@ -114,7 +116,7 @@ TRUNCATE TABLE `usuarios`;
 --
 
 INSERT INTO `usuarios` (`nombre`, `contacto`, `admin`, `pass`) VALUES
-('patata', 'patata', 0, '$2y$10$EBWWNGz0VzetgRpYjz6RSOJvs3L8TJx3o5AIYu0qTHb.IDtw3YwfW'),
+('admin', 'admin@admin.es', 1, '$2y$10$KWXhxyHlnNCAeJUC/rgDTe8CGCUPulPSawCWweiW4fk2NuYzR1.f6'),
 ('user1', 'user1@gmail.com', 1, '$2y$10$nwh.rwu4HBJ4YCqLpDVNAu.E3SK3DUTeJJxOIiPssnXFce6U2BPgq'),
 ('user2', 'user2@gmail.com', 0, '$2y$10$PQBG6TKuB2vgokELqJEEBeKnEUDcFbwYrjB5oRHNQYa1ug6fB.UkS'),
 ('user3', 'user3@gmail.com', 0, '$2y$10$Xyhjrh0psrJp6LdCvzdqZ.4Q0X3GBaz11PSdoQCK2IT7elbECn7QW'),

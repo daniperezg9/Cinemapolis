@@ -14,7 +14,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     $tituloPeli = $conn->real_escape_string($_GET['titulo']);
 
     // Consulta para obtener el género y la fecha de estreno de la película
-    $query = "SELECT pg.genero AS genero, p.fecha_estreno AS fecha_estreno FROM `peliculas` p JOIN `genero_peliculas` pg ON p.titulo = pg.titulo WHERE p.titulo ='$tituloPeli'";
+    $query = "SELECT pg.genero AS genero, p.fecha_estreno AS fecha_estreno , p.direccion_fotografia AS dir , p.alt AS alt , p.descripcion AS descr FROM `peliculas` p JOIN `genero_peliculas` pg ON p.titulo = pg.titulo WHERE p.titulo ='$tituloPeli'";
     // Realizamos la consulta
     $result = $conn->query($query);
 
@@ -22,6 +22,10 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
         while($row = $result->fetch_array()){
             $generoPeli = $row['genero'];
             $fecha_estreno = $row['fecha_estreno'];
+            $dir= $row['dir'];
+            $alt=$row['alt'];
+            $descr=$row['descr'];
+
         }
     }
 }
@@ -50,8 +54,9 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     ?>
 </div>
 <div id="Imagen">
-    <img src="./imgs/<?php echo $tituloPeli; ?>" alt="peli" width="15%" height="15%">
+    <?php echo" <img src='$dir' alt='$alt' width='300' height='360'/>"; ?>
     <p> Sinopsis </p>
+    <?php echo" <p>$descr</p>"; ?>
 </div>
 <section id="app">
     <div class="container">
