@@ -37,7 +37,7 @@ else {
       <p>Descripción: $descripcion
       <p>Creador por: $contacto
       EOS;
-      if($_SESSION['admin']=='1'){ //Si eres admin puedes borrarlo.
+      if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
         $contenidoPrincipal .= <<< EOS
         <p> Deseas borrar este foro (no hay vuelta atrás): <a href='borraForo.php?id_foro={$idforo}&contacto={$contacto}'>Borrar Foro</a></p>
         EOS;

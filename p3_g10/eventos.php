@@ -42,6 +42,11 @@ $tituloPagina = 'Pagina Principal Eventos';
                             <b>Fecha de creacion: </b>$creacion<br>
                         </p>
                 EOS;
+                if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
+                    $contenidoPrincipal .= <<< EOS
+                    <p><a href='borrarEvento.php?nombre_evento={$row['nombre_evento']}&creador_evento={$row['creador_evento']}&fecha_evento={$row['fecha_evento']}'>Borrar Evento</a></p>
+                    EOS;
+                  }
             }
         }
         else

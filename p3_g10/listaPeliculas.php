@@ -33,8 +33,18 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                 <td><img src='$img' alt='$alt' width='100' height='120'/></td>
                 <td><a href='./reseñasYvaloraciones.php?titulo={$row['titulo']}'>{$row['titulo']}</a></td>
                 <td>{$row['descripcion']}</td>
-            </tr>
     EOS;
+    $contenidoPrincipal .= "<td>";
+    if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
+        $contenidoPrincipal .= <<< EOS
+        <p><a href='borrarPelicula.php?titulo={$row['titulo']}'>Borrar Pelicula</a></p>
+        EOS;
+      }
+        $contenidoPrincipal .= "</td>";
+
+        $contenidoPrincipal .= <<<EOS
+        </tr>
+        EOS;
     }
     $contenidoPrincipal .= <<<EOS
         </table>
