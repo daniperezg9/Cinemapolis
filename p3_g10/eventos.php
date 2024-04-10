@@ -14,44 +14,43 @@ require_once __DIR__.'/includes/config.php';
         $query = "SELECT * FROM eventos";
         // Realizamos la consulta
         $result = $conn->query($query);
-
     }
-?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <title>LISTADO DE EVENTOS</title>
-</head>
-<?php require "./includes/vistas/comun/cabecera.php";?>
-<body>
-    <?php
-        if($result){
+
+$tituloPagina = 'Pagina Principal Eventos';
+
+    if (!isset($_SESSION['login'])) {
+        $contenidoPrincipal = <<<EOS
+        <h1>EVENTOS</h1>
+        <p> Registrate para poder ver los eventos:  <a href='login.php'>Login</a></p>
+        EOS;
+    }
+    else{
+        if($result->num_rows > 0){
             while($row = $result->fetch_array()){
                 $creador = $row['creador_evento'];
                 $nombre = $row['nombre_evento'];
                 $descripcion = $row['descripcion_evento'];
                 $fecha = $row['fecha_evento'];
                 $creacion = $row['fecha_creacion'];
-            ?>
-                <div>
-                    <h2><?php echo $nombre; ?></h2>
-                    <div>
+                $contenidoPrincipal .= <<< EOS
+                    <h2>$nombre</h2>
                         <p>
-                            <b>Descripcion: </b><?php echo $descripcion; ?> <br>
-                            <b>Creador: </b><?php echo $creador; ?> <br>
-                            <b>Fecha de inicio: </b> <?php echo $fecha; ?><br>
-                            <b>Fecha de creacion: </b> <?php echo $creacion; ?><br>
+                            <b>Descripcion: </b>$descripcion<br>
+                            <b>Creador: </b>$creador<br>
+                            <b>Fecha de inicio: </b>$fecha<br>
+                            <b>Fecha de creacion: </b>$creacion<br>
                         </p>
-                    </div>
-                </div>
-            <?php
-
+                EOS;
             }
         }
-    ?>
+        else
+        {
+            $contenidoPrincipal .= <<<EOS
+            <p>No hay ningún evento creado.</p>
+            EOS;
+        }
+    }
 
-
-</body>
-</html>
+    require __DIR__.'/includes/vistas/plantillas/plantilla.php';
+?>
