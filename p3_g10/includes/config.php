@@ -39,7 +39,7 @@ define('BD_NAME', 'cinemapolis');
 
 
 define('RAIZ_APP', __DIR__);
-define('RUTA_APP', '/p3_g10');
+define('RUTA_APP', '/cinemapolis/p3_g10/');
 define('RUTA_IMGS', RUTA_APP.'/images');
 define('RUTA_CSS', RUTA_APP.'/css');
 define('RUTA_JS', RUTA_APP.'/js');

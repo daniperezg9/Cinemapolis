@@ -17,7 +17,6 @@ class Usuario{
     {
         $usuario = self::buscaUserPorCorreo($correoUsuario);
         if ($usuario && $usuario->compruebaPassword($pass)) {
-            
             return $usuario;
         }
         return false;
@@ -58,23 +57,24 @@ class Usuario{
         return $user;
     }
 
-    public static function inserta_user($nuevo_user){
+    public static function inserta_user($nombre,$contacto,$esAdmin,$pass){
         $user=false;
         $conn= Aplicacion::getInstance()->getConexionBd();
         if ($conn->connect_error){
             die("La conexión ha fallado" . $conn->connect_error);
         }
 
-        if(!buscaUserPorCorreo($nuevo_user)){
+        if(self::buscaUserPorCorreo($contacto)==false){
             
             $query=sprintf("INSERT INTO usuarios(nombre, contacto, admin, pass) VALUES ('%s', '%s', '%s','%s')"
-                , $conn->real_escape_string($nuevo_user->nombre)
-                , $conn->real_escape_string($nuevo_user->contacto)
-                , $conn->real_escape_string($nuevo_user->esAdmin)
-                , $conn->real_escape_string(hashPassword($nuevo_user->password))
+                , $conn->real_escape_string($nombre)
+                , $conn->real_escape_string($contacto)
+                , $conn->real_escape_string($esAdmin)
+                , $conn->real_escape_string(self::hashPassword($pass))
             );
             if ( $conn->query($query) ) {
-                $user = $nuevo_user;
+                $user = new Usuario($nombre, $contacto, $esAdmin, $pass);
+                
             } else {
                 error_log("Error BD ({$conn->errno}): {$conn->error}");
             }
@@ -121,7 +121,7 @@ class Usuario{
     public function cambiaPassword($nuevoPassword)
     {
         $this->password = self::hashPassword($nuevoPassword);
-        modificaUser($this);
+        self::modificaUser($this);
     }
 
     private static function hashPassword($password)
@@ -143,15 +143,15 @@ class Usuario{
     }
 
     public  function get_contacto_usuario(){
-       return $this->$contacto;
+       return $this->contacto;
     }
 
     public  function get_nombre_usuario(){
-        return $this->$nombre;
+        return $this->nombre;
     } 
 
     public  function get_esAdmin_usuario(){
-        return $this->$esAdmin;
+        return $this->esAdmin;
     }
 
 }

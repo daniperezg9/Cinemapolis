@@ -6,7 +6,7 @@ require_once 'includes/config.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (Admin::esAdmin($_SESSION)) {
+    if (Usuario::get_esAdmin_usuario()) {
         $app = Aplicacion::getInstance();
         $conn = $app->getConexionBd();
         $tipo = $_POST['tipo'];
