@@ -1,39 +1,21 @@
 <?php
 namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
-session_start();
 //Definicion de constantes
 //Parametros de acceso de la base de datos
     
     //abrimos conexión 
-    $app = Aplicacion::getInstance();
-    $conn = $app->getConexionBd();
-    if (mysqli_connect_errno()){
-        die("error de conexión con BBDD". mysqli_connect_error());
-    }
 
-    //quitamos la insercion de codigo html y php
-    $contacto =$conn->real_escape_string($_POST['contacto']) ;
-    //buscamos la contraseña ya encriptada ya que es lo que almacenamos (tema de seguridad)
+    $user=Usuario::inserta_user($_POST['nombre'],$_POST['contacto'], 0, $_POST['password']);
     
-    // Creamos la consulta12
-    $query = "SELECT contacto FROM usuarios WHERE contacto = '$contacto' ";
-    // Realizamos la consulta
-    $result = $conn->query($query);
-    if ($result->num_rows == 0){
-        //recuperamos los resultados
-        $pass= password_hash($conn->real_escape_string($_POST['password']), PASSWORD_BCRYPT);
-        $contacto = $conn->real_escape_string($_POST['contacto']);
-        $nombre = $conn->real_escape_string($_POST['nombre']);
-        $query = "INSERT INTO usuarios (nombre, contacto, admin, pass) VALUES ('$nombre', '$contacto', FALSE, '$pass')";
-        //seteamos con lo devuelto por la consulta
-        $result = $conn->query($query);
+    
+    if ($user!=false){
         $creado=true;
     }
     else{
         $creado=false;
     }
-    $conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -50,8 +32,8 @@ session_start();
                     
                     //Si se crea con éxito la cuenta se guardan los datos de sesión y se devuelve al usuario a la página principal
                     $_SESSION['login']=true;
-                    $_SESSION['nombre']=$nombre;
-                    $_SESSION['contacto']= $contacto;
+                    $_SESSION['nombre']=$user->get_nombre_usuario();
+                    $_SESSION['contacto']= $user->get_contacto_usuario();
                     $_SESSION['admin']=false;
                     header('Location: ./index.php');
                     exit;
