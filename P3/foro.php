@@ -1,34 +1,62 @@
 <?php 
 namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
-?>
+//abrimos conexión 
+if(isset($_SESSION['login']) && $_SESSION['login']) {
+  $app = Aplicacion::getInstance();
+  $conn = $app->getConexionBd();
+  if ($conn->connect_error) {
+    die("La conexión ha fallado" . $conn->connect_error);
+  }
+  // Creamos la consulta
+  $query = "SELECT * FROM lista_foros";
+  // Realizamos la consulta
+  $result = $conn->query($query);
+}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta http-equiv="Content-Type" content="text/php; charset=utf-8">
-<title>Foro</title>
-</head>
-<?php require "./includes/vistas/comun/cabecera.php";?>
-<body>
 
-<div id="contenedor"> <!-- Inicio del contenedor -->
-	<main>
-	  <article>
-        <?php
-            if (!isset($_SESSION['login'])) {
-            echo "<h1>Bienvenido al foro!</h1>
-                  <p> Registrate para poder usar el foro:  <a href='login.php'>Login</a></p>";
-            }
-            else {
-            echo "<h1>Bienvenido al foro {$_SESSION['nombre']}: interactúa con quien quieras!</h1>
-                  <p>Vuelve a la página principal: <a href='index.php'>Home. </a></p>
-                  <p><a href='logout.php'>Cerrar Sesión</a></p>";
-            }
-        ?>
-	  </article>
-	</main>
-</div> <!-- Fin del contenedor -->
+$tituloPagina = 'Pagina Principal Foro';
 
-</body>
-</html>
+if (!isset($_SESSION['login'])) {
+  $contenidoPrincipal = <<<EOS
+    <h1>Bienvenido al foro!</h1>
+    <p> Registrate para poder usar el foro:  <a href='login.php'>Login</a></p>
+  EOS;
+}
+else {
+  $contenidoPrincipal = <<< EOS
+    <h1>Bienvenido al foro: interactúa con quien quieras!</h1>
+  EOS;
+  if($result->num_rows!=0){
+    while($row = $result->fetch_array()){
+      $idforo = $row['id_foro'];
+      $contacto = $row['contacto'];
+      $descripcion = $row['descripcion'];
+      $contenidoPrincipal .= <<< EOS
+      <p>Foro: <a href='./foros.php?id_foro={$row["id_foro"]}'>$idforo</a>
+      <p>Descripción: $descripcion
+      <p>Creador por: $contacto
+      EOS;
+      if($_SESSION['admin']=='1'){ //Si eres admin puedes borrarlo.
+        $contenidoPrincipal .= <<< EOS
+        <p> Deseas borrar este foro (no hay vuelta atrás): <a href='borraForo.php?id_foro={$idforo}&contacto={$contacto}'>Borrar Foro</a></p>
+        EOS;
+      }
+      $contenidoPrincipal .= <<< EOS
+      <p>------------------------------</p>
+      EOS;
+    }
+  }
+  else {
+    $contenidoPrincipal .= <<<EOS
+    <p>No hay ningún foro creado.</p>
+    <p>--------------------------</p>
+    EOS;
+  }
+  $contenidoPrincipal .= <<<EOS
+  <p>Crea tu propio foro: <a href= 'signupForo.php'>Foro Nuevo </a></p>
+  EOS;
+  $result->free();
+}
+
+require __DIR__.'/includes/vistas/plantillas/plantilla.php';
