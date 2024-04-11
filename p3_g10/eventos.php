@@ -33,7 +33,7 @@ $tituloPagina = 'Pagina Principal Eventos';
                 $descripcion = $row['descripcion_evento'];
                 $fecha = $row['fecha_evento'];
                 $creacion = $row['fecha_creacion'];
-                $contenidoPrincipal .= <<< EOS
+                $contenidoPrincipal = <<< EOS
                     <h2>$nombre</h2>
                         <p>
                             <b>Descripcion: </b>$descripcion<br>
