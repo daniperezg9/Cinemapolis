@@ -21,8 +21,8 @@ $tituloPagina = 'Pagina Principal Eventos';
 
     if (!isset($_SESSION['login'])) {
         $contenidoPrincipal = <<<EOS
-        <h1>EVENTOS</h1>
-        <p> Registrate para poder ver los eventos:  <a href='login.php'>Login</a></p>
+        <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
+        <h2>Para acceder a los eventos es necesario haber iniciado sesión. <a href='login.php'>Login</a></h2>
         EOS;
     }
     else{

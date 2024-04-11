@@ -19,8 +19,8 @@ $tituloPagina = 'Pagina Principal Foro';
 
 if (!isset($_SESSION['login'])) {
   $contenidoPrincipal = <<<EOS
-    <h1>Bienvenido al foro!</h1>
-    <p> Registrate para poder usar el foro:  <a href='login.php'>Login</a></p>
+    <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
+    <h2>Para acceder al foro es necesario haber iniciado sesión. <a href='login.php'>Login</a></h2>
   EOS;
 }
 else {

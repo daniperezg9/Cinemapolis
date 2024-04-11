@@ -54,8 +54,8 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
 else{ //Sino mostramos un error por no haber iniciado sesión
 
     $contenidoPrincipal = <<<EOS
-    <h1 class = "advertenciaInicioSesion">⚠️Advertencia⚠️</h1>
-    <h2>Para acceder a la lista de películas es necesario haber iniciado sesión.</h2>
+    <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
+    <h2>Para acceder a la lista de películas es necesario haber iniciado sesión. <a href='login.php'>Login</a></h2>
     EOS;
 }
 
