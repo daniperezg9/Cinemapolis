@@ -15,13 +15,7 @@ require_once __DIR__.'/includes/config.php';
     $id_foro=$conn->real_escape_string($_GET['id_foro']) ;
     $contacto=$conn->real_escape_string($_GET['contacto']);
 
-    $query = "DELETE FROM foro WHERE id_foro = '$id_foro' AND contacto = '$contacto' ";
-    // Realizamos la consulta
-    $result = $conn->query($query);
-
-    $query = "DELETE FROM lista_foros WHERE id_foro = '$id_foro' AND contacto = '$contacto' ";
-    //seteamos con lo devuelto por la consulta
-    $result = $conn->query($query);
+    Foro::borraForo($id_foro,$contacto);
     
     header('Location: ./foro.php');
 ?>
