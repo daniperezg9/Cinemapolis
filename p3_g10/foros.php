@@ -40,7 +40,7 @@ EOS;
         }
         if($row['contacto'] == $_SESSION['contacto'] || $_SESSION['admin']=='1'){  //Si creas el foro o tienes poderes de administración, puedes borar y editar los mensajes dentro de los mismos
           $contenidoPrincipal .= <<<EOS
-           <td><a href='borraMensaje.php?fecha_envio={$row['fecha_envio']}'>Borrar</a></td>
+           <td><a href='borraMensaje.php?fecha_envio={$row['fecha_envio']}&contacto={$row['contacto']}'>Borrar</a></td>
           EOS;
         }
         else{
@@ -58,6 +58,7 @@ EOS;
     <p> No hay ningún mensaje en este foro </p>
   EOS;
   }
+  $result->free();
   $contenidoPrincipal .= <<<EOS
   </table>
   <p>Añadir mensaje al foro: <a href='./signupMensaje.php?id_foro=$idforo'>Mensaje nuevo</a></p>

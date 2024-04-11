@@ -3,7 +3,6 @@ namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
 //Definicion de constantes
 //Parametros de acceso de la base de datos
-    
     //abrimos conexión 
     $app = Aplicacion::getInstance();
     $conn = $app->getConexionBd();
@@ -12,10 +11,11 @@ require_once __DIR__.'/includes/config.php';
     }
 
     //buscamos la contraseña ya encriptada ya que es lo que almacenamos (tema de seguridad)
-    $fecha_envio=$conn->real_escape_string($_SESSION['fecha_envio']) ;
-    $mensaje=$conn->real_escape_string($_POST['mensaje']);
+    $id_foro=$conn->real_escape_string($_GET['id_foro']) ;
+    $contacto=$conn->real_escape_string($_GET['contacto']);
+    $descripcion=$conn->real_escape_string($_POST['descripcion']);
 
-    Mensaje::modificarMensaje($mensaje, $fecha_envio);
+    Foro::modificarForo($id_foro,$contacto,$descripcion);
     
     header('Location: ./foro.php');
 ?>

@@ -14,9 +14,7 @@ require_once __DIR__.'/includes/config.php';
     $id_foro=$conn->real_escape_string($_SESSION['id_foro']) ;
     $mensaje=$conn->real_escape_string($_POST['mensaje']) ;
 
-    $query = "INSERT INTO foro (id_foro, contacto, mensaje, fecha_envio) VALUES ('$id_foro', '$contacto', '$mensaje', '$fecha_envio')";
-    $result = $conn->query($query);
-
-    $conn->close();
+    Mensaje::añadirMensaje($id_foro, $contacto, $mensaje, $fecha_envio);
+    
     header('Location: ./foro.php');
 ?>

@@ -11,20 +11,10 @@ require_once __DIR__.'/includes/config.php';
     //quitamos la insercion de codigo html y php
     $contacto =$conn->real_escape_string($_SESSION['contacto']) ;
     $id_foro=$conn->real_escape_string($_POST['id_foro']) ;
-    $descripcion=$conn->real_escape_string($_POST['descripcion']) ;
+    $descripcion=$conn->real_escape_string($_POST['descripcion']);
 
-    $query = "SELECT id_foro FROM lista_foros WHERE id_foro = '$id_foro' AND contacto ='$contacto' ";
-    // Realizamos la consulta
-    $result = $conn->query($query);
+    Foro::añadirForo($id_foro, $contacto, $descripcion);
 
-    if ($result->num_rows == 0){      
-        $result->free();  
-        $query = "INSERT INTO lista_foros (contacto, id_foro, descripcion) VALUES ('$contacto', '$id_foro', '$descripcion')";
-        //seteamos con lo devuelto por la consulta
-        $result = $conn->query($query);
-    }
-
-    $conn->close();
     header('Location: ./foro.php');
 ?>
 

@@ -19,8 +19,8 @@ $tituloPagina = 'Pagina Principal Foro';
 
 if (!isset($_SESSION['login'])) {
   $contenidoPrincipal = <<<EOS
-    <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
-    <h2>Para acceder al foro es necesario haber iniciado sesión. <a href='login.php'>Login</a></h2>
+  <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
+  <h2>Para acceder al foro es necesario haber iniciado sesión. <a href='login.php'>Login</a></h2>
   EOS;
 }
 else {
@@ -37,6 +37,11 @@ else {
       <p>Descripción: $descripcion
       <p>Creador por: $contacto
       EOS;
+      if(Admin::esAdmin($_SESSION) || $_SESSION['id_foro'] = $idforo){ //Si eres admin o el dueño puedes editarlo
+        $contenidoPrincipal .= <<< EOS
+        <p>Editar Foro: <a href='./signupEditForo.php?id_foro={$row["id_foro"]}&contacto={$row["contacto"]}&descripcion={$row["descripcion"]}'>Editar</a>
+        EOS;
+      }
       if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
         $contenidoPrincipal .= <<< EOS
         <p> Deseas borrar este foro (no hay vuelta atrás): <a href='borraForo.php?id_foro={$idforo}&contacto={$contacto}'>Borrar Foro</a></p>

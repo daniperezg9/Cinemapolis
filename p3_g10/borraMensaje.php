@@ -12,11 +12,10 @@ require_once __DIR__.'/includes/config.php';
     }
 
     //quitamos la insercion de codigo html y php
-    $fecha_envio=$conn->real_escape_string($_GET['fecha_envio']) ;
+    $fecha_envio=$conn->real_escape_string($_GET['fecha_envio']);
+    $contacto = $conn->real_escape_string($_GET['contacto']);
 
-
-    $query = "DELETE FROM foro WHERE fecha_envio = '$fecha_envio'"; //Borra unicamente el mensaje creado a una determinada hora (iba a hacerlo para una determinada hora y que solo pudiese borrarlo el que ha creado el mensaje pero entonces el admin no podría borrarlo)
-    $result = $conn->query($query);
+    Mensaje::borraMensaje($contacto, $fecha_envio);
     
     header('Location: ./foro.php');
 ?>
