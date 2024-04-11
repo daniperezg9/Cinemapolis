@@ -51,7 +51,7 @@ $tituloPagina = 'Pagina Principal Eventos';
         }
         else
         {
-            $contenidoPrincipal .= <<<EOS
+            $contenidoPrincipal = <<<EOS
             <p>No hay ningún evento creado.</p>
             EOS;
         }
