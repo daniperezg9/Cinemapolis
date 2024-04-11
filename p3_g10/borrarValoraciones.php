@@ -16,6 +16,6 @@ require_once __DIR__.'/includes/config.php';
     $contacto=$conn->real_escape_string($_GET['contacto']) ;
 
     Valoracion::borrarValoracion($contacto,$pelicula);
-    
-    header('Location: ./reseñasYvaloraciones.php');
+    $pelicula_encoded = urlencode($pelicula);
+    header('Location: ./listaPeliculas.php');
 ?>

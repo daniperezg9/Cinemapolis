@@ -30,7 +30,7 @@ require_once __DIR__.'/includes/config.php';
                 $result = $conn->query($query);
                 $valoracion_hecha=TRUE;
             }
-            $conn->close();
+            $valor_invalido=false;
         }
         else{
             $valor_invalido=true;

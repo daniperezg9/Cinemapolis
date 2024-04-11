@@ -17,7 +17,7 @@ class Resenyas{
         }
         return true;
     }
-    public modificarResenyas($contacto,$pelicula,$resenya){
+    public function modificarResenyas($contacto,$pelicula,$resenya){
         if (!$contacto || !$pelicula) {
             return false;
         } 
@@ -30,6 +30,24 @@ class Resenyas{
         }
         return true;
     }
+
+    public static function mostrarResenyas($pelicula){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "SELECT contacto, mensaje FROM resenyas WHERE pelicula = '$pelicula'";
+        $result = $conn->query($query);
+        if ( !$result ) {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+        while($row = $result->fetch_assoc()){
+            echo '<p><strong>' . $row['contacto'] . ':</strong> ' . $row['mensaje'] . '</p>';
+            if(Admin::esAdmin($_SESSION)){
+                echo '<p><a href="borrarResenya.php?contacto=' . $row['contacto'] . '&pelicula=' . $pelicula . '">Borrar Reseña</a></p>';
+            }
+        }
+        return true;
+    }
+
 
 }
 

@@ -1,6 +1,6 @@
 <?php
 namespace cinemapolis;
-require_once __DIR__.'includes/config.php';
+require_once __DIR__.'/includes/config.php';
 //Definicion de constantes
 //Parametros de acceso de la base de datos
    
@@ -26,7 +26,7 @@ require_once __DIR__.'includes/config.php';
             $result = $conn->query($query);
             $resenya_hecha=TRUE;
         }
-        $conn->close();
+        
     }
     else{
         $resenya_hecha=FALSE;

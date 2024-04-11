@@ -61,47 +61,17 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
 <section id="app">
     <div class="container">
         <div class="row">
-            <div class="col-6">
-                <div class="comment">
-                    <?php
-                    // Consulta para obtener las reseñas de la película desde la base de datos
-                    $query_resenas = "SELECT contacto, mensaje FROM resenyas WHERE pelicula = ?";
-                    $stmt_resenas = $conn->prepare($query_resenas);
-                    $stmt_resenas->bind_param("s", $tituloPeli);
-                    $stmt_resenas->execute();
-                    $result_resenas = $stmt_resenas->get_result();
-
-                    // Mostrar las reseñas
-                    while($row_resenas = $result_resenas->fetch_assoc()) {
-                        echo '<p><strong>' . $row_resenas['contacto'] . ':</strong> ' . $row_resenas['mensaje'] . '</p>';
-                    }
-                    ?>
-                </div>
+            <div class="comment">
+                <?php
+                Resenyas::mostrarResenyas($tituloPeli);
+                Valoracion::mostrarValoracion($tituloPeli);
+                ?>
             </div>
-            <div class="col-6">
-                <div class="rating">
-                    <?php
-                    // Consulta para obtener las valoraciones de la película desde la base de datos
-                    $query_valoraciones = "SELECT puntuacion FROM valoraciones WHERE pelicula = ?";
-                    $stmt_valoraciones = $conn->prepare($query_valoraciones);
-                    $stmt_valoraciones->bind_param("s", $tituloPeli);
-                    $stmt_valoraciones->execute();
-                    $result_valoraciones = $stmt_valoraciones->get_result();
-
-                    // Calcular el promedio de las valoraciones
-                    $total_valoraciones = 0;
-                    $num_valoraciones = $result_valoraciones->num_rows;
-                    while($row_valoraciones = $result_valoraciones->fetch_assoc()) {
-                        $total_valoraciones += $row_valoraciones['puntuacion'];
-                    }
-                    if ($num_valoraciones > 0) {
-                        $promedio_valoraciones = $total_valoraciones / $num_valoraciones;
-                        echo "<p><strong>Puntuación promedio:</strong> " . number_format($promedio_valoraciones, 2) . "</p>";
-                    } else {
-                        echo "<p>No hay valoraciones para esta película.</p>";
-                    }
-                    ?>
-                </div>
+            <div class="rating">
+                <?php
+                $v = new Valoracion();
+                $media = $v->getMedia();
+                ?>
             </div>
         </div>
         <div class="row">

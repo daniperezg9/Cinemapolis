@@ -15,7 +15,7 @@ require_once __DIR__.'/includes/config.php';
     $pelicula=$conn->real_escape_string($_GET['pelicula']) ;
     $contacto=$conn->real_escape_string($_GET['contacto']) ;
 
-    Resenya::borrarResenya($contacto,$pelicula);
+    Resenyas::borrarResenya($contacto,$pelicula);
     
-    header('Location: ./reseñasYvaloraciones.php');
+    header('Location: ./listaPeliculas.php');
 ?>
