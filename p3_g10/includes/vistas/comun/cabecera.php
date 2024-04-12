@@ -17,7 +17,9 @@ function opcionesInicioSesion(){
 ?>
 
 <header>
+    <div class="logo-container">
 	<img src="<?= RUTA_IMGS; ?>/logoCinemapolis.jpg" alt="CINEMAPOLIS" id ="CINEMAPOLIS">
+	</div>  
 
 	<div class="inicioSesion">
 		<h1 class= "saludo"> Bienvenido a Cinemapolis.io</h1>

@@ -18,27 +18,50 @@
 	}
 
 	header { /* Encabezado de la página */
-		background-color: blue;
+		display: flex;
 		grid-column: 1 / 4;
+		background-color: #110a2c;
+
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas: "logo login";
 		align-items: center;
-		overflow: scroll;
 	}
 
+	#cinemaPack { /* Imagen del cine */
+		width: 125px;
+		height: auto;
+		margin-right: 25px;
+	}
+
+	.logo-container {
+		flex: 0 0 auto; /* Ajusta el tamaño del contenedor del logo para que no crezca */
+	}
+
+	.inicioSesion {
+		flex: 1; /* Permite que el contenedor de inicio de sesión ocupe el espacio restante */
+		text-align: left; /* Alinea el texto a la derecha */
+	}
+	
 	header img { /* Imagenes del encabezado */
 		margin-right: 25px; 
 		width: 125px;
 		height: auto; 
 	}
 
-	#cinemaPack { /* Imagen de cinemaPack en el encabezado */
-		margin-right: 0px;
-		margin-left: 175px; 
+	header h1 { /* Título del encabezado */
+		color: white;
+		font-size: 2em;
+		grid-area: logo;
 	}
 
 	header a, header a:visited { /* Enlaces del encabezado de inicio de sesión */
 		color: white;
 		font-weight: bold;
 		text-decoration: none;
+	}
+
+	header p { /* Texto del encabezado */
+		color: white;
 	}
 
 	header a:hover { /* Enlaces del encabezado al pasar el cursor */
@@ -50,14 +73,22 @@
 	nav { /* Barra de navegación izquierda */
 		grid-column: 1;
 		grid-row: 2;
-		background-color: green;
 		overflow: scroll;
+	}
+
+	nav h2, a { /* Enlaces de la barra de navegación izquierda */
+		color: white;
+	}
+
+	nav a:hover { /* Enlaces del encabezado al pasar el cursor */
+		color: rgb(218, 155, 62);
+		font-weight: bold;
+		text-decoration: underline;
 	}
 
 	aside { /* Barra de lateral derecha */
 		grid-column: 3;
 		grid-row: 2;
-		background-color: yellow;
 	}
 
 	aside img { /* Imagenes de la barra lateral derecha */
@@ -75,5 +106,4 @@
 	footer { /* Pie de página */
 		grid-column: 1 / 4;
 		grid-row: 3;
-		background-color: red;
 	}
