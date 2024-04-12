@@ -16,6 +16,6 @@ require_once __DIR__.'/includes/config.php';
     $contacto=$conn->real_escape_string($_POST['contacto']) ;
 
     Resenyas::borrarResenya($contacto,$pelicula);
-    
-    header('Location: ./listaPeliculas.php');
+    $url_destino = './reseñasYvaloraciones.php?titulo=' . urlencode($pelicula);
+    header('Location:' . $url_destino);
 ?>

@@ -44,7 +44,13 @@ else {
       }
       if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
         $contenidoPrincipal .= <<< EOS
-        <p> Deseas borrar este foro (no hay vuelta atrás): <a href='borraForo.php?id_foro={$idforo}&contacto={$contacto}'>Borrar Foro</a></p>
+        <p> Deseas borrar este foro (no hay vuelta atrás): 
+          <form action="borrarForo.php" method="post" style="display: inline;">
+              <input type="hidden" name="id_foro" value="$idforo">
+              <input type="hidden" name="contacto" value="$contacto">
+              <button type="submit">Borrar Foro</button>
+          </form>
+        </p>
         EOS;
       }
       $contenidoPrincipal .= <<< EOS

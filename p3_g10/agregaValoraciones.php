@@ -16,6 +16,6 @@ require_once __DIR__.'/includes/config.php';
     $contacto= $conn->real_escape_string($_SESSION['contacto']);
 
     Valoracion::añadirValoracion($pelicula,$contacto,$puntuacion);
-
-    Header("Location:listaPeliculas.php");
+    $url_destino = './reseñasYvaloraciones.php?titulo=' . urlencode($pelicula);
+    header('Location:' . $url_destino);
 ?>

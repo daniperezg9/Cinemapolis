@@ -34,6 +34,7 @@ class Foro{
         
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = "DELETE FROM foro WHERE id_foro = '$id_foro' AND contacto = '$contacto' ";
+        
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;

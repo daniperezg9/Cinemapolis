@@ -16,6 +16,7 @@ require_once __DIR__.'/includes/config.php';
 
     Resenyas::añadirResenya($pelicula,$contacto,$resenya);
 
-    Header("Location:listaPeliculas.php");
+    $url_destino = './reseñasYvaloraciones.php?titulo=' . urlencode($pelicula);
+    header('Location:' . $url_destino);
     
 ?>
