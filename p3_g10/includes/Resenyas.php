@@ -42,9 +42,37 @@ class Resenyas{
         while($row = $result->fetch_assoc()){
             echo '<p><strong>' . $row['contacto'] . ':</strong> ' . $row['mensaje'] . '</p>';
             if(Admin::esAdmin($_SESSION)){
-                echo '<p><a href="borrarResenya.php?contacto=' . $row['contacto'] . '&pelicula=' . $pelicula . '">Borrar Reseña</a></p>';
+                echo '<form action="borrarResenya.php" method="post" style="display: inline;">
+                        <input type="hidden" name="contacto" value="' . $row['contacto'] . '">
+                        <input type="hidden" name="pelicula" value="' . $pelicula . '">
+                        <button type="submit"> Borrar Reseña </button>
+                      </form>';
             }
         }
+        if($result->num_rows==0){
+            echo "<p>No hay reseñas para esta película.</p>";        
+        }
+        return true;
+    }
+
+    public static function añadirResenya($pelicula,$contacto,$resenya){
+
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        if ($conn->connect_error){
+            die("La conexión ha fallado" . $conn->connect_error);
+        }
+        
+        $query = "SELECT * FROM resenyas WHERE contacto = '$contacto' AND pelicula='$pelicula'";
+
+        $result = $conn->query($query);
+        if ($result->num_rows == 0){
+            $result -> free();
+            $query = "INSERT INTO resenyas (contacto, pelicula, mensaje) VALUES ('$contacto', '$pelicula', '$resenya')";
+            $result = $conn->query($query);
+        }else{
+            die("Este usuario ya ha realizado una reseña");
+        }
+        $conn->close();
         return true;
     }
 

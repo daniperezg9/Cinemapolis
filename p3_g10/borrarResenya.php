@@ -12,8 +12,8 @@ require_once __DIR__.'/includes/config.php';
     }
 
     //buscamos la contraseña ya encriptada ya que es lo que almacenamos (tema de seguridad)
-    $pelicula=$conn->real_escape_string($_GET['pelicula']) ;
-    $contacto=$conn->real_escape_string($_GET['contacto']) ;
+    $pelicula=$conn->real_escape_string($_POST['pelicula']) ;
+    $contacto=$conn->real_escape_string($_POST['contacto']) ;
 
     Resenyas::borrarResenya($contacto,$pelicula);
     

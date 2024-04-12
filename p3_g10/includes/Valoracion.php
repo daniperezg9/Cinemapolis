@@ -42,11 +42,16 @@ class Valoracion{
         }
             $total_valoraciones = 0;
             $num_valoraciones = $result->num_rows;
+            
         while($row = $result->fetch_assoc()){
             $total_valoraciones += $row['puntuacion'];
             echo '<p><strong>' . $row['contacto'] . ':</strong> ' . $row['puntuacion'] . '</p>';
             if(Admin::esAdmin($_SESSION)){
-                echo '<p><a href="borrarValoraciones.php?contacto=' . $row['contacto'] . '&pelicula=' . $pelicula . '">Borrar valoracion</a></p>';
+                echo '<form action="borrarValoraciones.php" method="post" style="display: inline;">
+                        <input type="hidden" name="contacto" value="' . $row['contacto'] . '">
+                        <input type="hidden" name="pelicula" value="' . $pelicula . '">
+                        <button type="submit"> Borrar valoración </button>
+                      </form>';
             }
         }
         if ($num_valoraciones > 0) {
@@ -55,6 +60,26 @@ class Valoracion{
         } else {
             echo "<p>No hay valoraciones para esta película.</p>";
         }
+        return true;
+    }
+    public static function añadirValoracion($pelicula,$contacto,$puntuacion){
+
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        if ($conn->connect_error){
+            die("La conexión ha fallado" . $conn->connect_error);
+        }
+        
+        $query = "SELECT * FROM valoraciones WHERE contacto = '$contacto' AND pelicula='$pelicula'";
+
+        $result = $conn->query($query);
+        if ($result->num_rows == 0){
+            $result -> free();
+            $query = "INSERT INTO valoraciones (contacto, pelicula, puntuacion) VALUES ('$contacto', '$pelicula', '$puntuacion')";
+            $result = $conn->query($query);
+        }else{
+            die("Este usuario ya ha establecido una puntuacion");
+        }
+        $conn->close();
         return true;
     }
     public function __construct() {
