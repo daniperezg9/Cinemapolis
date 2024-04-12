@@ -4,7 +4,7 @@ require_once __DIR__.'/includes/config.php';
 
 $mensajeError = '';
 
-    if(isset($_POST['modifica_usuario'])&& isset($_SESSION['admin']) && $_SESSION['admin']==true && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin'])){
+    if(isset($_POST['modifica_usuario'])&& isset($_SESSION['admin']) && $_SESSION['admin']==1 && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin'])){
 
         $tituloPagina = 'Modificar perfil';
 
@@ -27,7 +27,7 @@ $mensajeError = '';
 
     
     }
-    else if(isset($_POST['modifica_usuario']) && isset($_SESSION['admin'])&& $_SESSION['admin']==false && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin']) ){
+    else if(isset($_POST['modifica_usuario']) && isset($_SESSION['admin'])&& $_SESSION['admin']==0 && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin']) ){
 
         $tituloPagina = 'Modificar perfil';
 
@@ -101,7 +101,7 @@ $mensajeError = '';
         $user=Usuario::buscaUserPorCorreo($_SESSION['contacto']);
         $user->set_nombre_usuario($_POST['nombre']);
         $user->set_password_usuario($_POST['password']);
-        $user->modifica_usuario($user);
+        $user->modificaUser($user);
         $_SESSION['nombre']=$user->get_nombre_usuario();
         $tituloPagina = 'Modificación realizada';
         $nombre=$_SESSION['nombre'];
@@ -118,7 +118,7 @@ $mensajeError = '';
         $user=Usuario::buscaUserPorCorreo($_POST['contacto']);
         $user->set_nombre_usuario($_POST['nombre']);
         $user->set_esAdmin_usuario($_POST['esAdmin']);
-        $user->modifica_usuario($user);
+        $user->modificaUser($user);
         $tituloPagina = 'Modificación realizada';
         $nombre=$user->get_nombre_usuario();
         $contacto=$user->get_contacto_usuario();

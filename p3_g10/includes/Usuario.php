@@ -113,7 +113,7 @@ class Usuario{
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Usuarios U SET nombre = '%s', pass='%s', admin='%d' WHERE U.contacto=%s"
+        $query=sprintf("UPDATE usuarios U SET `nombre` = '%s', `pass`='%s', `admin`='%d' WHERE U.contacto='%s'"
             , $conn->real_escape_string($user_actualizado->nombre)
             , $conn->real_escape_string($user_actualizado->password)
             , $conn->real_escape_string($user_actualizado->esAdmin)
@@ -199,7 +199,7 @@ class Usuario{
      }
  
      public  function set_password_usuario($pass){
-        $this->password=$pass;
+        $this->password=self::hashPassword($pass);
      }
  
   
