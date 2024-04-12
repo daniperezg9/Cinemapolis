@@ -7,7 +7,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     if ($conn->connect_error) {
         die("La conexión ha fallado" . $conn->connect_error);
     }
-  $idforo=$conn->real_escape_string($_GET['id_foro']);
+  $idforo=$conn->real_escape_string($_POST['id_foro']);
   // Creamos la consulta
   $query = "SELECT f.contacto AS contacto , f.fecha_envio AS fecha_envio ,f.mensaje AS mensaje FROM `foro` f join `lista_foros` lf ON f.id_foro=lf.id_foro WHERE lf.id_foro ='$idforo'";
   // Realizamos la consulta
@@ -30,22 +30,33 @@ EOS;
       EOS;
         if($row['contacto'] == $_SESSION['contacto'] || $_SESSION['admin']=='1'){
         $contenidoPrincipal .= <<<EOS
-          <td><a href='signupMensajeEdit.php?fecha_envio={$row['fecha_envio']}'>Editar</a></td>
+          <td>
+          <form action="signupMensajeEdit.php" method="post" style="display: inline;">
+            <input type="hidden" name="fecha_envio" value="$row[fecha_envio]">
+            <button type="submit">Editar</button>
+          </form>
+          </td>
         EOS;
         }
         else{
         $contenidoPrincipal .= <<<EOS
-          <td>No puedes editar</td>
+          <td>No se puede editar</td>
         EOS;
         }
         if($row['contacto'] == $_SESSION['contacto'] || $_SESSION['admin']=='1'){  //Si creas el foro o tienes poderes de administración, puedes borar y editar los mensajes dentro de los mismos
           $contenidoPrincipal .= <<<EOS
-           <td><a href='borraMensaje.php?fecha_envio={$row['fecha_envio']}&contacto={$row['contacto']}'>Borrar</a></td>
+          <td>
+          <form action="borraMensaje.php" method="post" style="display: inline;">
+              <input type="hidden" name="fecha_envio" value="$row[fecha_envio]">
+              <input type="hidden" name="contacto" value="$row[contacto]">
+              <button type="submit">Borrar</button>
+          </form>
+          </td>
           EOS;
         }
         else{
         $contenidoPrincipal .= <<<EOS
-          <td>No puedes borrar</td>
+          <td>No se puede borrar</td>
          EOS;
         }
         $contenidoPrincipal .= <<<EOS
@@ -61,7 +72,11 @@ EOS;
   $result->free();
   $contenidoPrincipal .= <<<EOS
   </table>
-  <p>Añadir mensaje al foro: <a href='./signupMensaje.php?id_foro=$idforo'>Mensaje nuevo</a></p>
+  <form action="signupMensaje.php" method="post" style="display: inline;">
+    <p>Añadir mensaje al foro:
+    <input type="hidden" name="id_foro" value="$idforo">
+    <button type="submit">Mensaje Nuevo</button>
+  </form>
   EOS;
 
   require __DIR__.'/includes/vistas/plantillas/plantilla.php';

@@ -12,7 +12,7 @@ require_once __DIR__.'/includes/config.php';
     }
 
     //buscamos la contraseña ya encriptada ya que es lo que almacenamos (tema de seguridad)
-    $fecha_envio=$conn->real_escape_string($_SESSION['fecha_envio']) ;
+    $fecha_envio=$conn->real_escape_string($_POST['fecha_envio']) ;
     $mensaje=$conn->real_escape_string($_POST['mensaje']);
 
     Mensaje::modificarMensaje($mensaje, $fecha_envio);

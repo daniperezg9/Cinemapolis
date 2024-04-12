@@ -12,8 +12,8 @@ require_once __DIR__.'/includes/config.php';
     }
 
     //quitamos la insercion de codigo html y php
-    $fecha_envio=$conn->real_escape_string($_GET['fecha_envio']);
-    $contacto = $conn->real_escape_string($_GET['contacto']);
+    $fecha_envio=$conn->real_escape_string($_POST['fecha_envio']);
+    $contacto = $conn->real_escape_string($_POST['contacto']);
 
     Mensaje::borraMensaje($contacto, $fecha_envio);
     

@@ -11,7 +11,7 @@ require_once __DIR__.'/includes/config.php';
     //quitamos la insercion de codigo html y php
     $fecha_envio=date("Y-m-d H:i:s");
     $contacto =$conn->real_escape_string($_SESSION['contacto']) ;
-    $id_foro=$conn->real_escape_string($_SESSION['id_foro']) ;
+    $id_foro=$conn->real_escape_string($_POST['id_foro']) ;
     $mensaje=$conn->real_escape_string($_POST['mensaje']) ;
 
     Mensaje::añadirMensaje($id_foro, $contacto, $mensaje, $fecha_envio);

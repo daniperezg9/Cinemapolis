@@ -11,8 +11,8 @@ require_once __DIR__.'/includes/config.php';
     }
 
     //buscamos la contraseña ya encriptada ya que es lo que almacenamos (tema de seguridad)
-    $id_foro=$conn->real_escape_string($_GET['id_foro']) ;
-    $contacto=$conn->real_escape_string($_GET['contacto']);
+    $id_foro=$conn->real_escape_string($_POST['id_foro']) ;
+    $contacto=$conn->real_escape_string($_POST['contacto']);
     $descripcion=$conn->real_escape_string($_POST['descripcion']);
 
     Foro::modificarForo($id_foro,$contacto,$descripcion);
