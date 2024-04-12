@@ -109,15 +109,15 @@ class Usuario{
     }
 
 
-    private static function modificaUser($user_actualizado)
+    public static function modificaUser($user_actualizado)
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query=sprintf("UPDATE Usuarios U SET nombre = '%s', pass='%s', admin='%d' WHERE U.contacto=%s"
-            , $conn->real_escape_string($usuario->nombre)
-            , $conn->real_escape_string($usuario->password)
-            , $conn->real_escape_string($usuario->esAdmin)
-            , $conn->real_escape_string($usuario->contacto)
+            , $conn->real_escape_string($user_actualizado->nombre)
+            , $conn->real_escape_string($user_actualizado->password)
+            , $conn->real_escape_string($user_actualizado->esAdmin)
+            , $conn->real_escape_string($user_actualizado->contacto)
         );
         if ( $conn->query($query) ) {
             $result = $user_actualizado;

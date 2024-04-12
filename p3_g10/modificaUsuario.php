@@ -4,7 +4,7 @@ require_once __DIR__.'/includes/config.php';
 
 $mensajeError = '';
 
-    if(isset($_POST['modifica_usuario'])&& isset($_SESSION['esAdmin']) && $_SESSION['Admin']==true && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin'])){
+    if(isset($_POST['modifica_usuario'])&& isset($_SESSION['admin']) && $_SESSION['admin']==true && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin'])){
 
         $tituloPagina = 'Modificar perfil';
 
@@ -27,7 +27,7 @@ $mensajeError = '';
 
     
     }
-    else if(isset($_POST['modifica_usuario']) && isset($_SESSION['Admin'])&& $_SESSION['Admin']==false && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin']) ){
+    else if(isset($_POST['modifica_usuario']) && isset($_SESSION['admin'])&& $_SESSION['admin']==false && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin']) ){
 
         $tituloPagina = 'Modificar perfil';
 
