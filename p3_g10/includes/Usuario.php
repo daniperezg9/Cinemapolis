@@ -190,15 +190,15 @@ class Usuario{
         return $this->contacto;
      }
     */
-     public  function set_nombre_usuario($nombre){
+     public function set_nombre_usuario($nombre){
         $this->nombre =$nombre;
      } 
  
-     public  function set_esAdmin_usuario($esAdmin){
+     public function set_esAdmin_usuario($esAdmin){
         $this->esAdmin = $esAdmin;
      }
  
-     public  function set_password_usuario($pass){
+     public function set_password_usuario($pass){
         $this->password=self::hashPassword($pass);
      }
  
