@@ -82,6 +82,33 @@ class Usuario{
         return $user;
     }
 
+    
+    public static function inserta_user_admin($nombre,$contacto,$esAdmin,$pass){
+        $user=false;
+        $conn= Aplicacion::getInstance()->getConexionBd();
+        if ($conn->connect_error){
+            die("La conexión ha fallado" . $conn->connect_error);
+        }
+
+        if(self::buscaUserPorCorreo($contacto)==false){
+            
+            $query=sprintf("INSERT INTO usuarios(nombre, contacto, admin, pass) VALUES ('%s', '%s', '%s','%s')"
+                , $conn->real_escape_string($nombre)
+                , $conn->real_escape_string($contacto)
+                , $conn->real_escape_string($esAdmin)
+                , $conn->real_escape_string($pass)
+            );
+            if ( $conn->query($query) ) {
+                $user = new Usuario($nombre, $contacto, $esAdmin, $pass);
+                
+            } else {
+                error_log("Error BD ({$conn->errno}): {$conn->error}");
+            }
+        }
+        return $user;
+    }
+
+
     private static function modificaUser($user_actualizado)
     {
         $result = false;
@@ -154,6 +181,28 @@ class Usuario{
         return $this->esAdmin;
     }
 
+    public  function get_password_usuario(){
+        return $this->password;
+    }
+
+    /* 
+    public  function set_contacto_usuario(){
+        return $this->contacto;
+     }
+    */
+     public  function set_nombre_usuario($nombre){
+        $this->nombre =$nombre;
+     } 
+ 
+     public  function set_esAdmin_usuario($esAdmin){
+        $this->esAdmin = $esAdmin;
+     }
+ 
+     public  function set_password_usuario($pass){
+        $this->password=$pass;
+     }
+ 
+  
 }
 
 
