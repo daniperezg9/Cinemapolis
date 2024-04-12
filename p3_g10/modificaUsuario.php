@@ -49,7 +49,7 @@ $mensajeError = '';
                         Correo electrónico: $contacto<br><br>
                         Nombre:<input type="text" name="nombre" value=$nombre><br><br>
                         <input type="hidden" name="password" value=$pass>
-                        <input type="hidden" name= "contacto" value=$contacto">
+                        <input type="hidden" name= "contacto" value=$contacto>
                         Admin:<input type="text" name="esAdmin" value=0><br><br>
                         <input type="hidden" name= "aceptarAdmin" value=true"><br>
                         <input type="submit" name="Enviar">
