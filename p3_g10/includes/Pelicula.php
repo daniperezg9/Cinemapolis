@@ -14,18 +14,23 @@ class Pelicula{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "DELETE FROM peliculas WHERE titulo = '$titulo'";
+
+        $t= $conn->real_escape_string($titulo);
+
+        $query = "DELETE FROM peliculas WHERE titulo = '$t'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
-        $query = "DELETE FROM genero_peliculas WHERE titulo = '$titulo'";
+        $query = "DELETE FROM genero_peliculas WHERE titulo = '$t'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
         return true;
     }
+
+
 }
 
 

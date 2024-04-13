@@ -10,7 +10,12 @@ class Resenyas{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "DELETE FROM resenyas WHERE contacto = '$contacto' AND pelicula = '$pelicula'";
+
+        $c=$conn->real_escape_string($contacto);
+        $p=$conn->real_escape_string($pelicula);
+
+
+        $query = "DELETE FROM resenyas WHERE contacto = '$c' AND pelicula = '$p'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
@@ -23,7 +28,12 @@ class Resenyas{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "UPDATE resenyas SET mensaje = '$resenya (EDITADO)' WHERE  contacto = '$contacto' AND pelicula = '$pelicula'";
+
+        $c=$conn->real_escape_string($contacto);
+        $p=$conn->real_escape_string($pelicula);
+        $r=$conn->real_escape_string($resenya);
+
+        $query = "UPDATE resenyas SET mensaje = '$r (EDITADO)' WHERE  contacto = '$c' AND pelicula = '$p'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
@@ -33,7 +43,10 @@ class Resenyas{
 
     public static function mostrarResenyas($pelicula){
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "SELECT contacto, mensaje FROM resenyas WHERE pelicula = '$pelicula'";
+
+        $p=$conn->real_escape_string($pelicula);
+
+        $query = "SELECT contacto, mensaje FROM resenyas WHERE pelicula = '$p'";
         $result = $conn->query($query);
         if ( !$result ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
@@ -63,6 +76,10 @@ class Resenyas{
         }
         
         $query = "SELECT * FROM resenyas WHERE contacto = '$contacto' AND pelicula='$pelicula'";
+
+        $c=$conn->real_escape_string($contacto);
+        $p=$conn->real_escape_string($pelicula);
+        $r=$conn->real_escape_string($resenya);
 
         $result = $conn->query($query);
         if ($result->num_rows == 0){

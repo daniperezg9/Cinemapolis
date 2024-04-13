@@ -12,7 +12,12 @@ class Mensaje{
         
         $conn = Aplicacion::getInstance()->getConexionBd();
 
-        $query = "INSERT INTO foro (id_foro, contacto, mensaje, fecha_envio) VALUES ('$id_foro', '$contacto', '$mensaje', '$fecha_envio')";
+        $i=$conn->real_escape_string($id_foro);
+        $c=$conn->real_escape_string($contacto);
+        $m=$conn->real_escape_string($mensaje);
+        $f=$conn->real_escape_string($fecha_envio);
+
+        $query = "INSERT INTO foro (id_foro, contacto, mensaje, fecha_envio) VALUES ('$i', '$c', '$m', '$f')";
         $result = $conn->query($query);
 
         $conn->close();
@@ -27,7 +32,11 @@ class Mensaje{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "DELETE FROM foro WHERE fecha_envio = '$fecha_envio' AND contacto = '$contacto'";
+
+        $c=$conn->real_escape_string($contacto);
+        $f=$conn->real_escape_string($fecha_envio);
+
+        $query = "DELETE FROM foro WHERE fecha_envio = '$f' AND contacto = '$c'";
         $result = $conn->query($query);
 
         return true;
@@ -41,7 +50,12 @@ class Mensaje{
         
         $conn = Aplicacion::getInstance()->getConexionBd();
 
-        $query = "UPDATE foro SET mensaje = '$mensaje (EDITADO)' WHERE  fecha_envio = '$fecha_envio'";
+        $m=$conn->real_escape_string($mensaje);
+        $f=$conn->real_escape_string($fecha_envio);
+
+        //¿no falta el contacto ?
+
+        $query = "UPDATE foro SET mensaje = '$m (EDITADO)' WHERE  fecha_envio = '$f'";
         $result = $conn->query($query);
 
         return true;

@@ -11,12 +11,16 @@ class Foro{
         
         $conn = Aplicacion::getInstance()->getConexionBd();
 
-        $query = "SELECT id_foro FROM lista_foros WHERE id_foro = '$id_foro' AND contacto ='$contacto' ";
+        $i= $conn->real_escape_string($id_foro);
+        $c= $conn->real_escape_string($contacto);
+        $d= $conn->real_escape_string($descripcion);
+
+        $query = "SELECT id_foro FROM lista_foros WHERE id_foro = '$i' AND contacto ='$c' ";
         $result = $conn->query($query);
 
         if ($result->num_rows == 0){      
             $result->free();  
-            $query = "INSERT INTO lista_foros (contacto, id_foro, descripcion) VALUES ('$contacto', '$id_foro', '$descripcion')";
+            $query = "INSERT INTO lista_foros (contacto, id_foro, descripcion) VALUES ('$c', '$i', '$d')";
             //seteamos con lo devuelto por la consulta
             $result = $conn->query($query);
         }
@@ -33,13 +37,17 @@ class Foro{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "DELETE FROM foro WHERE id_foro = '$id_foro' AND contacto = '$contacto' ";
+
+        $i= $conn->real_escape_string($id_foro);
+        $c= $conn->real_escape_string($contacto);
+
+        $query = "DELETE FROM foro WHERE id_foro = '$i' AND contacto = '$c' ";
         
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
-        $query = "DELETE FROM lista_foros WHERE id_foro = '$id_foro' AND contacto = '$contacto'";
+        $query = "DELETE FROM lista_foros WHERE id_foro = '$i' AND contacto = '$c'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
@@ -55,7 +63,11 @@ class Foro{
         
         $conn = Aplicacion::getInstance()->getConexionBd();
 
-        $query = "UPDATE lista_foros SET descripcion = '$descripcion' WHERE  id_foro = '$id_foro' AND contacto = '$contacto'";
+        $i= $conn->real_escape_string($id_foro);
+        $c= $conn->real_escape_string($contacto);
+        $d= $conn->real_escape_string($descripcion);
+
+        $query = "UPDATE lista_foros SET descripcion = '$d' WHERE  id_foro = '$i' AND contacto = '$c'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;

@@ -10,7 +10,12 @@ class Evento{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "DELETE FROM eventos WHERE nombre_evento = '$nombre_evento' AND creador_evento = '$creador_evento' AND fecha_evento = '$fecha_evento'";
+
+       $n = $conn->real_escape_string($nombre) ;
+       $c = $conn->real_escape_string($creador_evento);
+       $f = $conn->real_escape_string($fecha_evento);
+
+        $query = "DELETE FROM eventos WHERE nombre_evento = '$n' AND creador_evento = '$c' AND fecha_evento = '$f'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;

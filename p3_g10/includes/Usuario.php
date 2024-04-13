@@ -128,15 +128,16 @@ class Usuario{
         return $result;
     }
 
-    private static function borraPorCorreo($correoUsuario)
+    public static function borraPorCorreo($correoUsuario)
     {
         if (!$correoUsuario) {
             return false;
         } 
-        
+
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("DELETE FROM Usuarios U WHERE U.contacto = %s"
-            , $correoUsuario
+
+        $query = sprintf("DELETE FROM usuarios WHERE `contacto` = '%s'"
+            , $conn->real_escape_string($correoUsuario)
         );
         if ( ! $conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");

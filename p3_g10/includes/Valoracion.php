@@ -10,7 +10,11 @@ class Valoracion{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "DELETE FROM valoraciones WHERE contacto = '$contacto' AND pelicula = '$pelicula'";
+
+        $c=$conn->real_escape_string($contacto);
+        $p=$conn->real_escape_string($pelicula);
+
+        $query = "DELETE FROM valoraciones WHERE contacto = '$c' AND pelicula = '$p'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
@@ -24,7 +28,12 @@ class Valoracion{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "UPDATE valoracion SET puntuacion = '$valoracion (EDITADO)' WHERE  contacto = '$contacto' AND pelicula = '$pelicula'";
+
+        $c=$conn->real_escape_string($contacto);
+        $p=$conn->real_escape_string($pelicula);
+        $v=$conn->real_escape_string($valoracion);
+
+        $query = "UPDATE valoracion SET puntuacion = '$v (EDITADO)' WHERE  contacto = '$c' AND pelicula = '$p'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
@@ -34,7 +43,11 @@ class Valoracion{
 
     public static function mostrarValoracion($pelicula){
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "SELECT contacto, puntuacion FROM valoraciones WHERE pelicula = '$pelicula'";
+
+        $p=$conn->real_escape_string($pelicula);
+
+
+        $query = "SELECT contacto, puntuacion FROM valoraciones WHERE pelicula = '$p'";
         $result = $conn->query($query);
         if ( !$result ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
@@ -69,12 +82,16 @@ class Valoracion{
             die("La conexión ha fallado" . $conn->connect_error);
         }
         
-        $query = "SELECT * FROM valoraciones WHERE contacto = '$contacto' AND pelicula='$pelicula'";
+        $c=$conn->real_escape_string($contacto);
+        $p=$conn->real_escape_string($pelicula);
+        $punt=$conn->real_escape_string($puntuacion);
+
+        $query = "SELECT * FROM valoraciones WHERE contacto = '$c' AND pelicula='$p'";
 
         $result = $conn->query($query);
         if ($result->num_rows == 0){
             $result -> free();
-            $query = "INSERT INTO valoraciones (contacto, pelicula, puntuacion) VALUES ('$contacto', '$pelicula', '$puntuacion')";
+            $query = "INSERT INTO valoraciones (contacto, pelicula, puntuacion) VALUES ('$c', '$p', '$punt')";
             $result = $conn->query($query);
         }else{
             die("Este usuario ya ha establecido una puntuacion");

@@ -163,7 +163,69 @@ $mensajeError = '';
 
         }
 
+    else if(isset($_POST['borra_usuario'])){
+
+        if($_POST['confirmación']==$_SESSION['contacto']){
+            
+            $contacto=$_SESSION['contacto'];
+
+            $user=Usuario::buscaUserPorCorreo($_POST['confirmación']);
+            $user->borraPorCorreo($user->get_contacto_usuario());
+
+            $msn="<p>La cuenta vinculada a $contacto ha sido borrada con exito</p>";
+
+            if(isset($_SESSION['login'])){
+                unset($_SESSION['login']);
+            }
+            if(isset($_SESSION['nombre'])){
+                unset($_SESSION['nombre']);
+            }
+            if(isset($_SESSION['contacto'])){
+                unset($_SESSION['contacto']);
+            }
+            if(isset($_SESSION['admin'])){
+                unset($_SESSION['admin']);
+            }
+
+            $contenidoPrincipal = <<<EOS
+            $mensajeError
+            $msn
+            
+            EOS;
+
+        }
+        else{
+
+            $contacto=$_SESSION['contacto'];
+            $nombre=$_SESSION['nombre'];
+
+            $mensajeError="<p>la confirmación falló</p>";
+            $contenidoPrincipal = <<<EOS
+            $mensajeError
+            
+            Correo electrónico:$contacto<br>
+            Nombre:$nombre<br>
     
+    
+            <!--Formulario para iniciar sesión-->
+            <form action = "./modificaUsuario.php" method = "post">
+                
+                    <input type="hidden" name="modifica_usuario" value=true>
+                    <input type="submit" name="modificar usuario" value="modificar usuario">
+                
+            </form> 
+
+            <form action = "./modificaUsuario.php" method = "post">
+                
+                    <input type="hidden" name="borra_usuario" value=true>
+                    Si deseas borrar tu cuenta escribe $contacto <input type="text" name="confirmación">
+                    <input type="submit" name="borrar usuario" value="borrar usuario">
+                
+            </form> 
+            EOS;
+        }
+
+    }
 
     else{
         $tituloPagina = 'Mostrar perfil';
@@ -219,6 +281,15 @@ $mensajeError = '';
                     <input type="submit" name="modificar usuario" value="modificar usuario">
                 
             </form> 
+            <!--
+            <form action = "./modificaUsuario.php" method = "post">
+                
+                    <input type="hidden" name="borra_usuario" value=true>
+                    Si deseas borrar tu cuenta escribe $contacto <input type="text" name="confirmación">
+                    <input type="submit" name="borrar usuario" value="borrar usuario">
+                
+            </form> 
+            -->
             EOS;
 
         }
