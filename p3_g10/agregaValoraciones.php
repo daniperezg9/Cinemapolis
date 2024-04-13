@@ -11,6 +11,6 @@ require_once __DIR__.'/includes/config.php';
     $contacto=$_SESSION['contacto'];
 
     Valoracion::añadirValoracion($pelicula,$contacto,$puntuacion);
-    $url_destino = './reseñasYvaloraciones.php?titulo=' . urlencode($pelicula);
+    $url_destino = './resenyasYvaloraciones.php?titulo=' . urlencode($pelicula);
     header('Location:' . $url_destino);
 ?>

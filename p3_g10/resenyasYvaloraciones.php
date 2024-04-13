@@ -27,7 +27,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
             $descr=$row['descr'];
         }
     }
-
+    
     $contenidoPrincipal = <<<EOS
     <div id="Titulo">
         <h1>$tituloPeli</h1>
@@ -45,30 +45,36 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
         <div class="container">
             <div class="row">
                 <div class="comment">
-                    <?php
-                    Resenyas::mostrarResenyas($tituloPeli);
-                    Valoracion::mostrarValoracion($tituloPeli);
-                    ?>
+    EOS;
+    $contenidoPrincipal .= <<<EOS
+    Resenyas::mostrarResenyas($tituloPeli)
+    EOS;
+
+    $contenidoPrincipal .= <<<EOS
+    Valoracion::mostrarValoracion($tituloPeli)
+    EOS;
+    
+    $contenidoPrincipal .= <<<EOS
                 </div>
                 <div class="rating">
-                    <?php
-                    $v = new Valoracion();
-                    $media = $v->getMedia();
-                    ?>
+    EOS;             
+    //$v=new Valoracion();
+    //$contenidoPrincipal.= v->getMedia();
+    $contenidoPrincipal.=<<<EOS
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <form action="./agregaResenyas.php" method= "post">
                         <input name= "resenya" class="input" placeholder="Escriba un comentario">
-                        <input type="hidden" name= "pelicula" value="<?php echo $tituloPeli; ?>">
+                        <input type="hidden" name= "pelicula" value="$tituloPeli">
                         <button type="submit" class='primaryContained float-right'>Add Comment</button>
                     </form>
                 </div>
                 <div class="col-6">
                     <form action="./agregaValoraciones.php" method= "post">
                         <input type="number" name="puntuacion" class="input" placeholder="Puntuación (1-100)" min="0" max="100">
-                        <input type="hidden" name= "pelicula" value="<?php echo $tituloPeli; ?>">
+                        <input type="hidden" name= "pelicula" value="$tituloPeli">
                         <button type="submit" class='primaryContained float-right'>Add Rating</button>
                     </form>
                 </div>

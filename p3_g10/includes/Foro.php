@@ -7,17 +7,6 @@ class Foro{
     private $idforo;
     private $descripcion;
 
-    public static function listaForo(){
-        $app = Aplicacion::getInstance();
-        $conn = $app->getConexionBd();
-        if ($conn->connect_error) {
-            die("La conexión ha fallado" . $conn->connect_error);
-        }
-        $query = "SELECT * FROM lista_foros";
-        $result = $conn->query($query);
-        return $result;
-    }
-
     public static function añadirForo($id_foro, $contacto, $descripcion){
         
         $conn = Aplicacion::getInstance()->getConexionBd();

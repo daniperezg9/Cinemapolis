@@ -9,7 +9,7 @@ require_once __DIR__.'/includes/config.php';
 
     Resenyas::añadirResenya($pelicula,$contacto,$resenya);
 
-    $url_destino = './reseñasYvaloraciones.php?titulo=' . urlencode($pelicula);
+    $url_destino = './resenyasYvaloraciones.php?titulo=' . $_POST['pelicula'];
     header('Location:' . $url_destino);
     
 ?>
