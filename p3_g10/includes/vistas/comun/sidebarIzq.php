@@ -9,6 +9,11 @@
 		}
 		?>
 		<li><a href="<?= RUTA_APP ?>/listaPeliculas.php">Ver lista de películas</a></li>
+		<?php
+		if(isset($_SESSION['login']) && isset($_SESSION['admin']) && $_SESSION['login'] && $_SESSION['admin']){
+			echo '<li><a href="'. RUTA_APP .'/agregaPelicula.php">Añadir nueva película</a></li>';
+		}
+		?>
 		<li><a href="<?= RUTA_APP ?>/eventos.php">Eventos</a></li>
 		<li><a href="<?= RUTA_APP ?>/foro.php">Foro</a></li>
 	</ul>
