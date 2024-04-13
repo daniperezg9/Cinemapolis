@@ -73,7 +73,7 @@
 	nav { /* Barra de navegación izquierda */
 		grid-column: 1;
 		grid-row: 2;
-		overflow: scroll;
+		overflow: hidden;
 	}
 
 	nav h2, a { /* Enlaces de la barra de navegación izquierda */
@@ -103,7 +103,73 @@
 		overflow: scroll;
 	}
 
+	main a:hover{
+		color: rgb(218, 155, 62);
+		font-weight: bold;
+		text-decoration: underline;
+	
+	}
+
+	main a:visited { /* Enlaces del contenido principal */
+		color: rgb(211, 223, 104);
+	}
+
 	footer { /* Pie de página */
 		grid-column: 1 / 4;
 		grid-row: 3;
+		text-align: right;
+	}
+
+	fieldset { /* Formularios */
+		box-sizing: border-box;
+		border: 3px solid rgb(218, 155, 62);
+		width: 15em;
+		margin: 0 auto;
+	}
+
+	#loginFieldset { /* Formulario de login */
+		margin-top: 20%;
+		margin-bottom: 24%;
+	}
+
+	#signupFieldset { /* Formulario de Sign up */
+		margin-top: 18%;
+		margin-bottom: 20%;
+	}
+	
+	legend { /* Leyenda de los formularios */
+		color: #fff;
+		background: rgb(218, 155, 62);
+		border: 3px solid rgb(218, 155, 62);
+		padding: 10px 15px;
+	}
+
+	@media all and (max-width: 500px) { /* Cambios en la vista de la página web para dispositivos móviles */
+		div#contenedor {
+			grid-template-columns: 1fr;
+			grid-template-rows: 10% 10% 60% 10% 10%;
+		}
+
+		header {
+			grid-template-columns: 1fr;
+			grid-template-areas: "logo";
+		}
+
+		nav {
+			grid-column: 1;
+			grid-row: 3;
+		}
+
+		main {
+			grid-column: 1;
+			grid-row: 4;
+		}
+
+		aside {
+			
+		}
+
+		footer {
+			
+		}
 	}
