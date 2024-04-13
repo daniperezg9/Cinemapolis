@@ -6,8 +6,9 @@ $tituloPagina = 'Agrega pelicula';
 
 $contenidoPrincipal = '';
 
-if(isset($_SESSION['login']) && $_SESSION['login']){
+if(isset($_SESSION['login']) && isset($_SESSION['admin']) && $_SESSION['login'] && $_SESSION['admin']){
     $contenidoPrincipal .= "<form action='registraPelicula.php' method='POST' enctype='multipart/form-data'>
+    <p>Elija la imagen de la película:<p/>
     <input type='file' name='archivo'>
     <p>Descripción de la imagen:<p/>
     <input type='text' name='alt'>
