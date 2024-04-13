@@ -3,7 +3,7 @@ namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
 
 $mensajeError = '';
-
+    //NO ADMIN MODIFICA SU USUARIO
     if(isset($_POST['modifica_usuario'])&& isset($_SESSION['admin']) && $_SESSION['admin']==0 && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin'])){
 
         $tituloPagina = 'Modificar perfil';
@@ -27,10 +27,11 @@ $mensajeError = '';
 
     
     }
+    //ADMIN MODIFICA:
     else if(isset($_POST['modifica_usuario']) && isset($_SESSION['admin'])&& $_SESSION['admin']==1 && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin']) ){
 
         $tituloPagina = 'Modificar perfil';
-
+        //USUARIO DE OTRA PERSONA
         if(isset($_POST['modificaNoAdmin'])){
             
             if(($user=Usuario::buscaUserPorCorreo($_POST['contacto']))!=false){
@@ -55,8 +56,20 @@ $mensajeError = '';
                         <input type="submit" name="Enviar">
                     </fieldset>
                 </form> 
+
+                <form action = "./modificaUsuario.php" method = "post">
+                
+                    <input type="hidden" name="borra_usuario_admin" value=true>
+                    <input type="hidden" name= "contacto" value=$contacto>
+                    Si deseas borrar tu cuenta escribe $contacto <input type="text" name="confirmación">
+                    <input type="submit" name="borrar usuario" value="borrar usuario">
+                
+                </form> 
+
+
                 EOS;
             }
+            //Usuario no encontrado
             else{
 
 
@@ -94,6 +107,7 @@ $mensajeError = '';
             }
 
         }
+        //SU USUARIO (UN ADMIN NO PUEDE BORRAR SU CUENTA)
         else{
             $nombre=$_SESSION['nombre'];
             $contacto=$_SESSION['contacto'];
@@ -117,6 +131,7 @@ $mensajeError = '';
 
 
     }
+    //SE MODIFICA EL USUARIO PROPIO
     else if(isset($_POST['aceptarUsuario'])){
         $user=Usuario::buscaUserPorCorreo($_SESSION['contacto']);
         $user->set_nombre_usuario($_POST['nombre']);
@@ -135,6 +150,7 @@ $mensajeError = '';
             Nombre:$nombre<br>
             EOS;
     }
+    //ADMIN MODIFICA USUARIO AJENO O PROPIO
     else if(isset($_POST['aceptarAdmin'])){
         
         $user=Usuario::buscaUserPorCorreo($_POST['contacto']);
@@ -227,6 +243,59 @@ $mensajeError = '';
 
     }
 
+    else if(isset($_POST['borra_usuario_admin'])){
+        if($_POST['confirmación']==$_POST['contacto']){
+            $contacto=$_POST['contacto'];
+            $user=Usuario::buscaUserPorCorreo($_POST['confirmación']);
+            $user->borraPorCorreo($user->get_contacto_usuario());
+
+            $msn="<p>La cuenta vinculada a $contacto ha sido borrada con exito</p>";
+            $contenidoPrincipal = <<<EOS
+            $mensajeError
+            $msn
+            
+            EOS;
+        }
+        else{
+            $tituloPagina = 'Mostrar perfil';
+
+        
+
+            $contacto=$_SESSION['contacto'];
+            $nombre=$_SESSION['nombre'];
+            //ADMIN
+            if(isset($_SESSION['admin']) && $_SESSION['admin']==1){
+                
+                $contenidoPrincipal = <<<EOS
+                $mensajeError
+            
+                Correo electrónico: $contacto<br>
+                Nombre: $nombre<br>
+
+                <!--Formulario para iniciar sesión-->
+                <form action = "./modificaUsuario.php" method = "post">
+                    <input type="hidden" name="modifica_usuario" value=true>
+                    <br>
+                    <input type="submit" name="modificar usuario" value="modificar usuario propio">
+                    <br><br>
+                
+                </form> 
+
+                <form action = "./modificaUsuario.php" method = "post">
+                    Correo electrónico del usuario a modificar:
+                    <input type="text" name="contacto">
+                    <input type="hidden" name="modifica_usuario" value=true>
+                    <input type="hidden" name="modificaNoAdmin" value=true>
+                    <br>
+                    <br>
+                    <input type="submit" name="modificar usuario" value="modificar usuario">
+                </form>
+
+            EOS;
+            }
+        }
+    }
+
     else{
         $tituloPagina = 'Mostrar perfil';
 
@@ -234,7 +303,7 @@ $mensajeError = '';
 
         $contacto=$_SESSION['contacto'];
         $nombre=$_SESSION['nombre'];
-
+        //ADMIN
         if(isset($_SESSION['admin']) && $_SESSION['admin']==1){
             
             $contenidoPrincipal = <<<EOS
@@ -265,7 +334,7 @@ $mensajeError = '';
         EOS;
 
         }
-
+        //NO ADMIN
         if(isset($_SESSION['admin']) && $_SESSION['admin']==0){
             $contenidoPrincipal = <<<EOS
             $mensajeError
@@ -281,7 +350,7 @@ $mensajeError = '';
                     <input type="submit" name="modificar usuario" value="modificar usuario">
                 
             </form> 
-            <!--
+            
             <form action = "./modificaUsuario.php" method = "post">
                 
                     <input type="hidden" name="borra_usuario" value=true>
@@ -289,7 +358,7 @@ $mensajeError = '';
                     <input type="submit" name="borrar usuario" value="borrar usuario">
                 
             </form> 
-            -->
+            
             EOS;
 
         }
