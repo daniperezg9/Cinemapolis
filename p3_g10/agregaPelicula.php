@@ -8,7 +8,7 @@ require_once __DIR__.'/includes/config.php';
     <head>
         <!--<link rel="stylesheet" type="text/css" href="estilo.css" />-->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Reseña realizada</title>
+		<title>Agrega pelicula</title>
     </head>
 
     <body>
