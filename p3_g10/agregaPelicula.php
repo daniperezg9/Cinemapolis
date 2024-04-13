@@ -7,6 +7,7 @@ $tituloPagina = 'Agrega pelicula';
 $contenidoPrincipal = '';
 
 if(isset($_SESSION['login']) && isset($_SESSION['admin']) && $_SESSION['login'] && $_SESSION['admin']){
+    
     $contenidoPrincipal .= "<form action='registraPelicula.php' method='POST' enctype='multipart/form-data'>
     <p>Elija la imagen de la película:<p/>
     <input type='file' name='archivo'>
@@ -27,7 +28,8 @@ if(isset($_SESSION['login']) && isset($_SESSION['admin']) && $_SESSION['login'] 
     <br/>
     <input type='submit' name='submit' value='Subir película'>
     </form>";
-} else {
+} 
+else {
     $contenidoPrincipal .= $contenidoPrincipal = <<<EOS
     <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
     <h2>Para acceder a la lista de películas es necesario haber iniciado sesión como administrador. <a href='login.php'>Login</a></h2>

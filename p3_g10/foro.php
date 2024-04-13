@@ -17,7 +17,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
 
 $tituloPagina = 'Pagina Principal Foro';
 
-if (!isset($_SESSION['login'])) {
+if (!isset($_SESSION['login']) && $_SESSION['login']) {
   $contenidoPrincipal = <<<EOS
   <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
   <h2>Para acceder al foro es necesario haber iniciado sesión. <a href='login.php'>Login</a></h2>
