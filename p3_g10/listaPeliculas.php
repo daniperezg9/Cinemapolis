@@ -29,7 +29,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
         $img=$row['direccion_fotografia'];
         $alt=$row['alt'];
         $contenidoPrincipal .= <<<EOS
-            <tr>
+            <tr class = 'resenyas'>
                 <td><img src='$img' alt='$alt' width='100' height='120'/></td>
                 <td><a href='./resenyasYvaloraciones.php?titulo={$row['titulo']}'>{$row['titulo']}</a></td>
                 <td>{$row['descripcion']}</td>
@@ -37,7 +37,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     $contenidoPrincipal .= "<td>";
     if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
         $contenidoPrincipal .= <<< EOS
-        <p><a href='borrarPelicula.php?titulo={$row['titulo']}'>Borrar Pelicula</a></p>
+        <p><a class = 'borrarPeli' href='borrarPelicula.php?titulo={$row['titulo']}'>Borrar Pelicula</a></p>
         EOS;
       }
         $contenidoPrincipal .= "</td>";

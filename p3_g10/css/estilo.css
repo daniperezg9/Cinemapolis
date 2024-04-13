@@ -103,6 +103,14 @@
 		overflow: scroll;
 	}
 
+	#resenyas {
+		color: slateblue;
+	}
+
+	#borrarPeli {
+		color : red;
+	}
+
 	main a:hover{
 		color: rgb(218, 155, 62);
 		font-weight: bold;
