@@ -103,14 +103,6 @@
 		overflow: scroll;
 	}
 
-	#resenyas {
-		color: slateblue;
-	}
-
-	#borrarPeli {
-		color : red;
-	}
-
 	main a:hover{
 		color: rgb(218, 155, 62);
 		font-weight: bold;
@@ -120,6 +112,14 @@
 
 	main a:visited { /* Enlaces del contenido principal */
 		color: rgb(211, 223, 104);
+	}
+
+	#resenyas {
+		color: slateblue;
+	}
+
+	#borrarPeli {
+		color : red;
 	}
 
 	footer { /* Pie de página */
