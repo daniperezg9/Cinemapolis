@@ -4,7 +4,7 @@ require_once __DIR__.'/includes/config.php';
 //Definicion de constantes
 //Parametros de acceso de la base de datos
 
-    Mensaje::borraMensaje($contacto, $fecha_envio);
+    Mensaje::borraMensaje($_POST['contacto'], $_POST['fecha_envio']);
     
     header('Location: ./foro.php');
 ?>
