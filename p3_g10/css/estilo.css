@@ -144,32 +144,23 @@
 		padding: 10px 15px;
 	}
 
-	@media all and (max-width: 500px) { /* Cambios en la vista de la página web para dispositivos móviles */
+	@media all and (max-width: 640px) {
 		div#contenedor {
-			grid-template-columns: 1fr;
-			grid-template-rows: 10% 10% 60% 10% 10%;
+		flex-flow: column;
 		}
-
-		header {
-			grid-template-columns: 1fr;
-			grid-template-areas: "logo";
+		header{
+		order: 1;
 		}
-
-		nav {
-			grid-column: 1;
-			grid-row: 3;
+		nav{
+		order: 2;
 		}
-
-		main {
-			grid-column: 1;
-			grid-row: 4;
+		main{
+		order: 3;
 		}
-
-		aside {
-			
+		aside{
+			order : 4;
 		}
-
-		footer {
-			
+		footer{
+			order: 5;
 		}
 	}
