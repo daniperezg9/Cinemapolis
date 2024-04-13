@@ -2,16 +2,7 @@
 namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
 if(isset($_SESSION['login']) && $_SESSION['login']) {
-  $app = Aplicacion::getInstance();
-  $conn = $app->getConexionBd();
-    if ($conn->connect_error) {
-        die("La conexión ha fallado" . $conn->connect_error);
-    }
-  $idforo=$conn->real_escape_string($_POST['id_foro']);
-  // Creamos la consulta
-  $query = "SELECT f.contacto AS contacto , f.fecha_envio AS fecha_envio ,f.mensaje AS mensaje FROM `foro` f join `lista_foros` lf ON f.id_foro=lf.id_foro WHERE lf.id_foro ='$idforo'";
-  // Realizamos la consulta
-  $result = $conn->query($query);
+  $result = Mensaje::listaForos();
 }
 
 
@@ -74,7 +65,7 @@ EOS;
   </table>
   <form action="signupMensaje.php" method="post" style="display: inline;">
     <p>Añadir mensaje al foro:
-    <input type="hidden" name="id_foro" value="$idforo">
+    <input type="hidden" name="id_foro" value="$_POST[id_foro]">
     <button type="submit">Mensaje Nuevo</button>
   </form>
   EOS;

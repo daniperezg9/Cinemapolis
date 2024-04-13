@@ -8,6 +8,18 @@ class Mensaje{
     private $mensaje;
     private $fecha_envio;
 
+    public static function listaForos(){
+        $app = Aplicacion::getInstance();
+        $conn = $app->getConexionBd();
+          if ($conn->connect_error) {
+              die("La conexión ha fallado" . $conn->connect_error);
+        }
+        $idforo=$conn->real_escape_string($_POST['id_foro']);
+        $query = "SELECT f.contacto AS contacto , f.fecha_envio AS fecha_envio ,f.mensaje AS mensaje FROM `foro` f join `lista_foros` lf ON f.id_foro=lf.id_foro WHERE lf.id_foro ='$idforo'";
+        $result = $conn->query($query);
+        return $result;
+    }
+
     public static function añadirMensaje($id_foro, $contacto, $mensaje, $fecha_envio){
         
         $conn = Aplicacion::getInstance()->getConexionBd();

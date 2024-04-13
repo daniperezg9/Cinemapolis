@@ -3,21 +3,13 @@ namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
 //abrimos conexión 
 if(isset($_SESSION['login']) && $_SESSION['login']) {
-  $app = Aplicacion::getInstance();
-  $conn = $app->getConexionBd();
-  if ($conn->connect_error) {
-    die("La conexión ha fallado" . $conn->connect_error);
-  }
-  // Creamos la consulta
-  $query = "SELECT * FROM lista_foros";
-  // Realizamos la consulta
-  $result = $conn->query($query);
+  $result=Foro::listaForo();
 }
 
 
 $tituloPagina = 'Pagina Principal Foro';
 
-if (!isset($_SESSION['login']) && $_SESSION['login']) {
+if (!isset($_SESSION['login'])) {
   $contenidoPrincipal = <<<EOS
   <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
   <h2>Para acceder al foro es necesario haber iniciado sesión. <a href='login.php'>Login</a></h2>
