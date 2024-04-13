@@ -31,7 +31,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
         $contenidoPrincipal .= <<<EOS
             <tr>
                 <td><img src='$img' alt='$alt' width='100' height='120'/></td>
-                <td><a href='./reseñasYvaloraciones.php?titulo={$row['titulo']}'>{$row['titulo']}</a></td>
+                <td><a href='./resenyasYvaloraciones.php?titulo={$row['titulo']}'>{$row['titulo']}</a></td>
                 <td>{$row['descripcion']}</td>
     EOS;
     $contenidoPrincipal .= "<td>";
