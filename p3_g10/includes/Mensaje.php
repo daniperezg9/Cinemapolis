@@ -8,7 +8,7 @@ class Mensaje{
     private $mensaje;
     private $fecha_envio;
 
-    public static function listaForos(){
+    public static function listaMensajes(){
         $app = Aplicacion::getInstance();
         $conn = $app->getConexionBd();
           if ($conn->connect_error) {
