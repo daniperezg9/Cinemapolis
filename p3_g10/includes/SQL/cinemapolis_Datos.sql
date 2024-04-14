@@ -38,7 +38,7 @@ TRUNCATE TABLE `eventos`;
 --
 
 INSERT INTO `eventos` (`creador_evento`, `nombre_evento`, `descripcion_evento`, `fecha_evento`, `fecha_creacion`) VALUES
-('user1@gmail.com', 'evento generico', 'no tiene', '2024-03-08', '2024-03-07');
+('user1@gmail.com', 'Quedada para ver la nueva pelicula', 'A las 8pm en el centro', '2024-04-15', '2024-04-14');
 
 --
 -- Truncar tablas antes de insertar `foro`
@@ -50,7 +50,7 @@ TRUNCATE TABLE `foro`;
 --
 
 INSERT INTO `foro` (`id_foro`, `contacto`, `mensaje`, `fecha_envio`) VALUES
-('lloreria', 'user1@gmail.com', 'hasta las 9 pm', '2024-03-07 00:00:00');
+('Sakra', 'user1@gmail.com', 'La mejor pelicula que he visto', '2024-04-15 00:00:00');
 
 --
 -- Truncar tablas antes de insertar `genero_peliculas`
@@ -77,7 +77,7 @@ TRUNCATE TABLE `lista_foros`;
 --
 
 INSERT INTO `lista_foros` (`id_foro`, `contacto`, `descripcion`) VALUES
-('lloreria', 'user1@gmail.com', 'no tiene');
+('Sakra', 'user1@gmail.com', 'Foro para opinar sobre la pelicula Sakra');
 
 --
 -- Truncar tablas antes de insertar `peliculas`
@@ -104,7 +104,7 @@ TRUNCATE TABLE `resenyas`;
 --
 
 INSERT INTO `resenyas` (`contacto`, `pelicula`, `mensaje`) VALUES
-('user1@gmail.com', 'patata', 'asd');
+('user1@gmail.com', 'Sakra', 'Muy buena pelicula, la recomiendo a todo el mundo');
 
 --
 -- Truncar tablas antes de insertar `usuarios`
@@ -128,24 +128,12 @@ INSERT INTO `usuarios` (`nombre`, `contacto`, `admin`, `pass`) VALUES
 --
 
 TRUNCATE TABLE `usuario_en_evento`;
---
--- Volcado de datos para la tabla `usuario_en_evento`
---
-
-INSERT INTO `usuario_en_evento` (`contacto`, `nombre_evento`, `fecha_evento`) VALUES
-('user1@gmail.com', 'evento generico', '2024-03-08');
 
 --
 -- Truncar tablas antes de insertar `usuario_en_foro`
 --
 
 TRUNCATE TABLE `usuario_en_foro`;
---
--- Volcado de datos para la tabla `usuario_en_foro`
---
-
-INSERT INTO `usuario_en_foro` (`contacto`, `id_foro`) VALUES
-('user1@gmail.com', 'lloreria');
 
 --
 -- Truncar tablas antes de insertar `valoraciones`
@@ -157,7 +145,7 @@ TRUNCATE TABLE `valoraciones`;
 --
 
 INSERT INTO `valoraciones` (`contacto`, `pelicula`, `puntuacion`) VALUES
-('user1@gmail.com', 'patata', 2);
+('user1@gmail.com', 'Sakra', 5);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
