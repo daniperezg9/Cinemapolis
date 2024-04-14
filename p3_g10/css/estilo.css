@@ -180,21 +180,23 @@
 
 	@media all and (max-width: 640px) {
 		div#contenedor {
-			flex-flow: column;
+			height : 100vh;
+			display : grid;
+			grid-template-rows: 20% 20% auto 10%;
 		}
 		header{
-			order: 1;
+			grid-row: 1;
 		}
 		nav{
-			order: 2;
+			grid-row: 2;
 		}
 		main{
-			order: 3;
+			grid-row: 3;
 		}
 		aside{
 			display: hidden;
 		}
 		footer{
-			order: 4;
+			grid-row: 4;
 		}
 	}

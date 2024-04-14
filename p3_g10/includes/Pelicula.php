@@ -7,6 +7,14 @@ class Pelicula{
     private $sinopsis;
     private $foto;
 
+    public static function ListaPeliculas(){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "SELECT * FROM peliculas";
+        $result = $conn->query($query);
+        return $result;
+
+    }
+
     public static function buscaPelicula($titulo){
 
         if (!$titulo) {
