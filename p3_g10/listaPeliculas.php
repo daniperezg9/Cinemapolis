@@ -6,24 +6,24 @@ require_once __DIR__.'/includes/config.php';
 //Parametros de acceso de la base de datos
 //abrimos conexión 
 if(isset($_SESSION['login']) && $_SESSION['login']) {
-    $app = Aplicacion::getInstance();
-    $conn = $app->getConexionBd();
-    if ($conn->connect_error) {
-        die("La conexión ha fallado" . $conn->connect_error);
-    }
     
-    // Creamos la consulta
-    $query = "SELECT * FROM peliculas";
-    // Realizamos la consulta
-    $result = $conn->query($query);
+    $result = Pelicula::ListaPeliculas();
 
     // Preparamos el contenido principal
+    if(isset($_SESSION['admin'])&&$_SESSION['admin']==0){
     $contenidoPrincipal = <<<EOS
     <div id="contenedor">
         <table border='1'>
             <tr><th>Imagen</th><th>Título</th><th>Descripción</th></tr>
     EOS;
-
+    }
+    else{
+        $contenidoPrincipal = <<<EOS
+    <div id="contenedor">
+        <table border='1'>
+            <tr><th>Imagen</th><th>Título</th><th>Descripción</th><th>Borrar pelicula</th></tr>
+    EOS;
+    }
     if($result)
     while ($row=$result->fetch_array()) {
         $img=$row['direccion_fotografia'];
@@ -33,14 +33,14 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                 <td><img src='$img' alt='$alt' width='100' height='120'/></td>
                 <td><a href='./resenyasYvaloraciones.php?titulo={$row['titulo']}'>{$row['titulo']}</a></td>
                 <td>{$row['descripcion']}</td>
-    EOS;
-    $contenidoPrincipal .= "<td>";
-    if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
-        $contenidoPrincipal .= <<< EOS
-        <p><a class = "borrarPeli" href='borrarPelicula.php?titulo={$row['titulo']}'>Borrar Pelicula</a></p>
         EOS;
-      }
-        $contenidoPrincipal .= "</td>";
+        if(isset($_SESSION['admin'])&&$_SESSION['admin']==1){ //Si eres admin puedes borrarlo.
+            $contenidoPrincipal .= "<td>";
+            $contenidoPrincipal .= <<< EOS
+            <p><a class = "borrarPeli" href='borrarPelicula.php?titulo={$row['titulo']}'>Borrar Pelicula</a></p>
+            EOS;
+            $contenidoPrincipal .= "</td>";
+        }
 
         $contenidoPrincipal .= <<<EOS
         </tr>
@@ -50,6 +50,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
         </table>
     </div>
     EOS;
+
 }
 else{ //Sino mostramos un error por no haber iniciado sesión
 

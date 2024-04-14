@@ -8,7 +8,7 @@ require_once __DIR__.'/includes/config.php';
 if(isset($_SESSION['login']) && $_SESSION['login']) {
     
     $tituloPeli=$_GET['titulo'];
-    $row  = Pelicula::buscaPelicula_genero($tituloPeli);
+    $row = Pelicula::buscaPelicula_genero($tituloPeli);
     $generoPeli = $row['genero'];
     $fecha_estreno = $row['fecha_estreno'];
     $dir= $row['dir'];
