@@ -22,7 +22,7 @@ class Valoracion{
         return true;
     }
 
-    public function modificarValoraciones($contacto,$pelicula,$valoracion){
+    public static function modificarValoraciones($contacto,$pelicula,$valoracion){
         if (!$contacto || !$pelicula) {
             return false;
         } 
@@ -33,12 +33,19 @@ class Valoracion{
         $p=$conn->real_escape_string($pelicula);
         $v=$conn->real_escape_string($valoracion);
 
-        $query = "UPDATE valoracion SET puntuacion = '$v (EDITADO)' WHERE  contacto = '$c' AND pelicula = '$p'";
+        $query = "UPDATE valoraciones SET puntuacion = '$v (EDITADO)' WHERE  contacto = '$c' AND pelicula = '$p'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
         return true;
+    }
+    public static function ListaValoracion($p){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "SELECT contacto, puntuacion FROM valoraciones WHERE pelicula = '$p'";
+        $result = $conn->query($query);
+        return $result;
+
     }
 
     public static function mostrarValoracion($pelicula){

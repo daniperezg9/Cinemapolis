@@ -5,6 +5,6 @@ require_once __DIR__.'/includes/config.php';
 //Parametros de acceso de la base de datos
     
     Valoracion::borrarValoracion($_POST['contacto'],$_POST['pelicula']);
-    $url_destino = './reseñasYvaloraciones.php?titulo=' . urlencode($pelicula);
+    $url_destino = './resenyasYvaloraciones.php?titulo=' . $_POST['pelicula'];
     header('Location:' . $url_destino);
 ?>
