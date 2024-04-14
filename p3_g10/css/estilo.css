@@ -107,7 +107,6 @@
 		color: rgb(218, 155, 62);
 		font-weight: bold;
 		text-decoration: underline;
-	
 	}
 
 	main a:visited { /* Enlaces del contenido principal */
@@ -154,21 +153,21 @@
 
 	@media all and (max-width: 640px) {
 		div#contenedor {
-		flex-flow: column;
+			flex-flow: column;
 		}
 		header{
-		order: 1;
+			order: 1;
 		}
 		nav{
-		order: 2;
+			order: 2;
 		}
 		main{
-		order: 3;
+			order: 3;
 		}
 		aside{
-			order : 4;
+			display: hidden;
 		}
 		footer{
-			order: 5;
+			order: 4;
 		}
 	}
