@@ -18,6 +18,7 @@ $contenidoPrincipal = <<<EOS
     <p>En un mundo dominado por las plataformas de streaming, <strong>Cinemapolis.io</strong> ha demostrado ser la solución perfecta para los amantes del cine que anhelan compartir experiencias con amigos. ¿Cuántas veces has querido organizar una noche de cine con tus amigos y te has encontrado con el dilema de elegir la película perfecta? ¡No busques más!</p>
     
     <img src="./images/claqueta.png" alt="claquetaImg" id="claquetaImg">
+    <img src="./images/cine.png" alt="cineImg" id="cineImg">
 
     <p><strong>Cinemapolis.io</strong> es una plataforma diseñada para facilitar encuentros cinéfilos. Aquí, los usuarios pueden:</p>
     <ul>
@@ -29,8 +30,6 @@ $contenidoPrincipal = <<<EOS
     </ul>
 
     <p>En <strong>Cinemapolis.io</strong>, la magia del cine se combina con la comodidad de la tecnología. ¡Únete a nuestra comunidad y descubre la mejor película para tu próxima quedada! 🎬🍿</p>
-    
-    <img src="./images/cine.png" alt="cineImg" id="cineImg">
 EOS;
 
 require __DIR__.'/includes/vistas/plantillas/plantilla.php';

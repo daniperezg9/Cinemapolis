@@ -86,21 +86,27 @@
 		text-decoration: underline;
 	}
 
+	#imgSideIzq{
+		width: 80%;
+		height: auto;
+	}
+
 	aside { /* Barra de lateral derecha */
 		grid-column: 3;
 		grid-row: 2;
+		text-align: center;
 	}
 
 	aside img { /* Imagenes de la barra lateral derecha */
-		width: 100%;
-		height: 100%;
+		height: 80%;
+		width: auto;
+		margin-top: 10%;
 	}
 
 	main { /* Contenido principal de la página actual */
 		grid-column: 2;
 		grid-row: 2;
 		background-color: white;
-		margin: 2%;
 		overflow: scroll;
 	}
 
@@ -112,6 +118,16 @@
 
 	main a:visited { /* Enlaces del contenido principal */
 		color: rgb(211, 223, 104);
+	}
+
+	#claquetaImg{
+		width: 100px;
+		height: auto;
+	}
+
+	#cineImg{
+		width: 100px;
+		height: auto;
 	}
 
 	#resenyas {
@@ -126,6 +142,11 @@
 		grid-column: 1 / 4;
 		grid-row: 3;
 		text-align: right;
+	}
+
+	#instaImg, #facebookImg, #twiterImg{
+		width: 50px;
+		height: 50px;
 	}
 
 	fieldset { /* Formularios */
