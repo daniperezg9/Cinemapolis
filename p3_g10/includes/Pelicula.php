@@ -30,6 +30,21 @@ class Pelicula{
         return true;
     }
 
+    public static function buscaPelicula_genero($titulo)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+
+        $t= $conn->real_escape_string($titulo);
+        $query = "SELECT pg.genero AS genero, p.fecha_estreno AS fecha_estreno , p.direccion_fotografia AS dir , p.alt AS alt , p.descripcion AS descr FROM `peliculas` p JOIN `genero_peliculas` pg ON p.titulo = pg.titulo WHERE p.titulo ='$t'";
+        // Realizamos la consulta
+        $result = $conn->query($query);
+
+        if($result){
+            return $row = $result->fetch_array();
+        }
+        return false;
+    }
+
 
 }
 

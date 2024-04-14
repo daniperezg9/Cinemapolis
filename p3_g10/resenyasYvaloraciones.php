@@ -6,27 +6,16 @@ require_once __DIR__.'/includes/config.php';
 
 //abrimos conexión 
 if(isset($_SESSION['login']) && $_SESSION['login']) {
-    $app = Aplicacion::getInstance();
-    $conn = $app->getConexionBd();
-    if ($conn->connect_error) {
-        die("La conexión ha fallado" . $conn->connect_error);
-    }
-    $tituloPeli = $conn->real_escape_string($_GET['titulo']);
-
-    // Consulta para obtener el género y la fecha de estreno de la película
-    $query = "SELECT pg.genero AS genero, p.fecha_estreno AS fecha_estreno , p.direccion_fotografia AS dir , p.alt AS alt , p.descripcion AS descr FROM `peliculas` p JOIN `genero_peliculas` pg ON p.titulo = pg.titulo WHERE p.titulo ='$tituloPeli'";
-    // Realizamos la consulta
-    $result = $conn->query($query);
-
-    if($result){
-        while($row = $result->fetch_array()){
-            $generoPeli = $row['genero'];
-            $fecha_estreno = $row['fecha_estreno'];
-            $dir= $row['dir'];
-            $alt=$row['alt'];
-            $descr=$row['descr'];
-        }
-    }
+    
+    $tituloPeli=$_GET['titulo'];
+    $row  = Pelicula::buscaPelicula_genero($tituloPeli);
+    $generoPeli = $row['genero'];
+    $fecha_estreno = $row['fecha_estreno'];
+    $dir= $row['dir'];
+    $alt=$row['alt'];
+    $descr=$row['descr'];
+        
+    
     
     $contenidoPrincipal = <<<EOS
     <div id="Titulo">
