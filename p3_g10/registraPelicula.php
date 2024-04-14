@@ -11,8 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
    //Recogemos el archivo enviado por el formulario
    
    $archivo = $_FILES['archivo']['name'];
-
-   //echo"<p> $archivo<p/>";
+   
    //Si el archivo contiene algo y es diferente de vacio
    if (isset($archivo) && $archivo != "") {
       //Obtenemos algunos datos necesarios sobre el archivo
@@ -28,40 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             if(!$creado=Pelicula::insertaPelicula($_POST['pelicula'],$_POST['desc'],$_POST['alt'],$_POST['fecha_estreno'],$archivo,$temp,$_POST['genero'])){
                 $mensajeError='Faltan datos por rellenar o ya existe la pelicula';
             }
-
-            /*$app = Aplicacion::getInstance();
-            $conn= $app->getConexionBd();
-
-            if (mysqli_connect_errno()){
-                die("error de conexión con BBDD". mysqli_connect_error());
-            }
-            $titulo =$conn->real_escape_string($_POST['pelicula']) ;
-            $descripcion =$conn->real_escape_string($_POST['desc']) ;
-            $alt=$conn->real_escape_string($_POST['alt']) ;
-            $fecha_estreno=$conn->real_escape_string($_POST['fecha_estreno']) ;
-            //echo "<p>  $titulo $descripcion $alt $fecha_estreno <p/>";
-            $query = "SELECT titulo FROM peliculas WHERE titulo = '$titulo' ";
-
-
-            $result = $conn->query($query);
-            
-            if ($result->num_rows == 0){
-                //recuperamos los resultados
-                $dir='./images/'.date("Y-m-d-H-i-s-").$archivo;
-                if (move_uploaded_file($temp, $dir)) {
-                    
-                    chmod($dir, 0777);
-                    $query = "INSERT INTO peliculas (titulo, descripcion, fecha_estreno,direccion_fotografia,alt) VALUES ('$titulo', '$descripcion', '$fecha_estreno','$dir','$alt')";
-                //seteamos con lo devuelto por la consulta
-                    $result = $conn->query($query);
-
-                    $creado=true;
-                    
-                }*/
-            
-
-
-            
         }
     }
     else{
