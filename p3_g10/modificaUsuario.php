@@ -12,17 +12,33 @@ $mensajeError = '';
         $nombre=$_SESSION['nombre'];
         $contenidoPrincipal = <<<EOS
         $mensajeError
+
         <!--Formulario para modificar usuario (el propio)-->
+        <fieldset id=modificaFieldset>
         <form action = "./modificaUsuario.php" method = "post">
-            <fieldset id=loginFieldset>
-                <legend>Datos de usuario</legend>
-                Correo electrónico:$contacto<br>
+                <h1>Modificar datos</h1>
+                <p> 
+                <strong>Correo electrónico:</strong> $contacto<br>
                 Nombre:<input type="text" name="nombre" value=$nombre><br>
                 Contraseña:<input type="password" name="password"><br>
                 <input type="hidden" name= "aceptarUsuario" value=true">
                 <input type="submit" name="Enviar">
-            </fieldset>
-        </form> 
+                </p>
+        </form>
+
+        <form action = "./modificaUsuario.php" method = "post">
+                
+                    <h1>Borrar usuario</h1>
+                    <p>
+                    <input type="hidden" name="borra_usuario" value=true>
+                    Si deseas borrar tu cuenta escribe <strong>$contacto</strong> <input type="text" name="confirmación">
+                    <input type="submit" name="borrar usuario" value="borrar usuario">
+                    </p>
+                
+            </form>
+
+        
+        </fieldset>
         EOS;
 
     
@@ -43,29 +59,30 @@ $mensajeError = '';
                 $contenidoPrincipal = <<<EOS
                 $mensajeError
                 <!--Formulario para modificar usuario (de otro user)-->
+                <fieldset id=modificaFieldset>
+                <p>
                 <form action = "./modificaUsuario.php" method = "post">
-                    <fieldset id=loginFieldset>
-                        <legend>Datos de usuario</legend>
-                        
-                        Correo electrónico: $contacto<br><br>
+                        <h1>Modificar usuario de $contacto</h1>
+                        <strong>Correo electrónico:</strong> $contacto<br><br>
                         Nombre:<input type="text" name="nombre" value=$nombre><br><br>
                         <input type="hidden" name="password" value=$pass>
                         <input type="hidden" name= "contacto" value=$contacto>
                         Admin:<input type="text" name="esAdmin" value=0><br><br>
                         <input type="hidden" name= "aceptarAdmin" value=true"><br>
                         <input type="submit" name="Enviar">
-                    </fieldset>
+                    
                 </form> 
 
                 <form action = "./modificaUsuario.php" method = "post">
-                
+                    <h1>Borrar usuario de $contacto</h1>
                     <input type="hidden" name="borra_usuario_admin" value=true>
                     <input type="hidden" name= "contacto" value=$contacto>
-                    Si deseas borrar tu cuenta escribe $contacto <input type="text" name="confirmación">
+                    Si deseas borrar la cuenta escribe <strong>$contacto</strong> <input type="text" name="confirmación">
                     <input type="submit" name="borrar usuario" value="borrar usuario">
                 
-                </form> 
-
+                </form>
+                </p> 
+                </fieldset>
 
                 EOS;
             }
@@ -80,12 +97,15 @@ $mensajeError = '';
                 $mensajeError = '<p>No se ha encontrado ningún usuario con correo "'.$_POST['contacto'].'"</p>';
                 $contenidoPrincipal = <<<EOS
                 $mensajeError
-            
-                Correo electrónico: $contacto<br>
-                Nombre: $nombre<br>
+                <fieldset id=modificaFieldset>
+                <p>
+                
     
                 <!--Formulario para iniciar sesión-->
                 <form action = "./modificaUsuario.php" method = "post">
+                    <h1>Modificar usuario</h1>
+                    <strong>Correo electrónico:</strong> $contacto<br>
+                    <strong>Nombre:</strong> $nombre<br>
                     <input type="hidden" name="modifica_usuario" value=true>
                     <br>
                     <input type="submit" name="modificar usuario" value="modificar usuario propio">
@@ -94,6 +114,7 @@ $mensajeError = '';
                 </form> 
     
                 <form action = "./modificaUsuario.php" method = "post">
+                    <h1>Buscar usuario para modificar</h1>
                     Correo electrónico del usuario a modificar:
                     <input type="text" name="contacto">
                     <input type="hidden" name="modifica_usuario" value=true>
@@ -102,7 +123,8 @@ $mensajeError = '';
                     <br>
                     <input type="submit" name="modificar usuario" value="modificar usuario">
                 </form>
-    
+                </p>
+                </fieldset>
             EOS;
             }
 
@@ -116,10 +138,10 @@ $mensajeError = '';
             $mensajeError
             <!--Formulario para modificar usuario (el propio)-->
             <form action = "./modificaUsuario.php" method = "post">
-                <fieldset id=modificaUser>
-                    <legend>Datos de usuario</legend>
+                <fieldset id=modificaFieldset>
                     
-                    Correo electrónico:$contacto<br>
+                    <h1>Modificar usuario</h1>
+                    <strong>Correo electrónico:</strong> $contacto<br>
                     Nombre:<input type="text" name="nombre" value=$nombre><br>
                     Contraseña:<input type="password" name="password"><br>
                     <input type="hidden" name= "aceptarUsuario" value=true">
@@ -144,10 +166,13 @@ $mensajeError = '';
         $contenidoPrincipal = <<<EOS
             $mensajeError
             <!--Formulario para modificar usuario (el propio)-->
-            Se han modificado exitosamente los datos
+            <fieldset id=modificaFieldset>
+            Se han modificado los datos  exitosamente
             <br>
-            Correo electrónico:$contacto<br>
-            Nombre:$nombre<br>
+            <br>
+            <strong>Correo electrónico:</strong> $contacto<br><br>
+            <strong>Nombre:</strong>$nombre
+            </fieldset>
             EOS;
     }
     //ADMIN MODIFICA USUARIO AJENO O PROPIO
@@ -168,12 +193,16 @@ $mensajeError = '';
 
         $contenidoPrincipal = <<<EOS
             $mensajeError
+            $mensajeError
             <!--Formulario para modificar usuario (el propio)-->
-            Se han modificado exitosamente los datos
-
-            Correo electrónico:$contacto<br>
-            Nombre:$nombre<br>
-            Admin:$admin<br>
+            <fieldset id=modificaFieldset>
+            Se han modificado los datos  exitosamente
+            <br>
+            <br>
+            <strong>Correo electrónico:</strong> $contacto<br><br>
+            <strong>Nombre:</strong> $nombre<br><br>
+            <strong>Admin:</strong> $admin
+            </fieldset>
             EOS;
 
 
@@ -188,7 +217,7 @@ $mensajeError = '';
             $user=Usuario::buscaUserPorCorreo($_POST['confirmación']);
             $user->borraPorCorreo($user->get_contacto_usuario());
 
-            $msn="<p>La cuenta vinculada a $contacto ha sido borrada con exito</p>";
+            
 
             if(isset($_SESSION['login'])){
                 unset($_SESSION['login']);
@@ -205,7 +234,9 @@ $mensajeError = '';
 
             $contenidoPrincipal = <<<EOS
             $mensajeError
-            $msn
+            <fieldset id=modificaFieldset>
+            La cuenta asociada a <strong>$contacto</strong> ha sido borrada exitosamente.
+            </fieldset>
             
             EOS;
 
@@ -215,29 +246,32 @@ $mensajeError = '';
             $contacto=$_SESSION['contacto'];
             $nombre=$_SESSION['nombre'];
 
-            $mensajeError="<p>la confirmación falló</p>";
+            $mensajeError="<h1>La confirmación falló</h1>";
             $contenidoPrincipal = <<<EOS
             $mensajeError
             
-            Correo electrónico:$contacto<br>
-            Nombre:$nombre<br>
+            
     
     
             <!--Formulario para iniciar sesión-->
+            <fieldset id=modificaFieldset>
             <form action = "./modificaUsuario.php" method = "post">
-                
+                    <h1>Modificar usuario</h1>
+                    <strong>Correo electrónico:</strong> $contacto<br>
+                    <strong>Nombre:</strong>$nombre<br>
                     <input type="hidden" name="modifica_usuario" value=true>
                     <input type="submit" name="modificar usuario" value="modificar usuario">
                 
             </form> 
 
             <form action = "./modificaUsuario.php" method = "post">
-                
+                    <h1>Borrar usuario</h1>
                     <input type="hidden" name="borra_usuario" value=true>
-                    Si deseas borrar tu cuenta escribe $contacto <input type="text" name="confirmación">
+                    Si deseas borrar tu cuenta escribe <strong>$contacto</strong> <input type="text" name="confirmación">
                     <input type="submit" name="borrar usuario" value="borrar usuario">
                 
             </form> 
+            </fieldset>
             EOS;
         }
 
@@ -249,10 +283,12 @@ $mensajeError = '';
             $user=Usuario::buscaUserPorCorreo($_POST['confirmación']);
             $user->borraPorCorreo($user->get_contacto_usuario());
 
-            $msn="<p>La cuenta vinculada a $contacto ha sido borrada con exito</p>";
+
             $contenidoPrincipal = <<<EOS
             $mensajeError
-            $msn
+            <fieldset id=modificaFieldset>
+            La cuenta vinculada a <strong>$contacto<strong> ha sido borrada con exito
+            </fieldset>
             
             EOS;
         }
@@ -269,11 +305,13 @@ $mensajeError = '';
                 $contenidoPrincipal = <<<EOS
                 $mensajeError
             
-                Correo electrónico: $contacto<br>
-                Nombre: $nombre<br>
+                
 
                 <!--Formulario para iniciar sesión-->
+                <fieldset id=modificaFieldset>
                 <form action = "./modificaUsuario.php" method = "post">
+                    <strong>Correo electrónico:</strong> $contacto<br>
+                    <strong>Nombre:</strong> $nombre<br>
                     <input type="hidden" name="modifica_usuario" value=true>
                     <br>
                     <input type="submit" name="modificar usuario" value="modificar usuario propio">
@@ -290,7 +328,7 @@ $mensajeError = '';
                     <br>
                     <input type="submit" name="modificar usuario" value="modificar usuario">
                 </form>
-
+                </fieldset>
             EOS;
             }
         }
@@ -308,9 +346,12 @@ $mensajeError = '';
             
             $contenidoPrincipal = <<<EOS
             $mensajeError
-        
-            Correo electrónico: $contacto<br>
-            Nombre: $nombre<br>
+
+            <fieldset id=modificaFieldset>
+            <h1>Datos de usuario</h1>
+            <p>
+            <strong>Correo electrónico:</strong> $contacto<br>
+            <strong>Nombre:</strong> $nombre<br>
 
             <!--Formulario para iniciar sesión-->
             <form action = "./modificaUsuario.php" method = "post">
@@ -320,17 +361,19 @@ $mensajeError = '';
                 <br><br>
             
             </form> 
-
+            
             <form action = "./modificaUsuario.php" method = "post">
-                Correo electrónico del usuario a modificar:
+            Correo electrónico del usuario a modificar:
                 <input type="text" name="contacto">
                 <input type="hidden" name="modifica_usuario" value=true>
                 <input type="hidden" name="modificaNoAdmin" value=true>
                 <br>
                 <br>
                 <input type="submit" name="modificar usuario" value="modificar usuario">
-            </form>
-
+                </form>
+                </p>
+            </fieldset>
+                
         EOS;
 
         }
@@ -338,9 +381,11 @@ $mensajeError = '';
         if(isset($_SESSION['admin']) && $_SESSION['admin']==0){
             $contenidoPrincipal = <<<EOS
             $mensajeError
-            
-            Correo electrónico:$contacto<br>
-            Nombre:$nombre<br>
+            <fieldset id=modificaFieldset>
+            <h1>Datos de usuario</h1>
+            <p>
+            <strong>Correo electrónico:</strong> $contacto<br>
+            <strong>Nombre:</strong>$nombre<br>
     
     
             <!--Formulario para iniciar sesión-->
@@ -349,16 +394,9 @@ $mensajeError = '';
                     <input type="hidden" name="modifica_usuario" value=true>
                     <input type="submit" name="modificar usuario" value="modificar usuario">
                 
-            </form> 
-            
-            <form action = "./modificaUsuario.php" method = "post">
-                
-                    <input type="hidden" name="borra_usuario" value=true>
-                    Si deseas borrar tu cuenta escribe $contacto <input type="text" name="confirmación">
-                    <input type="submit" name="borrar usuario" value="borrar usuario">
-                
-            </form> 
-            
+            </form>  
+            </p>
+            </fieldset>
             EOS;
 
         }

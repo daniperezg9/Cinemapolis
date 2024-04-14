@@ -139,6 +139,11 @@
 		margin-bottom: 24%;
 	}
 
+	#modificaFieldset{/*Formulario de modificaUsuario*/
+		margin-top: 20%;
+		margin-bottom: 24%;
+	}
+
 	#signupFieldset { /* Formulario de Sign up */
 		margin-top: 18%;
 		margin-bottom: 20%;
