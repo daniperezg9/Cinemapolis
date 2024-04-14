@@ -31,7 +31,7 @@ EOS;
         }
         else{
         $contenidoPrincipal .= <<<EOS
-          <td>No se puede editar</td>
+          <td> </td>
         EOS;
         }
         if($row['contacto'] == $_SESSION['contacto'] || $_SESSION['admin']=='1'){  //Si creas el foro o tienes poderes de administración, puedes borar y editar los mensajes dentro de los mismos
@@ -47,7 +47,7 @@ EOS;
         }
         else{
         $contenidoPrincipal .= <<<EOS
-          <td>No se puede borrar</td>
+          <td> </td>
          EOS;
         }
         $contenidoPrincipal .= <<<EOS
