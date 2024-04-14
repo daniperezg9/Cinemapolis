@@ -57,9 +57,24 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                         <button type="submit"> Borrar reseña </button>
                     </form>
                 EOS;
+                $contenidoPrincipal .= <<<EOS
+                        <form action="./editaResenyas.php" method= "post">
+                        <input name= "resenya" class="input" placeholder="Edite la reseña">                        
+                        <input type="hidden" name="contacto" value="{$row['contacto']}">
+                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                        <button type="submit" class='primaryContained float-right'>Editar reseña</button>
+                    </form>
+                    EOS;
             }
-            if($_SESSION['contacto']== $row['contacto'] || Admin::esAdmin($_SESSION)){
+            else if($_SESSION['contacto']== $row['contacto']){
                 $contenidoPrincipal .= "<td>";
+                $contenidoPrincipal .= <<< EOS
+                    <form action="borrarResenya.php" method="post" style="display: inline;">
+                        <input type="hidden" name="contacto" value="{$row['contacto']}">
+                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                        <button type="submit"> Borrar reseña </button>
+                    </form>
+                EOS;
                 $contenidoPrincipal .= <<<EOS
                         <form action="./editaResenyas.php" method= "post">
                         <input name= "resenya" class="input" placeholder="Edite la reseña">                        
@@ -99,10 +114,25 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                             <button type="submit"> Borrar valoración </button>
                         </form>
                     EOS;
+                    $contenidoPrincipal .= <<<EOS
+                        <form action="./editaValoraciones.php" method= "post">
+                        <input type="number" name="puntuacion" class="input" placeholder="Puntuación (1-100)" min="0" max="100">
+                        <input type="hidden" name="contacto" value="{$row['contacto']}">
+                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                        <button type="submit" class='primaryContained float-right'>Editar puntuación</button>
+                        </form>
+                    EOS;
                     $contenidoPrincipal .= "</td>"; 
                 }
-                if($_SESSION['contacto']== $row['contacto'] || Admin::esAdmin($_SESSION)){
+                else if($_SESSION['contacto']== $row['contacto']){
                     $contenidoPrincipal .= "<td>";
+                    $contenidoPrincipal .= <<<EOS
+                        <form action="borrarValoraciones.php" method="post" style="display: inline;">
+                            <input type="hidden" name="contacto" value="{$row['contacto']}">
+                            <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                            <button type="submit"> Borrar valoración </button>
+                        </form>
+                    EOS;
                     $contenidoPrincipal .= <<<EOS
                         <form action="./editaValoraciones.php" method= "post">
                         <input type="number" name="puntuacion" class="input" placeholder="Puntuación (1-100)" min="0" max="100">
