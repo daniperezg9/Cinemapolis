@@ -46,13 +46,9 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
             <div class="row">
                 <div class="comment">
     EOS;
-    $contenidoPrincipal .= <<<EOS
-    Resenyas::mostrarResenyas($tituloPeli)
-    EOS;
+    $contenidoPrincipal .= Resenyas::mostrarResenyas($tituloPeli);
+    $contenidoPrincipal .= Valoracion::mostrarValoracion($tituloPeli);
 
-    $contenidoPrincipal .= <<<EOS
-    Valoracion::mostrarValoracion($tituloPeli)
-    EOS;
     
     $contenidoPrincipal .= <<<EOS
                 </div>
