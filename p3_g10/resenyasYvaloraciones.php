@@ -14,7 +14,8 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     $dir= $row['dir'];
     $alt=$row['alt'];
     $descr=$row['descr'];
-        
+    $resultResenyas = Resenyas::ListaResenyas($tituloPeli);
+    $resultValoracion = Valoracion::ListaValoracion($tituloPeli);
     
     
     $contenidoPrincipal = <<<EOS
@@ -35,10 +36,90 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
             <div class="row">
                 <div class="comment">
     EOS;
-    $contenidoPrincipal .= Resenyas::mostrarResenyas($tituloPeli);
-    $contenidoPrincipal .= Valoracion::mostrarValoracion($tituloPeli);
-
+    if (!$resultResenyas){
+        $contenidoPrincipal .= <<<EOS
+                    <p>No hay reseñas para esta película.</p>
+                EOS;        
+    }else{
+        while ($row=$resultResenyas->fetch_array()) {
+            $contenidoPrincipal .= <<<EOS
+                <div>
+                <tr id = 'resenyas'>
+                <td><strong>{$row['contacto']}:</strong></td><td>{$row['mensaje']}</td>
+                </div>
+            EOS;
+            if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
+                $contenidoPrincipal .= "<td>";
+                $contenidoPrincipal .= <<< EOS
+                    <form action="borrarResenya.php" method="post" style="display: inline;">
+                        <input type="hidden" name="contacto" value="{$row['contacto']}">
+                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                        <button type="submit"> Borrar reseña </button>
+                    </form>
+                EOS;
+            }
+            if($_SESSION['contacto']== $row['contacto'] || Admin::esAdmin($_SESSION)){
+                $contenidoPrincipal .= "<td>";
+                $contenidoPrincipal .= <<<EOS
+                        <form action="./editaResenyas.php" method= "post">
+                        <input name= "resenya" class="input" placeholder="Edite la reseña">                        
+                        <input type="hidden" name="contacto" value="{$row['contacto']}">
+                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                        <button type="submit" class='primaryContained float-right'>Editar reseña</button>
+                    </form>
+                    EOS;
+                
+                $contenidoPrincipal .= "</td>";
+            }
     
+            $contenidoPrincipal .= <<<EOS
+            </tr>
+            EOS;
+        }
+    }
+    if(!$resultValoracion){
+        $contenidoPrincipal .= <<<EOS
+                    <p>No hay valoraciones para esta película.</p>
+                EOS;         
+    }else{
+        if($resultValoracion){
+            while ($row=$resultValoracion->fetch_array()) {
+                $contenidoPrincipal .= <<<EOS
+                    <div>
+                    <tr id = 'valoracion'>
+                    <td><strong>{$row['contacto']}:</strong></td><td>{$row['puntuacion']}</td>
+                    </div>
+                EOS;
+                if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
+                    $contenidoPrincipal .= "<td>";
+                    $contenidoPrincipal .= <<<EOS
+                        <form action="borrarValoraciones.php" method="post" style="display: inline;">
+                            <input type="hidden" name="contacto" value="{$row['contacto']}">
+                            <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                            <button type="submit"> Borrar valoración </button>
+                        </form>
+                    EOS;
+                    $contenidoPrincipal .= "</td>"; 
+                }
+                if($_SESSION['contacto']== $row['contacto'] || Admin::esAdmin($_SESSION)){
+                    $contenidoPrincipal .= "<td>";
+                    $contenidoPrincipal .= <<<EOS
+                        <form action="./editaValoraciones.php" method= "post">
+                        <input type="number" name="puntuacion" class="input" placeholder="Puntuación (1-100)" min="0" max="100">
+                        <input type="hidden" name="contacto" value="{$row['contacto']}">
+                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                        <button type="submit" class='primaryContained float-right'>Editar puntuación</button>
+                        </form>
+                    EOS;
+                    $contenidoPrincipal .= "</td>";
+                }
+          
+                $contenidoPrincipal .= <<<EOS
+                </tr>
+                EOS;
+            }
+        }
+    }
     $contenidoPrincipal .= <<<EOS
                 </div>
                 <div class="rating">
@@ -51,16 +132,16 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
             <div class="row">
                 <div class="col-6">
                     <form action="./agregaResenyas.php" method= "post">
-                        <input name= "resenya" class="input" placeholder="Escriba un comentario">
-                        <input type="hidden" name= "pelicula" value="$tituloPeli">
-                        <button type="submit" class='primaryContained float-right'>Add Comment</button>
-                    </form>
+                    <input name= "resenya" class="input" placeholder="Escriba aqui su reseña">
+                    <input type="hidden" name= "pelicula" value="$tituloPeli">
+                    <button type="submit" class='primaryContained float-right'>Añadir reseña</button>
+            </form>
                 </div>
                 <div class="col-6">
                     <form action="./agregaValoraciones.php" method= "post">
                         <input type="number" name="puntuacion" class="input" placeholder="Puntuación (1-100)" min="0" max="100">
                         <input type="hidden" name= "pelicula" value="$tituloPeli">
-                        <button type="submit" class='primaryContained float-right'>Add Rating</button>
+                        <button type="submit" class='primaryContained float-right'>Añadir puntuación</button>
                     </form>
                 </div>
             </div>

@@ -22,7 +22,7 @@ class Resenyas{
         }
         return true;
     }
-    public function modificarResenyas($contacto,$pelicula,$resenya){
+    public static function modificarResenyas($contacto,$pelicula,$resenya){
         if (!$contacto || !$pelicula) {
             return false;
         } 
@@ -41,6 +41,13 @@ class Resenyas{
         return true;
     }
 
+    public static function ListaResenyas($p){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "SELECT contacto, mensaje FROM resenyas WHERE pelicula = '$p'";
+        $result = $conn->query($query);
+        return $result;
+
+    }
     public static function mostrarResenyas($pelicula){
         $conn = Aplicacion::getInstance()->getConexionBd();
 
