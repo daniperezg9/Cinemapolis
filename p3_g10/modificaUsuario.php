@@ -320,6 +320,7 @@ $mensajeError = '';
                 </form> 
 
                 <form action = "./modificaUsuario.php" method = "post">
+                    <h1>Buscar usuario para modificar</h1>
                     Correo electrónico del usuario a modificar:
                     <input type="text" name="contacto">
                     <input type="hidden" name="modifica_usuario" value=true>
@@ -363,7 +364,8 @@ $mensajeError = '';
             </form> 
             
             <form action = "./modificaUsuario.php" method = "post">
-            Correo electrónico del usuario a modificar:
+                <h1>Buscar usuario para modificar</h1>
+                Correo electrónico del usuario a modificar:
                 <input type="text" name="contacto">
                 <input type="hidden" name="modifica_usuario" value=true>
                 <input type="hidden" name="modificaNoAdmin" value=true>
