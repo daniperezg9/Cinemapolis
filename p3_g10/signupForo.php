@@ -8,7 +8,7 @@ $contenidoPrincipal = <<<EOS
     <form action = "./registraForo.php" method = "post">
     <fieldset>
         <legend>Crea un nuevo Foro</legend>
-        ID del foro:<br> <input type="text" name="id_foro"><br>
+        Nombre del foro:<br> <input type="text" name="id_foro"><br>
         Descripción básica del foro:<br> <input type="text" name="descripcion"><br>	
         <input type="submit" name="Enviar">
     </fieldset>
