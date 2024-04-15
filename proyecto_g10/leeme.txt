@@ -1,0 +1,4 @@
+Funcionalidades de la aplicación:
+- Reseñas
+- Valoraciones
+- Foro
