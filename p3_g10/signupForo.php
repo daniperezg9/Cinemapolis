@@ -1,18 +1,14 @@
 <?php 
-namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
+use cinemapolis\FormularioAñadirForo as FormularioAñadirForo;
 
 $tituloPagina = 'Sign up Foro';
 
+$formReg = new FormularioAñadirForo();
+$htmlForm = $formReg->gestiona();
+
 $contenidoPrincipal = <<<EOS
-    <form action = "./registraForo.php" method = "post">
-    <fieldset>
-        <legend>Crea un nuevo Foro</legend>
-        Nombre del foro:<br> <input type="text" name="id_foro"><br>
-        Descripción básica del foro:<br> <input type="text" name="descripcion"><br>	
-        <input type="submit" name="Enviar">
-    </fieldset>
-    </form> 
+    $htmlForm
 EOS;
 
 require __DIR__.'/includes/vistas/plantillas/plantilla.php';

@@ -31,7 +31,7 @@ class Foro{
 
         if ($result->num_rows == 0){      
             $result->free();  
-            $query = "INSERT INTO lista_foros (contacto, id_foro, descripcion) VALUES ('$c', '$i', '$d')";
+            $query = "INSERT INTO lista_foros (id_foro, contacto, descripcion) VALUES ('$i', '$c', '$d')";
             //seteamos con lo devuelto por la consulta
             $result = $conn->query($query);
         }
@@ -65,7 +65,23 @@ class Foro{
         }
         return true;
     }
-    
+
+    public static function mismoForo($i,$c){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT * FROM lista_foros lf WHERE lf.contacto = '$c' AND lf.id_foro = '$i'");
+        $rs = $conn->query($query);
+        $result = false;
+        if ($rs) {
+            $fila = $rs->fetch_assoc();
+            if ($fila) {
+                $result = new Foro($fila['contacto'], $fila['id_foro'], $fila['descripcion']);
+            }
+            $rs->free();
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $result;
+    }
 
     public static function modificarForo($id_foro, $contacto, $descripcion){
         if (!$contacto || !$id_foro) {
