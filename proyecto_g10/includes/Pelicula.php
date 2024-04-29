@@ -25,7 +25,7 @@ class Pelicula{
 
         $t= $conn->real_escape_string($titulo);
 
-        $query = "SELECT titulo FROM peliculas WHERE titulo = '$titulo' ";
+        $query = "SELECT titulo FROM peliculas WHERE titulo = '$t' ";
 
         $result = $conn->query($query);
 
@@ -37,6 +37,8 @@ class Pelicula{
     }
 
     public static function insertaPelicula($titulo,$descripcion,$alt,$fecha_estreno,$archivo,$temp,$genero){
+        
+        
 
         if (!$titulo||!$descripcion||!$alt||!$fecha_estreno) {
             return false;
@@ -50,22 +52,24 @@ class Pelicula{
             $f=$conn->real_escape_string($fecha_estreno);
             $g=$conn->real_escape_string($genero);
 
+            
 
             $dir='./images/'.date("Y-m-d-H-i-s-").$archivo;
             if (move_uploaded_file($temp, $dir)) {
                 
                 chmod($dir, 0777);
-                $query = "INSERT INTO peliculas (titulo, descripcion, fecha_estreno,direccion_fotografia,alt) VALUES ('$titulo', '$descripcion', '$fecha_estreno','$dir','$alt')";
+                $query = "INSERT INTO peliculas (titulo, descripcion, fecha_estreno,direccion_fotografia,alt) VALUES ('$t', '$d', '$f','$dir','$a')";
             
                 $result = $conn->query($query);
 
-                $query = "INSERT INTO genero_peliculas (titulo, genero) VALUES ('$t', '$genero')";
+                $query = "INSERT INTO genero_peliculas (titulo, genero) VALUES ('$t', '$g')";
             
                 $result = $conn->query($query);
 
 
                 return true;
-        }
+            }
+
         return false;
 
         }
