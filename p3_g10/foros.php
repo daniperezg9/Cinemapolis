@@ -20,10 +20,10 @@ EOS;
         <td>{$row['fecha_envio']}</td>
       EOS;
         if($row['contacto'] == $_SESSION['contacto'] || $_SESSION['admin']=='1'){
+        $_SESSION['msgEditFE'] = $row['fecha_envio'];
         $contenidoPrincipal .= <<<EOS
           <td>
           <form action="signupMensajeEdit.php" method="post" style="display: inline;">
-            <input type="hidden" name="fecha_envio" value="$row[fecha_envio]">
             <button type="submit">Editar</button>
           </form>
           </td>
@@ -61,11 +61,11 @@ EOS;
   EOS;
   }
   $result->free();
+  $_SESSION['foroMsg'] = $_POST['id_foro'];
   $contenidoPrincipal .= <<<EOS
   </table>
   <form action="signupMensaje.php" method="post" style="display: inline;">
     <p>Añadir mensaje al foro:
-    <input type="hidden" name="id_foro" value="$_POST[id_foro]">
     <button type="submit">Mensaje Nuevo</button>
   </form>
   EOS;
