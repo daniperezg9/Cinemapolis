@@ -21,7 +21,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
         $contenidoPrincipal = <<<EOS
     <div id="contenedor">
         <table border='1'>
-            <tr><th>Imagen</th><th>Título</th><th>Descripción</th><th>Borrar pelicula</th></tr>
+            <tr><th>Imagen</th><th>Título</th><th>Descripción</th><th>Modificar pelicula</th><<th>Borrar pelicula</th></tr>
     EOS;
     }
     if($result)
@@ -35,6 +35,12 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                 <td>{$row['descripcion']}</td>
         EOS;
         if(isset($_SESSION['admin'])&&$_SESSION['admin']==1){ //Si eres admin puedes borrarlo.
+            $contenidoPrincipal .= "<td>";
+            $contenidoPrincipal .= <<< EOS
+            <p><a class = "modificaPeli" href='modificaPelicula.php?titulo={$row['titulo']}'>Modificar Pelicula</a></p>
+            EOS;
+            $contenidoPrincipal .= "</td>";
+
             $contenidoPrincipal .= "<td>";
             $contenidoPrincipal .= <<< EOS
             <p><a class = "borrarPeli" href='borrarPelicula.php?titulo={$row['titulo']}'>Borrar Pelicula</a></p>

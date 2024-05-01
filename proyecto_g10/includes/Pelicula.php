@@ -25,7 +25,7 @@ class Pelicula{
 
         $t= $conn->real_escape_string($titulo);
 
-        $query = "SELECT titulo FROM peliculas WHERE titulo = '$t' ";
+        $query = "SELECT * FROM peliculas WHERE titulo = '$t' ";
 
         $result = $conn->query($query);
 
@@ -66,8 +66,51 @@ class Pelicula{
             
                 $result = $conn->query($query);
 
-
                 return true;
+            }
+
+        return false;
+
+        }
+    }
+                                            
+    public static function modificaPelicula($titulo_prem,$titulo,$descripcion,$alt,$fecha_estreno,$temp,$dir,$genero){
+        
+        
+
+        if (!$titulo||!$descripcion||!$alt||!$fecha_estreno) {
+            return false;
+        } 
+        $conn = Aplicacion::getInstance()->getConexionBd();
+
+        if($peli=self::buscaPelicula($titulo_prem)){
+            $tp=$conn->real_escape_string($titulo_prem);
+            $t= $conn->real_escape_string($titulo);
+            $d=$conn->real_escape_string($descripcion);
+            $a=$conn->real_escape_string($alt);
+            $f=$conn->real_escape_string($fecha_estreno);
+            $g=$conn->real_escape_string($genero);
+            if($temp==$peli['direccion_fotografia']){
+                return true;
+            }
+            else{
+                if(file_exists($dir)){
+                    unlink($dir);
+                }
+                
+                if (move_uploaded_file($temp, $dir)) {
+                    
+                    chmod($dir, 0777);
+                    $query = "UPDATE peliculas  SET titulo = '$t', descripcion = '$d', fecha_estreno='$f',alt='$a' where titulo ='$tp' ";
+                
+                    $result = $conn->query($query);
+    
+                    $query = "UPDATE genero_peliculas SET titulo='$t', genero = '$g' WHERE titulo='$tp'";
+                
+                    $result = $conn->query($query);
+    
+                    return true;
+                }
             }
 
         return false;
