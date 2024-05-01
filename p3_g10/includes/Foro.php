@@ -16,6 +16,7 @@ class Foro{
         $query = "SELECT * FROM lista_foros";
         $result = $conn->query($query);
         return $result;
+        $result->free();
     }
 
     public static function añadirForo($id_foro, $contacto, $descripcion){
