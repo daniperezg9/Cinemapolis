@@ -26,6 +26,9 @@ class FormularioModificaPelicula extends Formulario{
         $htmlErroresGlobales
         <fieldset>
             <legend>Modifica la pelicula:$tituloprem.</legend>
+            <div>
+            <p>Modifica solo los campos que necesites, los demas se rellenarán automaticamente al pulsar el boton modificar</p>
+            </div>
             <div>    
                 <p>{$erroresCampos['tituloprem']}</p>
                 <input id="tituloprem" type="hidden" name= "tituloprem" value="$tituloprem"/>
@@ -62,7 +65,7 @@ class FormularioModificaPelicula extends Formulario{
             </div>
 
         <fieldset>
-        <button type="submit" name="Enviar">Añadir</button>
+        <button type="submit" name="Enviar">Modificar</button>
         EOF;
         return $html;
     }
@@ -73,7 +76,7 @@ class FormularioModificaPelicula extends Formulario{
 
         $peli = Pelicula::buscaPelicula($datos['tituloprem']);
         $archivo=   $_FILES['archivo']['name']; 
-       
+        
         $alt =      filter_var($datos['alt'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $titulo =   filter_var($datos['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $desc =     filter_var($datos['desc'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -83,18 +86,26 @@ class FormularioModificaPelicula extends Formulario{
         if(!$peli){
             $this->errores['tituloprem'] = "La pelicula no esta registrada en la base de datos por lo que no se puede modificar.";
         }
-        if ( ! $archivo || empty($archivo) ) {
+        if ( ! $archivo || empty($archivo)  ) {
+
             //$archivo = $_FILES($peli['direccion_fotografia']);
             $archivo = file($peli['direccion_fotografia']);
             $tipo = mime_content_type($peli['direccion_fotografia']);
             $tamano = filesize($peli['direccion_fotografia']);
             $temp = $peli['direccion_fotografia'];
+            
         }
         else{
+
             $tipo = $_FILES['archivo']['type'];
             $tamano = $_FILES['archivo']['size'];
             $temp = $_FILES['archivo']['tmp_name'];
+            
+            if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
+                $this->errores['archivo']='Error. La extensión o el tamaño de los archivos no es correcta.<br/>- Se permiten archivos .gif, .jpg, .jpeg, .png. y de 200 kb como máximo.';
+            }
         }
+        
         if ( ! $alt || empty($alt) ) {
             $alt= $peli['alt'];
         }
@@ -120,16 +131,12 @@ class FormularioModificaPelicula extends Formulario{
             */
             
             $dir=$peli['direccion_fotografia'];
-            //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
-            if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
-                $this->errores['archivo']='Error. La extensión o el tamaño de los archivos no es correcta.<br/>- Se permiten archivos .gif, .jpg, .jpeg, .png. y de 200 kb como máximo.';
-            }
-            else {                    
+            //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño                
                                             //($titulo_prem,$titulo,$descripcion,$alt,$fecha_estreno,$temp,$dir,$genero)
                 if(!Pelicula::modificaPelicula($datos['tituloprem'],$titulo,$desc,$alt,$fecha_estreno,$temp,$dir,$genero)){
                     $this->errores[]='ha sucedido un error al modificar la pelicula o no existia dicha pelicula';
                 }
-            }
+            
             
         }
                 

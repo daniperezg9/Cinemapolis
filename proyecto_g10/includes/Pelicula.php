@@ -91,6 +91,15 @@ class Pelicula{
             $f=$conn->real_escape_string($fecha_estreno);
             $g=$conn->real_escape_string($genero);
             if($temp==$peli['direccion_fotografia']){
+
+                $query = "UPDATE peliculas  SET titulo = '$t', descripcion = '$d', fecha_estreno='$f',alt='$a' where titulo ='$tp' ";
+                
+                    $result = $conn->query($query);
+    
+                    $query = "UPDATE genero_peliculas SET titulo='$t', genero = '$g' WHERE titulo='$tp'";
+                
+                    $result = $conn->query($query);
+
                 return true;
             }
             else{
