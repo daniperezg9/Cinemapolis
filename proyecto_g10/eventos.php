@@ -18,9 +18,9 @@ require_once __DIR__.'/includes/config.php';
 
 
 $tituloPagina = 'Pagina Principal Eventos';
-
+$contenidoPrincipal = '';
     if (!isset($_SESSION['login'])) {
-        $contenidoPrincipal = <<<EOS
+        $contenidoPrincipal .= <<<EOS
         <h1 class = "advertencia">⚠️Advertencia⚠️</h1>
         <h2>Para acceder a los eventos es necesario haber iniciado sesión. <a href='login.php'>Login</a></h2>
         EOS;
@@ -33,7 +33,7 @@ $tituloPagina = 'Pagina Principal Eventos';
                 $descripcion = $row['descripcion_evento'];
                 $fecha = $row['fecha_evento'];
                 $creacion = $row['fecha_creacion'];
-                $contenidoPrincipal = <<< EOS
+                $contenidoPrincipal .= <<< EOS
                     <h2>$nombre</h2>
                         <p>
                             <b>Descripcion: </b>$descripcion<br>
@@ -42,11 +42,36 @@ $tituloPagina = 'Pagina Principal Eventos';
                             <b>Fecha de creacion: </b>$creacion<br>
                         </p>
                 EOS;
-                if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
-                    $contenidoPrincipal .= <<< EOS
-                    <p><a href='borrarEvento.php?nombre_evento={$row['nombre_evento']}&creador_evento={$row['creador_evento']}&fecha_evento={$row['fecha_evento']}'>Borrar Evento</a></p>
+                $fecha_actual = date("Y-m-d");
+                if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["creador_evento"]){ //Si eres admin puedes borrarlo.
+                    $contenidoPrincipal .= <<<EOS
+                        <form action='borrarEvento.php' method='post'>
+                            <input type='hidden' name='nombre_evento' value='{$row['nombre_evento']}'>
+                            <input type='hidden' name='creador_evento' value='{$row['creador_evento']}'>
+                            <input type='hidden' name='fecha_evento' value='{$row['fecha_evento']}'>
+                            <input type='submit' value='Borrar Evento'>
+                        </form>
                     EOS;
-                  }
+                }
+                if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["creador_evento"]){ //Si eres admin puedes borrarlo.
+                    $contenidoPrincipal .= <<<EOS
+                    <form action="./editaEvento.php" method="post">
+                    Nombre del evento:<br>
+                    <input type="text" name="nombre_evento"><br>
+                
+                    Descripción básica del evento:<br>
+                    <input type="text" name="descripcion_evento"><br>
+                
+                    Fecha del evento:<br>
+                    <input type="date" name="fecha_evento"><br>
+                    <input type="submit" name="Modificar Evento" value= "Modifcar Evento">
+                    <input type='hidden' name='nombre_evento_old' value='{$row['nombre_evento']}'>
+                    <input type='hidden' name='creador_evento_old' value='{$row['creador_evento']}'>
+                    <input type='hidden' name='fecha_evento_old' value='{$row['fecha_evento']}'>
+                    <input type='hidden' name='fecha_actual' value='$fecha_actual'>
+                </form>
+                EOS;
+                }
             }
         }
         else
@@ -55,6 +80,24 @@ $tituloPagina = 'Pagina Principal Eventos';
             <p>No hay ningún evento creado.</p>
             EOS;
         }
+        
+
+        $contenidoPrincipal .= <<<EOS
+            <form action="./agregaEvento.php" method="post">
+                Nombre del evento:<br>
+                <input type="text" name="nombre_evento"><br>
+                Descripción básica del evento:<br>
+                <input type="text" name="descripcion_evento"><br>
+                Fecha del evento:<br>
+                <input type="date" name="fecha_evento"><br>
+                <input type='hidden' name='fecha_actual' value='$fecha_actual'>
+                <input type='hidden' name='creador_evento' value="{$_SESSION['contacto']}">
+                <input type="submit" name="Añadir Evento" value="Añadir evento">
+            </form>
+        EOS;
+
+
+
     }
 
     require __DIR__.'/includes/vistas/plantillas/plantilla.php';
