@@ -2,6 +2,31 @@
 namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
 
+$tituloPagina = 'Modifica Usuario';
+
+$contenidoPrincipal = '';
+
+if(isset($_SESSION['login']) && isset($_SESSION['admin']) && $_SESSION['login'] && $_SESSION['admin']){
+    $formReg=new FormularioModificaUsuarioPropio();
+    $formReg2=new FormularioModificaUsuarioAjeno();
+    $htmlForm=$formReg->gestiona();
+    $htmlForm2=$formReg2->gestiona();
+    $contenidoPrincipal=<<<EOS
+        $htmlForm
+        $htmlForm2
+    EOS;
+} 
+else if(isset($_SESSION['login']) && isset($_SESSION['admin']) && $_SESSION['login'] && !$_SESSION['admin']){
+    $formReg=new FormularioModificaUsuarioPropio();
+    $htmlForm=$formReg->gestiona();
+    $contenidoPrincipal=<<<EOS
+        $htmlForm
+    EOS;
+}
+
+
+
+/*
 $mensajeError = '';
     //NO ADMIN MODIFICA SU USUARIO
     if(isset($_POST['modifica_usuario'])&& isset($_SESSION['admin']) && $_SESSION['admin']==0 && !isset($_POST['aceptarUsuario'])&& !isset($_POST['aceptarAdmin'])){
@@ -403,6 +428,6 @@ $mensajeError = '';
 
         }
 
-    }
+    }*/
     require __DIR__.'/includes/vistas/plantillas/plantilla.php';
 ?>
