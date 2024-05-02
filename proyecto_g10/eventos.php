@@ -18,6 +18,7 @@ require_once __DIR__.'/includes/config.php';
 
 
 $tituloPagina = 'Pagina Principal Eventos';
+$fecha_actual = date("Y-m-d");
 $contenidoPrincipal = '';
     if (!isset($_SESSION['login'])) {
         $contenidoPrincipal .= <<<EOS
@@ -42,7 +43,6 @@ $contenidoPrincipal = '';
                             <b>Fecha de creacion: </b>$creacion<br>
                         </p>
                 EOS;
-                $fecha_actual = date("Y-m-d");
                 if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["creador_evento"]){ //Si eres admin puedes borrarlo.
                     $contenidoPrincipal .= <<<EOS
                         <form action='borrarEvento.php' method='post'>

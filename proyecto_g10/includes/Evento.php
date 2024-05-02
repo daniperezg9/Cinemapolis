@@ -7,7 +7,20 @@ class Evento{
         if (!$nombre_evento || !$creador_evento || !$fecha_evento) {
             return false;
         } 
+        $conn = Aplicacion::getInstance()->getConexionBd();
+
+        $ne= $conn->real_escape_string($nombre_evento);
+        $ce= $conn->real_escape_string($creador_evento);
+        $fe = $conn->real_escape_string($fecha_evento);
+
+        $query = "DELETE FROM eventos WHERE nombre_evento = '$ne' AND creador_evento = '$ce' AND fecha_evento = '$fe'";
+        if ( !$conn->query($query) ) {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+        return true;
     }
+
     public static function modificarEvento($nombre_evento,$descripcion_evento,$fecha_evento,$nombre_evento_old,$fecha_evento_old,$creador_evento_old, $fecha_actual){
         if (!$nombre_evento || !$descripcion_evento || !$fecha_evento || !$nombre_evento_old || !$fecha_evento_old || !$creador_evento_old || !$fecha_actual) {
             return false;
@@ -30,6 +43,7 @@ class Evento{
         }
         return true;
     }
+
     public static function añadirEvento($nombre_evento,$descripcion_evento,$fecha_evento,$fecha_actual,$creador_evento){
         
         $conn = Aplicacion::getInstance()->getConexionBd();
