@@ -22,6 +22,18 @@ class Usuario{
         return false;
     }
 
+
+    public static function listaUserPorCorreo($contacto){
+        $conn= Aplicacion::getInstance()->getConexionBd();
+        if ($conn->connect_error){
+            die("La conexión ha fallado" . $conn->connect_error);
+        }
+        $query = "SELECT usuarios.contacto FROM usuarios WHERE contacto != '$contacto'";
+        $result = $conn->query($query);
+        return $result;
+    }
+
+
     public static function buscaUserPorCorreo($contacto){
         $conn= Aplicacion::getInstance()->getConexionBd();
         if ($conn->connect_error){

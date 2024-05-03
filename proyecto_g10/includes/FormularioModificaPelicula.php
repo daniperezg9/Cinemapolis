@@ -64,8 +64,8 @@ class FormularioModificaPelicula extends Formulario{
                 <p>{$erroresCampos['genero']}</p>
             </div>
 
-        <fieldset>
-        <button type="submit" name="Enviar">Modificar</button>
+            <button type="submit" name="Enviar">Modificar</button>
+        </fieldset>
         EOF;
         return $html;
     }

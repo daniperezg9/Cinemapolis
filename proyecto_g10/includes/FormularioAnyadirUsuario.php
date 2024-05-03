@@ -38,8 +38,8 @@ class FormularioAnyadirUsuario extends Formulario{
                 <input id="contra" type="password" name="contra" value="$contra" />
                 <p>{$erroresCampos['contra']}
             </div>
-        <fieldset>
-        <button type="submit" name="Enviar">Crear usuario</button>
+            <button type="submit" name="Enviar">Crear usuario</button>
+        </fieldset>
         EOF;
         return $html;
     }
@@ -74,8 +74,14 @@ class FormularioAnyadirUsuario extends Formulario{
                 $this->errores[] = "El correo del usuario ya esta registrado en la base de datos";
             }
             else{
-                if (!Usuario::inserta_user($nombre,$correo,0,$contra)){
+                if (!$user=Usuario::inserta_user($nombre,$correo,0,$contra)){
                     $this->errores[] = "El usuario no ha podido ser insertado en la base de datos";
+                }
+                else{
+                    $_SESSION['login']=true;
+                    $_SESSION['nombre']=$user->get_nombre_usuario();
+                    $_SESSION['contacto']=$user->get_contacto_usuario();
+                    $_SESSION['admin']=$user->get_esAdmin_usuario();
                 }
             }
                 

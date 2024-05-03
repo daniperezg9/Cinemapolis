@@ -19,13 +19,24 @@ class FormularioModificaUsuarioAjeno extends Formulario{
                                                     $this->errores, 'span', array('class' => 'error'));
         
 
+        $listaUsers=Usuario::listaUserPorCorreo($_SESSION['contacto']);
+
+        $muestraLista="<select name='contacto'><option value='nada'>Selecciona una cuenta</option>";
+
+        while($row=$listaUsers->fetch_array()){
+            $contacto=$row['contacto'];
+            $muestraLista.="<option value='$contacto'>$contacto</option>";
+        }
+
+        $muestraLista.="</select>";
+
         $html = <<<EOF
         $htmlErroresGlobales
         <fieldset>
             <legend>Modificar el usuario de otro usuario:</legend>
             <div>
                 <label for="contacto">Correo electrónico:</label>
-                <input id="contacto" type="email" name="contacto" value="$contacto" />
+                $muestraLista
                 <p>{$erroresCampos['contacto']}</p>
             </div>
             <div>
@@ -48,14 +59,21 @@ class FormularioModificaUsuarioAjeno extends Formulario{
     protected function procesaFormulario(&$datos){
         $this->errores = [];
 
+        $sel= trim($datos['contacto'] ?? '');
+        $sel = filter_var($sel, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
         if($datos['contacto']==$_SESSION['contacto']){
             $this->errores['contacto']='Los administradores no deben modificar su cuenta como si fuese la de otra persona.';
         }
 
+        
         if(!$infoUser=Usuario::buscaUserPorCorreo($datos['contacto'])){
             $this->errores['contacto']='La cuenta no tiene vinculado ningún usuario';
         }
         
+        if($sel=='nada'){
+            $this->errores['contacto'] = 'Debes seleccionar una cuenta.';
+        }
         $nombre =       filter_var($datos['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $contra =       filter_var($datos['contacto'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         

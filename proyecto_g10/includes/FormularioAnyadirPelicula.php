@@ -55,8 +55,8 @@ class FormularioAnyadirPelicula extends Formulario{
                 <input id="genero" type="text" name="genero" value="$genero" />
                 <p>{$erroresCampos['genero']}
             </div>
-        <fieldset>
-        <button type="submit" name="Enviar">Añadir</button>
+            <button type="submit" name="Enviar">Añadir</button>
+        </fieldset>
         EOF;
         return $html;
     }
