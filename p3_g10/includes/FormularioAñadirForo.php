@@ -31,9 +31,9 @@ class FormularioAñadirForo extends Formulario{
                 <label for="descripcion">Descripcion del foro</label>
                 <input id="descripcion" type="text" name="descripcion" value="$descripcion" />
                 <p>{$erroresCampos['descripcion']}
-            </div>
-        <fieldset>
+            </div>        
         <button type="submit" name="Enviar">Añadir</button>
+        <fieldset>
         EOF;
         return $html;
     }

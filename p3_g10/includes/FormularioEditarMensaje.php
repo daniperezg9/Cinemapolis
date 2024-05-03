@@ -28,8 +28,8 @@ class FormularioEditarMensaje extends Formulario{
                 <input id="mensaje" type="text" name="mensaje" value="$mensaje" />
                 <p>{$erroresCampos['mensaje']}
             </div>
-        <fieldset>
         <button type="submit" name="Enviar">Editar</button>
+        <fieldset>
         EOF;
         return $html;
     }

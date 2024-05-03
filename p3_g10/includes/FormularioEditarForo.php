@@ -27,8 +27,8 @@ class FormularioEditarForo extends Formulario{
                 <input id="descripcion" type="text" name="descripcion" value="$descripcion" />
                 <p>{$erroresCampos['descripcion']}
             </div>
-        <fieldset>
         <button type="submit" name="Enviar">Editar</button>
+        <fieldset>
         EOF;
         return $html;
     }
