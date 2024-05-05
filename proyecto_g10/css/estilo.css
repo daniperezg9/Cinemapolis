@@ -181,6 +181,41 @@
 		padding: 10px 15px;
 	}
 
+	#contenedorEvento{ /*Contenedor de todos los eventos */
+		border: 3px solid rgb(218, 155, 62);
+		padding:10px;
+		margin:10px;
+	}
+
+	#modificaEventoFieldset{ /* Formulario para modificar eventos */
+		border: 3px solid rgb(175, 14, 143);
+		padding:10px;
+		margin:10px;
+		width: 15em;
+	}
+
+	#modificaEventoLegend{ /* Leyenda para modificar eventos */
+		background: rgb(175, 14, 143);
+		border: 3px solid rgb(175, 14, 143);
+	}
+
+	#agregaEventoFieldset{ /* Formulario para agregar eventos */
+		border: 3px solid rgb(0, 128, 255);
+		padding:10px;
+		margin:10px;
+		width: 15em;
+	}
+
+	#agregaEventoLegend{ /* Leyenda para agregar eventos */
+		background: rgb(0, 128, 255);
+		border: 3px solid rgb(0, 128, 255);
+	}
+
+	#borrarEventoBoton{ /* Formulario oculto para borrar eventos */
+		padding:10px;
+		margin:10px;
+	}
+
 	@media all and (max-width: 640px) { /* Cambios en la vista de la web para dispositivos móviles */
 		div#contenedor {
 			height : 100vh;

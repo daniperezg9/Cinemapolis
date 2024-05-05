@@ -35,40 +35,47 @@ $contenidoPrincipal = '';
                 $fecha = $row['fecha_evento'];
                 $creacion = $row['fecha_creacion'];
                 $contenidoPrincipal .= <<< EOS
-                    <h2>$nombre</h2>
+                    <div id='contenedorEvento'>
+                        <h2>$nombre</h2>
                         <p>
-                            <b>Descripcion: </b>$descripcion<br>
-                            <b>Creador: </b>$creador<br>
-                            <b>Fecha de inicio: </b>$fecha<br>
-                            <b>Fecha de creacion: </b>$creacion<br>
+                            <strong>Descripcion: </strong>$descripcion<br>
+                            <strong>Creador: </strong>$creador<br>
+                            <strong>Fecha de inicio: </strong>$fecha<br>
+                            <strong>Fecha de creacion: </strong>$creacion<br>
                         </p>
+                    </div>
                 EOS;
                 if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["creador_evento"]){ //Si eres admin puedes borrarlo.
                     $contenidoPrincipal .= <<<EOS
+                    <div id ='borrarEventoBoton'>
                         <form action='borrarEvento.php' method='post'>
                             <input type='hidden' name='nombre_evento' value='{$row['nombre_evento']}'>
                             <input type='hidden' name='creador_evento' value='{$row['creador_evento']}'>
                             <input type='hidden' name='fecha_evento' value='{$row['fecha_evento']}'>
                             <input type='submit' value='Borrar Evento'>
                         </form>
+                    </div>
                     EOS;
                 }
                 if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["creador_evento"]){ //Si eres admin puedes borrarlo.
                     $contenidoPrincipal .= <<<EOS
                     <form action="./editaEvento.php" method="post">
-                    Nombre del evento:<br>
-                    <input type="text" name="nombre_evento"><br>
-                
-                    Descripción básica del evento:<br>
-                    <input type="text" name="descripcion_evento"><br>
-                
-                    Fecha del evento:<br>
-                    <input type="date" name="fecha_evento"><br>
-                    <input type="submit" name="Modificar Evento" value= "Modifcar Evento">
-                    <input type='hidden' name='nombre_evento_old' value='{$row['nombre_evento']}'>
-                    <input type='hidden' name='creador_evento_old' value='{$row['creador_evento']}'>
-                    <input type='hidden' name='fecha_evento_old' value='{$row['fecha_evento']}'>
-                    <input type='hidden' name='fecha_actual' value='$fecha_actual'>
+                        <fieldset id=modificaEventoFieldset>
+                            <legend id = "modificaEventoLegend">Modifica este evento</legend>
+                            Nombre del evento:<br>
+                            <input type="text" name="nombre_evento"><br>
+                        
+                            Descripción básica del evento:<br>
+                            <input type="text" name="descripcion_evento"><br>
+                        
+                            Fecha del evento:<br>
+                            <input type="date" name="fecha_evento"><br>
+                            <input type="submit" name="Modificar Evento" value= "Modifcar Evento">
+                            <input type='hidden' name='nombre_evento_old' value='{$row['nombre_evento']}'>
+                            <input type='hidden' name='creador_evento_old' value='{$row['creador_evento']}'>
+                            <input type='hidden' name='fecha_evento_old' value='{$row['fecha_evento']}'>
+                            <input type='hidden' name='fecha_actual' value='$fecha_actual'>
+                        </fieldset>
                 </form>
                 EOS;
                 }
@@ -83,17 +90,20 @@ $contenidoPrincipal = '';
         
 
         $contenidoPrincipal .= <<<EOS
-            <form action="./agregaEvento.php" method="post">
-                Nombre del evento:<br>
-                <input type="text" name="nombre_evento"><br>
-                Descripción básica del evento:<br>
-                <input type="text" name="descripcion_evento"><br>
-                Fecha del evento:<br>
-                <input type="date" name="fecha_evento"><br>
-                <input type='hidden' name='fecha_actual' value='$fecha_actual'>
-                <input type='hidden' name='creador_evento' value="{$_SESSION['contacto']}">
-                <input type="submit" name="Añadir Evento" value="Añadir evento">
-            </form>
+                <form action="./agregaEvento.php" method="post">
+                    <fieldset id=agregaEventoFieldset>
+                            <legend id ="agregaEventoLegend">Añade un nuevo evento</legend>
+                            Nombre del evento:<br>
+                            <input type="text" name="nombre_evento"><br>
+                            Descripción básica del evento:<br>
+                            <input type="text" name="descripcion_evento"><br>
+                            Fecha del evento:<br>
+                            <input type="date" name="fecha_evento"><br>
+                            <input type='hidden' name='fecha_actual' value='$fecha_actual'>
+                            <input type='hidden' name='creador_evento' value="{$_SESSION['contacto']}">
+                            <input type="submit" name="Añadir Evento" value="Añadir evento">
+                        </fieldset>
+                </form>
         EOS;
 
 
