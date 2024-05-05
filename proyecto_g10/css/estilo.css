@@ -159,6 +159,7 @@
 		border: 3px solid rgb(218, 155, 62);
 		width: 15em;
 		margin: 0 auto;
+		margin-top: 3%;
 	}
 
 	#loginFieldset { /* Formulario de login */
@@ -209,6 +210,14 @@
 	#agregaEventoLegend{ /* Leyenda para agregar eventos */
 		background: rgb(0, 128, 255);
 		border: 3px solid rgb(0, 128, 255);
+	}
+
+	#contenedorForo{
+		border: 3px solid rgb(157, 79, 0);
+		background-color: rgb(218, 155, 62);
+		color:white;
+		padding:10px;
+		margin:10px;
 	}
 
 	@media all and (max-width: 640px) { /* Cambios en la vista de la web para dispositivos móviles */

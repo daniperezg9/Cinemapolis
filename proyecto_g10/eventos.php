@@ -56,8 +56,7 @@ $contenidoPrincipal = '';
                         </div>
                     EOS;
                 }
-                $contenidoPrincipal .= "</div>"; // Cierra el contenedorEvento aquí
-        
+                $contenidoPrincipal .= "</div>";
         
                 if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["creador_evento"]){ //Si eres admin puedes borrarlo.
                     $contenidoPrincipal .= <<<EOS
