@@ -131,6 +131,10 @@
 		height: auto;
 	}
 
+	main table{ /*tablas del main */
+		width: 35em;
+	}
+
 	#resenyas { /* Reseñas de las películas */
 		color: slateblue;
 	}
