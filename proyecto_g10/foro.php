@@ -57,14 +57,13 @@ else {
       }
       $contenidoPrincipal .= <<< EOS
       </div>
-      <p>------------------------------</p>
       EOS;
     }
   }
   else {
     $contenidoPrincipal .= <<<EOS
     <p>No hay ningún foro creado.</p>
-    <p>--------------------------</p>
+    <p>------------------------------------------------------</p>
     EOS;
   }
   $contenidoPrincipal .= <<<EOS
