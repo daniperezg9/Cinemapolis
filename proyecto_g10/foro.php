@@ -25,6 +25,7 @@ else {
       $contacto = $row['contacto'];
       $descripcion = $row['descripcion'];
       $contenidoPrincipal .= <<< EOS
+      <div id ="contenedorForo">
       <form action="foros.php" method="post" style="display: inline;">
       <p> Foro:
           <input type="hidden" name="id_foro" value="$idforo">
@@ -55,6 +56,7 @@ else {
         EOS;
       }
       $contenidoPrincipal .= <<< EOS
+      </div>
       <p>------------------------------</p>
       EOS;
     }
