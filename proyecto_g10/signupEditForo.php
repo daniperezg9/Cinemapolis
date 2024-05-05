@@ -1,11 +1,22 @@
 <?php 
-namespace cinemapolis;
+use cinemapolis\FormularioEditarForo as FormularioEditarForo;
 require_once __DIR__.'/includes/config.php';
 
 
 $tituloPagina = 'Sign up Foro Edit';
 
+$formReg = new FormularioEditarForo();
+$htmlForm = $formReg->gestiona();
+
 $contenidoPrincipal = <<<EOS
+    $htmlForm
+EOS;
+
+
+
+require __DIR__.'/includes/vistas/plantillas/plantilla.php';
+
+/*$contenidoPrincipal = <<<EOS
     <form action =  "./editaForo.php"  method = "post">
     <fieldset>
         <legend>Edita Foro</legend>
@@ -15,6 +26,6 @@ $contenidoPrincipal = <<<EOS
         <input type="submit" name="Enviar">
     </fieldset>
     </form>    
-EOS;
+EOS;*/
 
 require __DIR__.'/includes/vistas/plantillas/plantilla.php';

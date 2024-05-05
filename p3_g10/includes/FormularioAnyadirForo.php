@@ -1,7 +1,7 @@
 <?php
 namespace cinemapolis;
 
-class FormularioAñadirForo extends Formulario{
+class FormularioAnyadirForo extends Formulario{
 
     public function __construct(){
         parent::__construct('formañadirforo', ['urlRedireccion' => 'foro.php']);

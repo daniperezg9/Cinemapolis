@@ -1,10 +1,10 @@
 <?php 
 require_once __DIR__.'/includes/config.php';
-use cinemapolis\FormularioAñadirMensaje as FormularioAñadirMensaje;
+use cinemapolis\FormularioAnyadirMensaje as FormularioAnyadirMensaje;
 
 $tituloPagina = 'Sign up Mensaje';
 
-$formReg = new FormularioAñadirMensaje();
+$formReg = new FormularioAnyadirMensaje();
 $htmlForm = $formReg->gestiona();
 
 $contenidoPrincipal = <<<EOS
