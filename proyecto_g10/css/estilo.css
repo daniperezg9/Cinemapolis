@@ -162,8 +162,7 @@
 	}
 
 	#loginFieldset { /* Formulario de login */
-		margin-top: 20%;
-		margin-bottom: 24%;
+		margin-top: 10%;
 	}
 
 	#modificaFieldset{/*Formulario de modificaUsuario*/
@@ -172,8 +171,7 @@
 	}
 
 	#signupFieldset { /* Formulario de Sign up */
-		margin-top: 18%;
-		margin-bottom: 20%;
+		margin-top: 5%;
 	}
 	
 	legend { /* Leyenda de los formularios */

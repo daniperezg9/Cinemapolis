@@ -20,7 +20,7 @@ class FormularioAnyadirUsuario extends Formulario{
 
         $html = <<<EOF
         $htmlErroresGlobales
-        <fieldset>
+        <fieldset id=signupFieldset>
             <legend>Crea tu usuario</legend>
             <div>
                 <label for="nombre">Nombre:</label>
