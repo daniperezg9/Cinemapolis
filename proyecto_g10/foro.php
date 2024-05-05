@@ -63,7 +63,6 @@ else {
   else {
     $contenidoPrincipal .= <<<EOS
     <p>No hay ningún foro creado.</p>
-    <p>------------------------------------------------------</p>
     EOS;
   }
   $contenidoPrincipal .= <<<EOS
