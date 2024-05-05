@@ -43,20 +43,22 @@ $contenidoPrincipal = '';
                             <strong>Fecha de inicio: </strong>$fecha<br>
                             <strong>Fecha de creacion: </strong>$creacion<br>
                         </p>
-                    </div>
                 EOS;
                 if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["creador_evento"]){ //Si eres admin puedes borrarlo.
                     $contenidoPrincipal .= <<<EOS
-                    <div id ='borrarEventoBoton'>
-                        <form action='borrarEvento.php' method='post'>
-                            <input type='hidden' name='nombre_evento' value='{$row['nombre_evento']}'>
-                            <input type='hidden' name='creador_evento' value='{$row['creador_evento']}'>
-                            <input type='hidden' name='fecha_evento' value='{$row['fecha_evento']}'>
-                            <input type='submit' value='Borrar Evento'>
-                        </form>
-                    </div>
+                        <div id ='borrarEventoBoton'>
+                            <form action='borrarEvento.php' method='post'>
+                                <input type='hidden' name='nombre_evento' value='{$row['nombre_evento']}'>
+                                <input type='hidden' name='creador_evento' value='{$row['creador_evento']}'>
+                                <input type='hidden' name='fecha_evento' value='{$row['fecha_evento']}'>
+                                <input type='submit' value='Borrar Evento'>
+                            </form>
+                        </div>
                     EOS;
                 }
+                $contenidoPrincipal .= "</div>"; // Cierra el contenedorEvento aquí
+        
+        
                 if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["creador_evento"]){ //Si eres admin puedes borrarlo.
                     $contenidoPrincipal .= <<<EOS
                     <form action="./editaEvento.php" method="post">

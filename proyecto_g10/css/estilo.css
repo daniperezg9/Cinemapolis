@@ -211,11 +211,6 @@
 		border: 3px solid rgb(0, 128, 255);
 	}
 
-	#borrarEventoBoton{ /* Formulario oculto para borrar eventos */
-		padding:10px;
-		margin:10px;
-	}
-
 	@media all and (max-width: 640px) { /* Cambios en la vista de la web para dispositivos móviles */
 		div#contenedor {
 			height : 100vh;
