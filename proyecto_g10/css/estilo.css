@@ -110,14 +110,15 @@
 		overflow: scroll;
 	}
 
+	main a, main a:visited { /*Enlaces del contenido principal */
+		color: rgb(0, 128, 255);
+		font-weight: bold;
+	}
+
 	main a:hover{ /* Enlaces del contenido principal al pasar el cursor */
 		color: rgb(218, 155, 62);
 		font-weight: bold;
 		text-decoration: underline;
-	}
-
-	main a:visited { /* Enlaces del contenido principal */
-		color: rgb(211, 223, 104);
 	}
 
 	#claquetaImg{ /* Imagen de la página principal */
