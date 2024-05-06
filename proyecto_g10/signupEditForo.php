@@ -12,10 +12,6 @@ $contenidoPrincipal = <<<EOS
     $htmlForm
 EOS;
 
-
-
-require __DIR__.'/includes/vistas/plantillas/plantilla.php';
-
 /*$contenidoPrincipal = <<<EOS
     <form action =  "./editaForo.php"  method = "post">
     <fieldset>
