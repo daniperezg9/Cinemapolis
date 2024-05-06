@@ -62,6 +62,8 @@ class FormularioAnyadirResenya extends Formulario{
             else{
                 if(!Resenyas::añadirResenya($titulo,$contacto,$mensaje)){
                     $this->errores[]='Faltan datos por rellenar o ya se ha realizado una reseña sobre la pelicula';
+                }else{
+                    $_SESSION['reseñas_realizadas'][$titulo][$contacto] = true;
                 }
             }
         }           

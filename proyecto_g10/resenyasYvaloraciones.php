@@ -3,6 +3,12 @@ namespace cinemapolis;
 require_once __DIR__.'/includes/config.php';
 //Definicion de constantes
 //Parametros de acceso de la base de datos
+if (!isset($_SESSION['valoracion_realizadas'])) {
+    $_SESSION['valoracion_realizadas'] = [];
+}
+if (!isset($_SESSION['reseñas_realizadas'])) {
+    $_SESSION['reseñas_realizadas'] = [];
+}
 
 //abrimos conexión 
 if(isset($_SESSION['login']) && $_SESSION['login']) {
@@ -16,7 +22,6 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     $descr=$row['descr'];
     $resultResenyas = Resenyas::ListaResenyas($tituloPeli);
     $resultValoracion = Valoracion::ListaValoracion($tituloPeli);
-    
     
     $contenidoPrincipal = <<<EOS
     <div id="Titulo">
@@ -70,6 +75,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                         <button type="submit"> Borrar reseña </button>
                     </form>
                 EOS;
+                
                 $contenidoPrincipal .= <<<EOS
                         <p><a class="editaResenya" href="editaResenyas.php?titulo=$tituloPeli">Editar reseña</a></p>
                     EOS;
@@ -136,20 +142,29 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     EOS;             
     //$v=new Valoracion();
     //$contenidoPrincipal.= v->getMedia();
-    $contenidoPrincipal.=<<<EOS
+    if(!isset($_SESSION['reseñas_realizadas'][$tituloPeli]) &&
+    !isset($_SESSION['reseñas_realizadas'][$tituloPeli][$_SESSION['contacto']])){
+        $contenidoPrincipal.=<<<EOS
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <p><a class="anyadeResenya" href="agregaResenyas.php?titulo=$tituloPeli">Añadir reseña</a></p>
                 </div>
-                <div class="col-6">
-                    <p><a class="anyadeValoracion" href="agregaValoraciones.php?titulo=$tituloPeli">Añadir valoración</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
     EOS;
+    }
+    
+        if(!isset($_SESSION['valoracion_realizadas'][$tituloPeli]) && !isset($_SESSION['valoracion_realizadas'][$tituloPeli][$_SESSION['contacto']])){
+            $contenidoPrincipal.=<<<EOS
+                        <div class="col-6">
+                            <p><a class="anyadeValoracion" href="agregaValoraciones.php?titulo=$tituloPeli">Añadir valoración</a></p>
+                        </div>
+                    </div>
+                </div>
+                </section>
+            EOS;
+        }
+    
 
 }
 else{
