@@ -235,9 +235,6 @@
 		main{
 			grid-row: 3;
 		}
-		aside{
-			display: hidden;
-		}
 		footer{
 			grid-row: 4;
 		}
