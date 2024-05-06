@@ -110,6 +110,10 @@
 		overflow: scroll;
 	}
 
+	article{
+		padding: 5%;
+	}
+
 	main a, main a:visited { /*Enlaces del contenido principal */
 		color: rgb(0, 128, 255);
 		font-weight: bold;
