@@ -4,15 +4,38 @@ namespace cinemapolis;
 class Pelicula{
 
     private $titulo;
-    private $sinopsis;
-    private $foto;
+    private $descripcion;
+    private $alt;
+    private $fecha_estreno;
+    private $dir_foto;
+    private $genero;
 
+    
+    private function __construct($titulo,$descripcion, $alt,$fecha_estreno,$dir_foto,$genero) {
+        $this->titulo = $titulo;
+        $this->descripcion = $descripcion;
+        $this->alt = $alt;
+        $this->fecha_estreno = $fecha_estreno;
+        $this->dir_foto = $dir_foto;
+        $this->genero = $genero;
+    }
+    
     public static function ListaPeliculas(){
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "SELECT * FROM peliculas";
-        $result = $conn->query($query);
-        return $result;
-
+        $query = "SELECT * FROM peliculas p JOIN `genero_peliculas` pg ON p.titulo = pg.titulo";
+        $rs = $conn->query($query);
+        $result=[];
+        $i=0;
+        if($rs->num_rows > 0){
+            foreach($rs as $row){
+                $result[$i]=new Pelicula($row['titulo'],$row['descripcion'], $row['alt'],$row['fecha_estreno'],$row['direccion_fotografia'],$row['genero']);
+                $i++;
+            }
+            $rs->free();
+            return $result;
+        }
+        
+        return false;
     }
 
     public static function buscaPelicula($titulo){
@@ -25,12 +48,15 @@ class Pelicula{
 
         $t= $conn->real_escape_string($titulo);
 
-        $query = "SELECT * FROM peliculas WHERE titulo = '$t' ";
+        $query = "SELECT * FROM peliculas p JOIN `genero_peliculas` pg ON p.titulo = pg.titulo  WHERE p.titulo = '$t' ";
 
-        $result = $conn->query($query);
+        $result=$conn->query($query);
 
         if ($result->num_rows == 1){
-            return $row= $result->fetch_array();
+            $row= $result->fetch_array();
+            $pelicula=new Pelicula($row['titulo'],$row['descripcion'], $row['alt'],$row['fecha_estreno'],$row['direccion_fotografia'],$row['genero']);
+            $result->free();
+            return $pelicula ;
         }
 
         return false;
@@ -90,7 +116,7 @@ class Pelicula{
             $a=$conn->real_escape_string($alt);
             $f=$conn->real_escape_string($fecha_estreno);
             $g=$conn->real_escape_string($genero);
-            if($temp==$peli['direccion_fotografia']){
+            if($temp===$dir){
 
                 $query = "UPDATE peliculas  SET titulo = '$t', descripcion = '$d', fecha_estreno='$f',alt='$a' where titulo ='$tp' ";
                 
@@ -150,7 +176,7 @@ class Pelicula{
         return true;
     }
 
-    public static function buscaPelicula_genero($titulo)
+    /*public static function buscaPelicula_genero($titulo)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
 
@@ -163,8 +189,30 @@ class Pelicula{
             return $row = $result->fetch_array();
         }
         return false;
+    }*/
+
+
+
+
+    public function get_titulo(){
+        return $this->titulo;
+    }
+    public function get_descripcion(){
+        return $this->descripcion;
+    }
+    public function get_alt(){
+        return $this->alt;
+    }
+    public function get_fecha_estreno(){
+        return $this->fecha_estreno;
+    }
+    public function get_genero(){
+        return $this->genero;
     }
 
+    public function get_dir_foto(){
+        return $this->dir_foto;
+    }
 
 }
 

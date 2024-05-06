@@ -80,19 +80,19 @@ class FormularioModificaPelicula extends Formulario{
         $alt =      filter_var($datos['alt'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $titulo =   filter_var($datos['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $desc =     filter_var($datos['desc'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $fecha_estreno = $datos['fecha_estreno'];
+        $fecha_estreno = $datos['fecha_estreno'] ?? false;
         $genero =   filter_var($datos['genero'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if(!$peli){
             $this->errores['tituloprem'] = "La pelicula no esta registrada en la base de datos por lo que no se puede modificar.";
         }
         if ( ! $archivo || empty($archivo)  ) {
-
+            $temp = $peli->get_dir_foto();
+            
             //$archivo = $_FILES($peli['direccion_fotografia']);
-            $archivo = file($peli['direccion_fotografia']);
-            $tipo = mime_content_type($peli['direccion_fotografia']);
-            $tamano = filesize($peli['direccion_fotografia']);
-            $temp = $peli['direccion_fotografia'];
+            $archivo = file($peli->get_dir_foto());
+            $tipo = mime_content_type($peli->get_dir_foto());
+            $tamano = filesize($peli->get_dir_foto());
             
         }
         else{
@@ -107,20 +107,19 @@ class FormularioModificaPelicula extends Formulario{
         }
         
         if ( ! $alt || empty($alt) ) {
-            $alt= $peli['alt'];
+            $alt = $peli->get_alt();
         }
         if ( ! $titulo || empty($titulo) ) {
             $titulo=$datos['tituloprem'];
         }
         if ( ! $desc || empty($desc) ) {
-            $desc= $peli['descripcion'];
+            $desc= $peli->get_descripcion();
         }
         if ( ! $fecha_estreno || empty($fecha_estreno) ) {
-            $fecha_estreno=$peli['fecha_estreno'];
+            $fecha_estreno=$peli->get_fecha_estreno();
         }
         if ( ! $genero || empty($genero) ) {
-            $gen=Pelicula::buscaPelicula_genero($datos['tituloprem']);
-            $genero=$gen['genero'];
+            $genero=$peli->get_genero();
         }
 
         if (count($this->errores) === 0) {
@@ -130,7 +129,9 @@ class FormularioModificaPelicula extends Formulario{
             $temp = $_FILES['archivo']['tmp_name'];
             */
             
-            $dir=$peli['direccion_fotografia'];
+            $dir=$peli->get_dir_foto();
+
+            
             //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño                
                                             //($titulo_prem,$titulo,$descripcion,$alt,$fecha_estreno,$temp,$dir,$genero)
                 if(!Pelicula::modificaPelicula($datos['tituloprem'],$titulo,$desc,$alt,$fecha_estreno,$temp,$dir,$genero)){

@@ -13,13 +13,13 @@ if (!isset($_SESSION['reseñas_realizadas'])) {
 //abrimos conexión 
 if(isset($_SESSION['login']) && $_SESSION['login']) {
     
-    $tituloPeli=$_GET['titulo'];
-    $row = Pelicula::buscaPelicula_genero($tituloPeli);
-    $generoPeli = $row['genero'];
-    $fecha_estreno = $row['fecha_estreno'];
-    $dir= $row['dir'];
-    $alt=$row['alt'];
-    $descr=$row['descr'];
+    $tituloPeli=filter_var($_GET['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $row = Pelicula::buscaPelicula($tituloPeli);
+    $generoPeli = $row->get_genero();
+    $fecha_estreno = $row->get_fecha_estreno();
+    $dir= $row->get_dir_foto();
+    $alt=$row->get_alt();
+    $descr=$row->get_descripcion();
     $resultResenyas = Resenyas::ListaResenyas($tituloPeli);
     $resultValoracion = Valoracion::ListaValoracion($tituloPeli);
     
