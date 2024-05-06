@@ -34,7 +34,7 @@ else {
       <p>Descripción: $descripcion
       <p>Creador por: $contacto
       EOS;
-      if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row["contacto"]){ //Si eres admin o el dueño puedes editarlo
+      if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row->getContacto()){ //Si eres admin o el dueño puedes editarlo
         $_SESSION['foroEditId'] = $idforo;
         $_SESSION['foroEditCon'] = $contacto;
         $_SESSION['foroEditDes'] = $descripcion;

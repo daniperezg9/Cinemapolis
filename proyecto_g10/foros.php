@@ -9,14 +9,14 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
 $tituloPagina = 'Foros';
 $contenidoPrincipal = <<<EOS
   <table id="tablaForos">
-  <tr><th>Usuario</th><th>Mensaje</th><th>Fecha Envío</th><th>Editar Mensaje</th><th>Borrar Mensaje</th></tr>
+  <tr><th>Mensaje</th><th>Usuario</th><th>Fecha Envío</th><th> </th><th> </th></tr>
 EOS;
   if($result->num_rows!=0){
     while ($row=$result->fetch_array()) {
       $contenidoPrincipal .= <<<EOS
         <tr>
-        <td>{$row['contacto']}</td>
         <td>{$row['mensaje']}</td>
+        <td>{$row['contacto']}</td>
         <td>{$row['fecha_envio']}</td>
       EOS;
         if($row['contacto'] == $_SESSION['contacto'] || $_SESSION['admin']=='1'){
