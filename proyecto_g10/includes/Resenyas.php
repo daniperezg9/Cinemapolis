@@ -99,6 +99,26 @@ class Resenyas{
         $conn->close();
         return true;
     }
+    public static function buscaUsuarioRensenya($titulo,$contacto){
+        if (!$titulo || !$contacto) {
+            return false;
+        } 
+        
+        $conn = Aplicacion::getInstance()->getConexionBd();
+
+        $t= $conn->real_escape_string($titulo);
+        $c= $conn->real_escape_string($contacto);
+
+        $query = "SELECT * FROM resenyas WHERE titulo = '$t' AND contacto = '$c'";
+
+        $result = $conn->query($query);
+
+        if ($result->num_rows == 1){
+            return $row= $result->fetch_array();
+        }
+        $result->free();
+        return false;
+    }
 
 
 }

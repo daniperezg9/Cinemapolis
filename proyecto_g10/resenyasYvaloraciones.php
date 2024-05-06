@@ -161,18 +161,10 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
             </div>
             <div class="row">
                 <div class="col-6">
-                    <form action="./agregaResenyas.php" method= "post">
-                    <input name= "resenya" class="input" placeholder="Escriba aqui su reseña">
-                    <input type="hidden" name= "pelicula" value="$tituloPeli">
-                    <button type="submit" class='primaryContained float-right'>Añadir reseña</button>
-            </form>
+                    <p><a class="anyadeResenya" href="agregaResenyas.php">Añadir reseña</a></p>
                 </div>
                 <div class="col-6">
-                    <form action="./agregaValoraciones.php" method= "post">
-                        <input type="number" name="puntuacion" class="input" placeholder="Puntuación (1-100)" min="0" max="100">
-                        <input type="hidden" name= "pelicula" value="$tituloPeli">
-                        <button type="submit" class='primaryContained float-right'>Añadir puntuación</button>
-                    </form>
+                    <p><a class="anyadeValoracion" href="agregaValoraciones.php">Añadir valoración</a></p>
                 </div>
             </div>
         </div>

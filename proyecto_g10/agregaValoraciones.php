@@ -6,11 +6,11 @@ require_once __DIR__.'/includes/config.php';
     
     //abrimos conexión 
 
-    $puntuacion = $_POST['puntuacion'] ;
-    $pelicula = $_POST['pelicula'] ;
-    $contacto=$_SESSION['contacto'];
-
-    Valoracion::añadirValoracion($pelicula,$contacto,$puntuacion);
-    $url_destino = './resenyasYvaloraciones.php?titulo=' . urlencode($pelicula);
-    header('Location:' . $url_destino);
+    $formReg = new FormularioAnyadirValoracion();
+    $htmlForm=$formReg->gestiona();
+    $contenidoPrincipal=<<<EOS
+        $htmlForm
+    EOS;
+    //$url_destino = './resenyasYvaloraciones.php?titulo=' . urlencode($pelicula);
+    //header('Location:' . $url_destino);
 ?>
