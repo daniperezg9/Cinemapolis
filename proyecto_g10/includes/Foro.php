@@ -3,9 +3,29 @@ namespace cinemapolis;
 
 class Foro{
 
-    private $contacto;
     private $idforo;
+    private $contacto;
     private $descripcion;
+
+    public function getIdForo()
+    {
+        return $this->idforo;
+    }
+
+    public function getContacto()
+    {
+        return $this->contacto;
+    }
+
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    private function __construct($idforo,$contacto,$descripcion) {
+        $this->idforo = $idforo;
+        $this->contacto = $contacto;
+        $this->descripcion = $descripcion;
+    }
 
     public static function listaForo(){
         $app = Aplicacion::getInstance();
@@ -14,7 +34,19 @@ class Foro{
             die("La conexión ha fallado" . $conn->connect_error);
         }
         $query = "SELECT * FROM lista_foros";
-        $result = $conn->query($query);
+        $rs = $conn->query($query);
+        $result = [];
+        $i = 0;
+        if ($rs) {
+            foreach ($rs as $fila) {  
+                $result[$i] = new Foro($fila['id_foro'], $fila['contacto'], $fila['descripcion']);
+                $i++;
+            }
+            $rs->free();
+        }
+        else {
+            error_log("Error BD ({$conn->errno}): $conn->error");
+        }
         return $result;
     }
 

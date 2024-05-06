@@ -19,11 +19,11 @@ else {
   $contenidoPrincipal = <<< EOS
     <h1>Bienvenido al foro: interactúa con quien quieras!</h1>
   EOS;
-  if($result->num_rows!=0){
-    while($row = $result->fetch_array()){
-      $idforo = $row['id_foro'];
-      $contacto = $row['contacto'];
-      $descripcion = $row['descripcion'];
+  if($result!=null){
+    foreach($result as $row) {
+      $idforo = $row->getIdForo();
+      $contacto = $row->getContacto();
+      $descripcion = $row->getDescripcion();
       $contenidoPrincipal .= <<< EOS
       <div id ="contenedorForo">
       <form action="foros.php" method="post" style="display: inline;">
@@ -68,7 +68,6 @@ else {
   $contenidoPrincipal .= <<<EOS
   <p>Crea tu propio foro: <a href= 'signupForo.php'>Foro Nuevo </a></p>
   EOS;
-  $result->free();
 }
 
 require __DIR__.'/includes/vistas/plantillas/plantilla.php';
