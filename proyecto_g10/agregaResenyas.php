@@ -12,4 +12,5 @@ require_once __DIR__.'/includes/config.php';
     $url_destino = './resenyasYvaloraciones.php?titulo=' . $_POST['pelicula'];
     header('Location:' . $url_destino);
     
+require __DIR__.'/includes/vistas/plantillas/plantilla.php';
 ?>
