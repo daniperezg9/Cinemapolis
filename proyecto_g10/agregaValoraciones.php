@@ -13,4 +13,5 @@ require_once __DIR__.'/includes/config.php';
     EOS;
     //$url_destino = './resenyasYvaloraciones.php?titulo=' . urlencode($pelicula);
     //header('Location:' . $url_destino);
+    require __DIR__.'/includes/vistas/plantillas/plantilla.php';
 ?>

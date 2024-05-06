@@ -21,7 +21,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
         $contenidoPrincipal = <<<EOS
     <div id="contenedor">
         <table border='1'>
-            <tr><th>Imagen</th><th>Título</th><th>Descripción</th><th>Modificar pelicula</th><<th>Borrar pelicula</th></tr>
+            <tr><th>Imagen</th><th>Título</th><th>Descripción</th><th>Modificar pelicula</th><th>Borrar pelicula</th></tr>
     EOS;
     }
     if($result)

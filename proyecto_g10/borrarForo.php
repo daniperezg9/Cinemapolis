@@ -6,5 +6,5 @@ require_once __DIR__.'/includes/config.php';
 
     Foro::borraForo($_POST['id_foro'],$_POST['contacto']);
     
-    header("Location: foro.php");
+    header("Location: listaForos.php");
 ?>

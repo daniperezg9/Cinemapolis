@@ -6,5 +6,5 @@ require_once __DIR__.'/includes/config.php';
 
     Mensaje::borraMensaje($_POST['contacto'], $_POST['fecha_envio']);
     
-    header('Location: ./foro.php');
+    header('Location: ./listaForos.php');
 ?>

@@ -8,7 +8,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
 
 $tituloPagina = 'Foros';
 $contenidoPrincipal = <<<EOS
-  <table border='3'>
+  <table id="tablaForos">
   <tr><th>Usuario</th><th>Mensaje</th><th>Fecha Envío</th><th>Editar Mensaje</th><th>Borrar Mensaje</th></tr>
 EOS;
   if($result->num_rows!=0){

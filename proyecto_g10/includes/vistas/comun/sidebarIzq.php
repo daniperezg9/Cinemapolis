@@ -15,7 +15,7 @@
 		}
 		?>
 		<li><a href="<?= RUTA_APP ?>/eventos.php">Eventos</a></li>
-		<li><a href="<?= RUTA_APP ?>/foro.php">Foro</a></li>
+		<li><a href="<?= RUTA_APP ?>/listaForos.php">Foro</a></li>
 	</ul>
 
 	<img src="<?= RUTA_IMGS; ?>/entradaCine.png" alt="imgSideIzq" id="imgSideIzq">

@@ -4,7 +4,7 @@ namespace cinemapolis;
 class FormularioAnyadirMensaje extends Formulario{
 
     public function __construct(){
-        parent::__construct('formañadirmsg', ['urlRedireccion' => 'foro.php']);
+        parent::__construct('formañadirmsg', ['urlRedireccion' => 'listaForos.php']);
     }
 
     protected function generaCamposFormulario(&$datos){

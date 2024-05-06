@@ -4,7 +4,7 @@ namespace cinemapolis;
 class FormularioAnyadirForo extends Formulario{
 
     public function __construct(){
-        parent::__construct('formañadirforo', ['urlRedireccion' => 'foro.php']);
+        parent::__construct('formañadirforo', ['urlRedireccion' => 'listaForos.php']);
     }
 
     protected function generaCamposFormulario(&$datos){
