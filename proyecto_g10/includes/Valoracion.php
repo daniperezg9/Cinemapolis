@@ -121,7 +121,7 @@ class Valoracion{
         $t= $conn->real_escape_string($titulo);
         $c= $conn->real_escape_string($contacto);
 
-        $query = "SELECT * FROM valoraciones WHERE titulo = '$t' AND contacto = '$c'";
+        $query = "SELECT * FROM valoraciones WHERE pelicula = '$t' AND contacto = '$c'";
 
         $result = $conn->query($query);
 

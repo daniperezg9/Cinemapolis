@@ -109,7 +109,7 @@ class Resenyas{
         $t= $conn->real_escape_string($titulo);
         $c= $conn->real_escape_string($contacto);
 
-        $query = "SELECT * FROM resenyas WHERE titulo = '$t' AND contacto = '$c'";
+        $query = "SELECT * FROM resenyas WHERE pelicula = '$t' AND contacto = '$c'";
 
         $result = $conn->query($query);
 

@@ -58,12 +58,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                     </form>
                 EOS;
                 $contenidoPrincipal .= <<<EOS
-                        <form action="./editaResenyas.php" method= "post">
-                        <input name= "resenya" class="input" placeholder="Edite la reseña">                        
-                        <input type="hidden" name="contacto" value="{$row['contacto']}">
-                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
-                        <button type="submit" class='primaryContained float-right'>Editar reseña</button>
-                    </form>
+                        <p><a class="editaResenya" href="editaResenyas.php?titulo=$tituloPeli">Editar reseña</a></p>
                     EOS;
             }
             else if($_SESSION['contacto']== $row['contacto']){
@@ -76,12 +71,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                     </form>
                 EOS;
                 $contenidoPrincipal .= <<<EOS
-                        <form action="./editaResenyas.php" method= "post">
-                        <input name= "resenya" class="input" placeholder="Edite la reseña">                        
-                        <input type="hidden" name="contacto" value="{$row['contacto']}">
-                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
-                        <button type="submit" class='primaryContained float-right'>Editar reseña</button>
-                    </form>
+                        <p><a class="editaResenya" href="editaResenyas.php?titulo=$tituloPeli">Editar reseña</a></p>
                     EOS;
                 
                 $contenidoPrincipal .= "</td>";
@@ -115,12 +105,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                         </form>
                     EOS;
                     $contenidoPrincipal .= <<<EOS
-                        <form action="./editaValoraciones.php" method= "post">
-                        <input type="number" name="puntuacion" class="input" placeholder="Puntuación (1-100)" min="0" max="100">
-                        <input type="hidden" name="contacto" value="{$row['contacto']}">
-                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
-                        <button type="submit" class='primaryContained float-right'>Editar puntuación</button>
-                        </form>
+                        <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli">Editar Valoración</a></p>
                     EOS;
                     $contenidoPrincipal .= "</td>"; 
                 }
@@ -134,12 +119,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                         </form>
                     EOS;
                     $contenidoPrincipal .= <<<EOS
-                        <form action="./editaValoraciones.php" method= "post">
-                        <input type="number" name="puntuacion" class="input" placeholder="Puntuación (1-100)" min="0" max="100">
-                        <input type="hidden" name="contacto" value="{$row['contacto']}">
-                        <input type="hidden" name="pelicula" value="{$tituloPeli}">
-                        <button type="submit" class='primaryContained float-right'>Editar puntuación</button>
-                        </form>
+                        <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli">Editar Valoración</a></p>
                     EOS;
                     $contenidoPrincipal .= "</td>";
                 }
@@ -161,10 +141,10 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
             </div>
             <div class="row">
                 <div class="col-6">
-                    <p><a class="anyadeResenya" href="agregaResenyas.php">Añadir reseña</a></p>
+                    <p><a class="anyadeResenya" href="agregaResenyas.php?titulo=$tituloPeli">Añadir reseña</a></p>
                 </div>
                 <div class="col-6">
-                    <p><a class="anyadeValoracion" href="agregaValoraciones.php">Añadir valoración</a></p>
+                    <p><a class="anyadeValoracion" href="agregaValoraciones.php?titulo=$tituloPeli">Añadir valoración</a></p>
                 </div>
             </div>
         </div>

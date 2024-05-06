@@ -2,17 +2,19 @@
 namespace cinemapolis;
 use SplFileInfo;
 
-class FormularioModificarResenya extends Formulario{
+class FormularioModificarValoracion extends Formulario{
 
     public function __construct(){
-        parent::__construct('formmodificarresesenya', ['urlRedireccion' => 'listaPeliculas.php' , 'enctype' => 'multipart/form-data']);
+        $titulo = $_GET['titulo'] ?? '';
+        $url_destino = './resenyasYvaloraciones.php?titulo=' . urlencode($titulo);
+        parent::__construct('formmodificarresesenya', ['urlRedireccion' => $url_destino]);
     }
 
     protected function generaCamposFormulario(&$datos){
 
-        $titulo = $datos['titulo'] ?? '';
-        $contacto = $datos['contacto'] ?? '';
-        $contacto = $datos['puntuacion'] ?? '';
+        $titulo = $_GET['titulo'] ?? '';
+        $contacto = $_SESSION['contacto'] ?? '';
+        $puntuacion = $datos['puntuacion'] ?? '';
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
         $erroresCampos = self::generaErroresCampos(['titulo','puntuacion','contacto'],
@@ -24,8 +26,13 @@ class FormularioModificarResenya extends Formulario{
         <fieldset>
             <legend>Modifique su valoracion</legend>
             <div>
-                <label for="titulo">Modificar valoracion:</label>
-                <input id="titulo" type="text" name="puntuacion" value="$puntuacion" />
+            <label for="puntuacion">Valoración (1-10):</label>
+            <input id="puntuacion" type="number" name="puntuacion" min="1" max="10" required value="<?php echo $puntuacion; ?>" />
+                <p>{$erroresCampos['puntuacion']}
+                <input type="hidden" name="contacto" value="$contacto">
+                <p>{$erroresCampos['contacto']}
+                <input type="hidden" name="titulo" value="$titulo">
+                <p>{$erroresCampos['titulo']}
                 
             </div>
             <button type="submit" name="Enviar">Modificar valoracion</button>
@@ -40,6 +47,7 @@ class FormularioModificarResenya extends Formulario{
 
         $puntuacion =      filter_var($datos['puntuacion'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $titulo =   filter_var($datos['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $contacto =   filter_var($datos['contacto'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if ( !$puntuacion || empty($puntuacion) ) {
             $this->errores['puntuacion'] = 'Tienes que añadir una valoracion';
@@ -53,7 +61,7 @@ class FormularioModificarResenya extends Formulario{
                 $this->errores[] = "Este usuario no ha realizado una valoracion";
             }
             else{
-                if(!Resenya::modificarResenyas($contacto,$titulo,$puntuacion)){
+                if(!Valoracion::modificarValoraciones($contacto,$titulo,$puntuacion)){
                     $this->errores[]='Faltan datos por rellenar o ya se ha realizado una valoracion sobre la pelicula';
                 }
             }

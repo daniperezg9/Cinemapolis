@@ -5,14 +5,16 @@ use SplFileInfo;
 class FormularioAnyadirResenya extends Formulario{
 
     public function __construct(){
-        parent::__construct('formanyadirresesenya', ['urlRedireccion' => 'listaPeliculas.php' , 'enctype' => 'multipart/form-data']);
+        $titulo = $_GET['titulo'] ?? '';
+        $url_destino = './resenyasYvaloraciones.php?titulo=' . urlencode($titulo);
+        parent::__construct('formanyadirresesenya', ['urlRedireccion' => $url_destino]);
     }
 
     protected function generaCamposFormulario(&$datos){
 
-        $titulo = $datos['titulo'] ?? '';
+        $titulo = $_GET['titulo'] ?? '';
         $mensaje = $datos['mensaje'] ?? '';
-        $contacto = $datos['contacto'] ?? '';
+        $contacto = $_SESSION['contacto'] ?? '';
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
         $erroresCampos = self::generaErroresCampos(['titulo','mensaje','contacto'],
@@ -26,7 +28,11 @@ class FormularioAnyadirResenya extends Formulario{
             <div>
                 <label for="titulo">Reseña:</label>
                 <input id="titulo" type="text" name="mensaje" value="$mensaje" />
-                
+                <p>{$erroresCampos['mensaje']}
+                <input type="hidden" name="contacto" value="$contacto">
+                <p>{$erroresCampos['contacto']}
+                <input type="hidden" name="titulo" value="$titulo">
+                <p>{$erroresCampos['titulo']}
             </div>
             <button type="submit" name="Enviar">Añadir reseña</button>
         </fieldset>
@@ -40,6 +46,7 @@ class FormularioAnyadirResenya extends Formulario{
 
         $mensaje =      filter_var($datos['mensaje'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $titulo =   filter_var($datos['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $contacto =   filter_var($datos['contacto'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if ( !$mensaje || empty($mensaje) ) {
             $this->errores['mensaje'] = 'Tienes que añadir una reseña';
@@ -47,13 +54,13 @@ class FormularioAnyadirResenya extends Formulario{
 
         if (count($this->errores) === 0) {
 
-            $peli = Resenya::buscaUsuarioRensenya($datos['titulo'],$datos['contacto']);
+            $peli = Resenyas::buscaUsuarioRensenya($datos['titulo'],$datos['contacto']);
             
             if($peli){
                 $this->errores[] = "Este usuario ya ha realizado una reseña";
             }
             else{
-                if(!Resenya::añadirReseñas($titulo,$contacto,$mensaje)){
+                if(!Resenyas::añadirResenya($titulo,$contacto,$mensaje)){
                     $this->errores[]='Faltan datos por rellenar o ya se ha realizado una reseña sobre la pelicula';
                 }
             }
