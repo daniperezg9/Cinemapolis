@@ -14,7 +14,7 @@ class FormularioLogin extends Formulario{
         $password = '';
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-        $erroresCampos = self::generaErroresCampos(['contacto', 'password'],
+        $erroresCampos = self::generaErroresCampos(['contacto', 'password','ini'],
                                                     $this->errores, 'span', array('class' => 'error'));
         
 
@@ -22,13 +22,15 @@ class FormularioLogin extends Formulario{
         $htmlErroresGlobales
         <fieldset>
             <legend>Inicia sesión</legend>
-            Correo electrónico:<br> <input type="text" name="contacto"><br>
+            <p>{$erroresCampos['ini']}</p>
+            <label for="contacto">Correo electrónico: </label>
+            <input id="contacto" type="email" name="contacto" value="$contacto"><br>
             <p>{$erroresCampos['contacto']}</p>
-
-            Contraseña:<br> <input type="password" name="password"><br>	
+            <label for="password">Contraseña: </label>
+            <input id"password" type="password" name="password"><br>
             <p>{$erroresCampos['password']}</p>
 
-            <button type="submit" name="Enviar">Editar</button>
+            <button type="submit" name="Enviar">Iniciar sesion</button>
         </fieldset>
         EOF;
         return $html;
@@ -44,19 +46,18 @@ class FormularioLogin extends Formulario{
             $this->errores['contacto'] = 'El correo no puede estar vacío.';
         }
 
-        $contacto = trim($datos['contacto'] ?? '');
-        $contacto = filter_var($contacto, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if ( ! $contacto || empty($contacto)) {
-            $this->errores['contacto'] = 'El correo no puede estar vacío.';
-        }
         $password = trim($datos['password'] ?? '');
         $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password || empty($password)) {
             $this->errores['password'] = 'La contraseña no puede estar vacía.';
         }
-        
-        if(!$user=Usuario::login($contacto, $password)){
-            $this->errores['contacto'] = 'No se pudo iniciar sesión con este correo';
+        $contacto = trim($datos['contacto'] ?? '');
+        $contacto = filter_var($contacto, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        if ( ! $contacto || empty($contacto)) {
+            $this->errores['contacto'] = 'El correo no puede estar vacío.';
+        }
+        else if(!$user=Usuario::login($contacto, $password)){
+            $this->errores['ini'] = 'Los datos de inicio de sesión no son correctos.';
         }
         if (count($this->errores) === 0) {
             $_SESSION['login']=true;
