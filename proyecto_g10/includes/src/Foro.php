@@ -64,9 +64,7 @@ class Foro{
         if ($result->num_rows == 0){    
             $result->free();  
             $query = "INSERT INTO lista_foros (id_foro, contacto, descripcion) VALUES ('$i', '$c', '$d')";
-            //seteamos con lo devuelto por la consulta
             $result = $conn->query($query);
-              
         }
 
         $conn->close();
