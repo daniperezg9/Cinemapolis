@@ -27,7 +27,7 @@ class FormularioModificarResenya extends Formulario{
             <legend>Registra una nueva reseña</legend>
             <div>
                 <label for="titulo">Reseña:</label>
-                <input id="titulo" type="text" name="mensaje" value="$mensaje" />
+                <input required id="titulo" type="text" name="mensaje" value="$mensaje" />
                 <p>{$erroresCampos['mensaje']}
                 <input type="hidden" name="contacto" value="$contacto">
                 <p>{$erroresCampos['contacto']}

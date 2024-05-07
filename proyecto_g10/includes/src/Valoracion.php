@@ -2,6 +2,30 @@
 namespace cinemapolis\src;
 
 class Valoracion{
+    private $puntuacion;
+    private $contacto;
+
+    private function __construct($contacto, $puntuacion) {
+        $this->puntuacion = $puntuacion;
+        $this->contacto = $contacto;
+    }
+    public static function ListaValoracion($p){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "SELECT contacto, puntuacion FROM valoraciones WHERE pelicula = '$p'";
+        $rs = $conn->query($query);
+        $result=[];
+        $i=0;
+        if($rs->num_rows > 0){
+            foreach($rs as $row){
+                $result[$i]=new Valoracion($row['contacto'], $row['puntuacion']);
+                $i++;
+            }
+            $rs->free();
+            return $result;
+        }
+        return false;
+
+    }
     private $promedio_valoraciones;
     public static function borrarValoracion($contacto,$pelicula)
     {
@@ -41,49 +65,8 @@ class Valoracion{
             return false;
         }
         return true;
-    }
-    public static function ListaValoracion($p){
-        $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "SELECT contacto, puntuacion FROM valoraciones WHERE pelicula = '$p'";
-        $result = $conn->query($query);
-        return $result;
-
-    }
-
-    public static function mostrarValoracion($pelicula){
-        $conn = Aplicacion::getInstance()->getConexionBd();
-
-        $p=$conn->real_escape_string($pelicula);
-
-
-        $query = "SELECT contacto, puntuacion FROM valoraciones WHERE pelicula = '$p'";
-        $result = $conn->query($query);
-        if ( !$result ) {
-            error_log("Error BD ({$conn->errno}): {$conn->error}");
-            return false;
-        }
-            $total_valoraciones = 0;
-            $num_valoraciones = $result->num_rows;
-            
-        while($row = $result->fetch_assoc()){
-            $total_valoraciones += $row['puntuacion'];
-            echo '<p><strong>' . $row['contacto'] . ':</strong> ' . $row['puntuacion'] . '</p>';
-            if(Admin::esAdmin($_SESSION)){
-                echo '<form action="borrarValoraciones.php" method="post" style="display: inline;">
-                        <input type="hidden" name="contacto" value="' . $row['contacto'] . '">
-                        <input type="hidden" name="pelicula" value="' . $pelicula . '">
-                        <button type="submit"> Borrar valoración </button>
-                      </form>';
-            }
-        }
-        if ($num_valoraciones > 0) {
-            $promedio_valoraciones = $total_valoraciones / $num_valoraciones;
-            echo "<p><strong>Puntuación promedio:</strong> " . number_format($promedio_valoraciones, 2) . "</p>";
-        } else {
-            echo "<p>No hay valoraciones para esta película.</p>";
-        }
-        return true;
-    }
+    }       
+   
     public static function añadirValoracion($pelicula,$contacto,$puntuacion){
 
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -108,8 +91,6 @@ class Valoracion{
         $conn->close();
         return true;
     }
-    public function __construct() {
-    }
     public  function getMedia(){
         return $this->promedio_valoraciones;
     }
@@ -132,6 +113,12 @@ class Valoracion{
         }
         $result->free();
         return false;
+    }
+    public function get_puntuacion(){
+        return $this->puntuacion;
+    }
+    public function get_contacto(){
+        return $this->contacto;
     }
 }
 

@@ -27,7 +27,7 @@ class FormularioAnyadirValoracion extends Formulario{
             <legend>Registra una nueva valoración</legend>
             <div>
             <label for="puntuacion">Valoración (1-10):</label>
-            <input id="puntuacion" type="number" name="puntuacion" min="1" max="10" required value="$puntuacion" />
+            <input required id="puntuacion" type="number" name="puntuacion" min="1" max="10" required value="$puntuacion" />
                 <p>{$erroresCampos['puntuacion']}
                 <input type="hidden" name="contacto" value="$contacto">
                 <p>{$erroresCampos['contacto']}

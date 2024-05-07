@@ -2,6 +2,13 @@
 namespace cinemapolis\src;
 
 class Resenyas{
+    private $mensaje;
+    private $contacto;
+
+    private function __construct($contacto,$mensaje) {
+        $this->mensaje = $mensaje;
+        $this->contacto = $contacto;
+    }
 
     public static function borrarResenya($contacto,$pelicula)
     {
@@ -46,35 +53,19 @@ class Resenyas{
     public static function ListaResenyas($p){
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = "SELECT contacto, mensaje FROM resenyas WHERE pelicula = '$p'";
-        $result = $conn->query($query);
-        return $result;
-
-    }
-    public static function mostrarResenyas($pelicula){
-        $conn = Aplicacion::getInstance()->getConexionBd();
-
-        $p=$conn->real_escape_string($pelicula);
-
-        $query = "SELECT contacto, mensaje FROM resenyas WHERE pelicula = '$p'";
-        $result = $conn->query($query);
-        if ( !$result ) {
-            error_log("Error BD ({$conn->errno}): {$conn->error}");
-            return false;
-        }
-        while($row = $result->fetch_assoc()){
-            echo '<p><strong>' . $row['contacto'] . ':</strong> ' . $row['mensaje'] . '</p>';
-            if(Admin::esAdmin($_SESSION)){
-                echo '<form action="borrarResenya.php" method="post" style="display: inline;">
-                        <input type="hidden" name="contacto" value="' . $row['contacto'] . '">
-                        <input type="hidden" name="pelicula" value="' . $pelicula . '">
-                        <button type="submit"> Borrar Reseña </button>
-                      </form>';
+        $rs = $conn->query($query);
+        $result=[];
+        $i=0;
+        if($rs->num_rows > 0){
+            foreach($rs as $row){
+                $result[$i]=new Resenyas($row['contacto'], $row['mensaje']);
+                $i++;
             }
+            $rs->free();
+            return $result;
         }
-        if($result->num_rows==0){
-            echo "<p>No hay reseñas para esta película.</p>";        
-        }
-        return true;
+        return false;
+
     }
 
     public static function añadirResenya($pelicula,$contacto,$resenya){
@@ -121,8 +112,13 @@ class Resenyas{
         $result->free();
         return false;
     }
-
-
+    
+    public function get_msg(){
+        return $this->mensaje;
+    }
+    public function get_contacto(){
+        return $this->contacto;
+    }
 }
 
 

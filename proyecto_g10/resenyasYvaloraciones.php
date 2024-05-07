@@ -46,18 +46,23 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                     <p>No hay reseñas para esta película.</p>
                 EOS;        
     }else{
-        while ($row=$resultResenyas->fetch_array()) {
+        $i=0;
+        //while ($row=$resultResenyas->fetch_array()) {
+        while($i<count($resultResenyas)){
+            $msg=$resultResenyas[$i]->get_msg();
+            $contacto=$resultResenyas[$i]->get_contacto();
+        
             $contenidoPrincipal .= <<<EOS
                 <div>
                 <tr id = 'resenyas'>
-                <td><strong>{$row['contacto']}:</strong></td><td>{$row['mensaje']}</td>
+                <td><strong>{$contacto}:</strong></td> <td>{$msg}</td>
                 </div>
             EOS;
             if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
                 $contenidoPrincipal .= "<td>";
                 $contenidoPrincipal .= <<< EOS
                     <form action="borrarResenya.php" method="post" style="display: inline;">
-                        <input type="hidden" name="contacto" value="{$row['contacto']}">
+                        <input type="hidden" name="contacto" value="$contacto">
                         <input type="hidden" name="pelicula" value="{$tituloPeli}">
                         <button type="submit"> Borrar reseña </button>
                     </form>
@@ -70,7 +75,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                 $contenidoPrincipal .= "<td>";
                 $contenidoPrincipal .= <<< EOS
                     <form action="borrarResenya.php" method="post" style="display: inline;">
-                        <input type="hidden" name="contacto" value="{$row['contacto']}">
+                        <input type="hidden" name="contacto" value="$contacto">
                         <input type="hidden" name="pelicula" value="{$tituloPeli}">
                         <button type="submit"> Borrar reseña </button>
                     </form>
@@ -86,6 +91,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
             $contenidoPrincipal .= <<<EOS
             </tr>
             EOS;
+            $i++;
         }
     }
     if(!$resultValoracion){
@@ -94,47 +100,52 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                 EOS;         
     }else{
         if($resultValoracion){
-            while ($row=$resultValoracion->fetch_array()) {
-                $contenidoPrincipal .= <<<EOS
-                    <div>
-                    <tr id = 'valoracion'>
-                    <td><strong>{$row['contacto']}:</strong></td><td>{$row['puntuacion']}</td>
-                    </div>
-                EOS;
-                if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
-                    $contenidoPrincipal .= "<td>";
-                    $contenidoPrincipal .= <<<EOS
-                        <form action="borrarValoraciones.php" method="post" style="display: inline;">
-                            <input type="hidden" name="contacto" value="{$row['contacto']}">
-                            <input type="hidden" name="pelicula" value="{$tituloPeli}">
-                            <button type="submit"> Borrar valoración </button>
-                        </form>
-                    EOS;
-                    $contenidoPrincipal .= <<<EOS
-                        <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli">Editar Valoración</a></p>
-                    EOS;
-                    $contenidoPrincipal .= "</td>"; 
-                }
-                else if($_SESSION['contacto']== $row['contacto']){
-                    $contenidoPrincipal .= "<td>";
-                    $contenidoPrincipal .= <<<EOS
-                        <form action="borrarValoraciones.php" method="post" style="display: inline;">
-                            <input type="hidden" name="contacto" value="{$row['contacto']}">
-                            <input type="hidden" name="pelicula" value="{$tituloPeli}">
-                            <button type="submit"> Borrar valoración </button>
-                        </form>
-                    EOS;
-                    $contenidoPrincipal .= <<<EOS
-                        <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli">Editar Valoración</a></p>
-                    EOS;
-                    $contenidoPrincipal .= "</td>";
-                }
-          
-                $contenidoPrincipal .= <<<EOS
-                </tr>
-                EOS;
-            }
-        }
+            // while ($row=$resultValoracion->fetch_array()) {
+             $j=0;
+         while($j<count($resultValoracion)){
+             $puntuacion=$resultValoracion[$j]->get_puntuacion();
+             $contacto=$resultValoracion[$j]->get_contacto();
+                 $contenidoPrincipal .= <<<EOS
+                     <div>
+                     <tr id = 'valoracion'>
+                     <td><strong>{$contacto}:</strong></td><td>{$puntuacion}</td>
+                     </div>
+                 EOS;
+                 if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
+                     $contenidoPrincipal .= "<td>";
+                     $contenidoPrincipal .= <<<EOS
+                         <form action="borrarValoraciones.php" method="post" style="display: inline;">
+                             <input type="hidden" name="contacto" value="$contacto">
+                             <input type="hidden" name="pelicula" value="$tituloPeli">
+                             <button type="submit"> Borrar valoración </button>
+                         </form>
+                     EOS;
+                     $contenidoPrincipal .= <<<EOS
+                         <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli">Editar Valoración</a></p>
+                     EOS;
+                     $contenidoPrincipal .= "</td>"; 
+                 }
+                 else if($_SESSION['contacto']== $row['contacto']){
+                     $contenidoPrincipal .= "<td>";
+                     $contenidoPrincipal .= <<<EOS
+                         <form action="borrarValoraciones.php" method="post" style="display: inline;">
+                             <input type="hidden" name="contacto" value="{$contacto}">
+                             <input type="hidden" name="pelicula" value="{$tituloPeli}">
+                             <button type="submit"> Borrar valoración </button>
+                         </form>
+                     EOS;
+                     $contenidoPrincipal .= <<<EOS
+                         <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli">Editar Valoración</a></p>
+                     EOS;
+                     $contenidoPrincipal .= "</td>";
+                 }
+           
+                 $contenidoPrincipal .= <<<EOS
+                 </tr>
+                 EOS;
+                $j++;
+             }
+         }
     }
     $contenidoPrincipal .= <<<EOS
                 </div>
