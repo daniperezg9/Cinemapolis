@@ -71,7 +71,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                         <p><a class="editaResenya" href="editaResenyas.php?titulo=$tituloPeli">Editar reseña</a></p>
                     EOS;
             }
-            else if($_SESSION['contacto']== $row['contacto']){
+            else if($_SESSION['contacto']==$contacto){
                 $contenidoPrincipal .= "<td>";
                 $contenidoPrincipal .= <<< EOS
                     <form action="borrarResenya.php" method="post" style="display: inline;">
@@ -125,7 +125,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                      EOS;
                      $contenidoPrincipal .= "</td>"; 
                  }
-                 else if($_SESSION['contacto']== $row['contacto']){
+                 else if($_SESSION['contacto']== $contacto){
                      $contenidoPrincipal .= "<td>";
                      $contenidoPrincipal .= <<<EOS
                          <form action="borrarValoraciones.php" method="post" style="display: inline;">

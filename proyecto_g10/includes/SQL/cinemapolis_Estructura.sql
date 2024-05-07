@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-04-2024 a las 21:27:56
+-- Tiempo de generación: 07-05-2024 a las 21:18:59
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -26,24 +27,9 @@ USE `cinemapolis`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `chat`
---
-
-DROP TABLE IF EXISTS `chat`;
-CREATE TABLE `chat` (
-  `remitente` varchar(50) NOT NULL,
-  `receptor` varchar(50) NOT NULL,
-  `mensaje` varchar(140) NOT NULL,
-  `fecha_envio` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `eventos`
 --
 
-DROP TABLE IF EXISTS `eventos`;
 CREATE TABLE `eventos` (
   `creador_evento` varchar(50) NOT NULL,
   `nombre_evento` varchar(100) NOT NULL,
@@ -58,7 +44,6 @@ CREATE TABLE `eventos` (
 -- Estructura de tabla para la tabla `foro`
 --
 
-DROP TABLE IF EXISTS `foro`;
 CREATE TABLE `foro` (
   `id_foro` varchar(50) NOT NULL,
   `contacto` varchar(50) NOT NULL,
@@ -72,7 +57,6 @@ CREATE TABLE `foro` (
 -- Estructura de tabla para la tabla `genero_peliculas`
 --
 
-DROP TABLE IF EXISTS `genero_peliculas`;
 CREATE TABLE `genero_peliculas` (
   `titulo` varchar(100) NOT NULL,
   `genero` varchar(50) NOT NULL
@@ -84,7 +68,6 @@ CREATE TABLE `genero_peliculas` (
 -- Estructura de tabla para la tabla `lista_foros`
 --
 
-DROP TABLE IF EXISTS `lista_foros`;
 CREATE TABLE `lista_foros` (
   `id_foro` varchar(50) NOT NULL,
   `contacto` varchar(50) NOT NULL,
@@ -97,7 +80,6 @@ CREATE TABLE `lista_foros` (
 -- Estructura de tabla para la tabla `peliculas`
 --
 
-DROP TABLE IF EXISTS `peliculas`;
 CREATE TABLE `peliculas` (
   `titulo` varchar(100) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
@@ -112,7 +94,6 @@ CREATE TABLE `peliculas` (
 -- Estructura de tabla para la tabla `resenyas`
 --
 
-DROP TABLE IF EXISTS `resenyas`;
 CREATE TABLE `resenyas` (
   `contacto` varchar(50) NOT NULL,
   `pelicula` varchar(100) NOT NULL,
@@ -125,7 +106,6 @@ CREATE TABLE `resenyas` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `nombre` varchar(50) NOT NULL,
   `contacto` varchar(50) NOT NULL,
@@ -136,35 +116,9 @@ CREATE TABLE `usuarios` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario_en_evento`
---
-
-DROP TABLE IF EXISTS `usuario_en_evento`;
-CREATE TABLE `usuario_en_evento` (
-  `contacto` varchar(50) NOT NULL,
-  `nombre_evento` varchar(100) NOT NULL,
-  `fecha_evento` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario_en_foro`
---
-
-DROP TABLE IF EXISTS `usuario_en_foro`;
-CREATE TABLE `usuario_en_foro` (
-  `contacto` varchar(50) NOT NULL,
-  `id_foro` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `valoraciones`
 --
 
-DROP TABLE IF EXISTS `valoraciones`;
 CREATE TABLE `valoraciones` (
   `contacto` varchar(50) NOT NULL,
   `pelicula` varchar(100) NOT NULL,
@@ -174,14 +128,6 @@ CREATE TABLE `valoraciones` (
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `chat`
---
-ALTER TABLE `chat`
-  ADD PRIMARY KEY (`remitente`,`receptor`,`fecha_envio`),
-  ADD KEY `receptor` (`receptor`),
-  ADD KEY `remitente` (`remitente`);
 
 --
 -- Indices de la tabla `eventos`
@@ -206,12 +152,6 @@ ALTER TABLE `genero_peliculas`
   ADD KEY `titulo` (`titulo`);
 
 --
--- Indices de la tabla `lista_foros`
---
-ALTER TABLE `lista_foros`
-  ADD PRIMARY KEY (`id_foro`,`contacto`);
-
---
 -- Indices de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
@@ -233,21 +173,6 @@ ALTER TABLE `usuarios`
   ADD KEY `contacto` (`contacto`);
 
 --
--- Indices de la tabla `usuario_en_evento`
---
-ALTER TABLE `usuario_en_evento`
-  ADD PRIMARY KEY (`contacto`,`nombre_evento`,`fecha_evento`),
-  ADD KEY `contacto` (`contacto`,`nombre_evento`,`fecha_evento`);
-
---
--- Indices de la tabla `usuario_en_foro`
---
-ALTER TABLE `usuario_en_foro`
-  ADD PRIMARY KEY (`contacto`,`id_foro`),
-  ADD KEY `id_foro` (`id_foro`),
-  ADD KEY `contacto` (`contacto`);
-
---
 -- Indices de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
@@ -257,13 +182,6 @@ ALTER TABLE `valoraciones`
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `chat`
---
-ALTER TABLE `chat`
-  ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`remitente`) REFERENCES `usuarios` (`contacto`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `chat_ibfk_2` FOREIGN KEY (`receptor`) REFERENCES `usuarios` (`contacto`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `eventos`
@@ -284,23 +202,11 @@ ALTER TABLE `resenyas`
   ADD CONSTRAINT `resenyas_ibfk_1` FOREIGN KEY (`contacto`) REFERENCES `usuarios` (`contacto`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `usuario_en_evento`
---
-ALTER TABLE `usuario_en_evento`
-  ADD CONSTRAINT `usuario_en_evento_ibfk_1` FOREIGN KEY (`contacto`) REFERENCES `usuarios` (`contacto`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario_en_foro`
---
-ALTER TABLE `usuario_en_foro`
-  ADD CONSTRAINT `usuario_en_foro_ibfk_1` FOREIGN KEY (`contacto`) REFERENCES `usuarios` (`contacto`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuario_en_foro_ibfk_2` FOREIGN KEY (`id_foro`) REFERENCES `foro` (`id_foro`) ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
   ADD CONSTRAINT `valoraciones_ibfk_1` FOREIGN KEY (`contacto`) REFERENCES `usuarios` (`contacto`) ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
