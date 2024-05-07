@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2024 a las 21:18:59
+-- Tiempo de generación: 07-05-2024 a las 21:31:53
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -30,6 +30,7 @@ USE `cinemapolis`;
 -- Estructura de tabla para la tabla `eventos`
 --
 
+DROP TABLE IF EXISTS `eventos`;
 CREATE TABLE `eventos` (
   `creador_evento` varchar(50) NOT NULL,
   `nombre_evento` varchar(100) NOT NULL,
@@ -44,6 +45,7 @@ CREATE TABLE `eventos` (
 -- Estructura de tabla para la tabla `foro`
 --
 
+DROP TABLE IF EXISTS `foro`;
 CREATE TABLE `foro` (
   `id_foro` varchar(50) NOT NULL,
   `contacto` varchar(50) NOT NULL,
@@ -57,6 +59,7 @@ CREATE TABLE `foro` (
 -- Estructura de tabla para la tabla `genero_peliculas`
 --
 
+DROP TABLE IF EXISTS `genero_peliculas`;
 CREATE TABLE `genero_peliculas` (
   `titulo` varchar(100) NOT NULL,
   `genero` varchar(50) NOT NULL
@@ -68,6 +71,7 @@ CREATE TABLE `genero_peliculas` (
 -- Estructura de tabla para la tabla `lista_foros`
 --
 
+DROP TABLE IF EXISTS `lista_foros`;
 CREATE TABLE `lista_foros` (
   `id_foro` varchar(50) NOT NULL,
   `contacto` varchar(50) NOT NULL,
@@ -80,6 +84,7 @@ CREATE TABLE `lista_foros` (
 -- Estructura de tabla para la tabla `peliculas`
 --
 
+DROP TABLE IF EXISTS `peliculas`;
 CREATE TABLE `peliculas` (
   `titulo` varchar(100) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
@@ -94,6 +99,7 @@ CREATE TABLE `peliculas` (
 -- Estructura de tabla para la tabla `resenyas`
 --
 
+DROP TABLE IF EXISTS `resenyas`;
 CREATE TABLE `resenyas` (
   `contacto` varchar(50) NOT NULL,
   `pelicula` varchar(100) NOT NULL,
@@ -106,6 +112,7 @@ CREATE TABLE `resenyas` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `nombre` varchar(50) NOT NULL,
   `contacto` varchar(50) NOT NULL,
@@ -119,6 +126,7 @@ CREATE TABLE `usuarios` (
 -- Estructura de tabla para la tabla `valoraciones`
 --
 
+DROP TABLE IF EXISTS `valoraciones`;
 CREATE TABLE `valoraciones` (
   `contacto` varchar(50) NOT NULL,
   `pelicula` varchar(100) NOT NULL,

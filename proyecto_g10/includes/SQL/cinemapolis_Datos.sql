@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2024 a las 21:18:51
+-- Tiempo de generación: 07-05-2024 a las 21:30:24
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -21,9 +21,12 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `cinemapolis`
 --
-CREATE DATABASE IF NOT EXISTS `cinemapolis` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `cinemapolis`;
 
+--
+-- Truncar tablas antes de insertar `eventos`
+--
+
+TRUNCATE TABLE `eventos`;
 --
 -- Volcado de datos para la tabla `eventos`
 --
@@ -32,6 +35,11 @@ INSERT INTO `eventos` (`creador_evento`, `nombre_evento`, `descripcion_evento`, 
 ('admin@admin.es', 'Quedada para hablar del valle de las sombras', 'Os espero en el Meet', '2024-05-12', '2024-05-07'),
 ('admin@admin.es', 'Veamos Nimona', 'Vamos a ver nimona a las 5PM', '2024-05-10', '2024-05-07');
 
+--
+-- Truncar tablas antes de insertar `foro`
+--
+
+TRUNCATE TABLE `foro`;
 --
 -- Volcado de datos para la tabla `foro`
 --
@@ -45,6 +53,11 @@ INSERT INTO `foro` (`id_foro`, `contacto`, `mensaje`, `fecha_envio`) VALUES
 ('Valle de las sombras (explicaciones)', 'admin@admin.es', 'que alguien me explique el final', '2024-05-07 21:09:29');
 
 --
+-- Truncar tablas antes de insertar `genero_peliculas`
+--
+
+TRUNCATE TABLE `genero_peliculas`;
+--
 -- Volcado de datos para la tabla `genero_peliculas`
 --
 
@@ -55,6 +68,11 @@ INSERT INTO `genero_peliculas` (`titulo`, `genero`) VALUES
 ('Tarot', 'Terror'),
 ('Valle de sombras', 'Ciencia ficci&oacute;n');
 
+--
+-- Truncar tablas antes de insertar `lista_foros`
+--
+
+TRUNCATE TABLE `lista_foros`;
 --
 -- Volcado de datos para la tabla `lista_foros`
 --
@@ -67,6 +85,11 @@ INSERT INTO `lista_foros` (`id_foro`, `contacto`, `descripcion`) VALUES
 ('Odio hacia nimona', 'user1@gmail.com', 'simplemente la detesto');
 
 --
+-- Truncar tablas antes de insertar `peliculas`
+--
+
+TRUNCATE TABLE `peliculas`;
+--
 -- Volcado de datos para la tabla `peliculas`
 --
 
@@ -77,6 +100,11 @@ INSERT INTO `peliculas` (`titulo`, `descripcion`, `fecha_estreno`, `direccion_fo
 ('Tarot', 'Cuando un grupo de amigos infringe de manera imprudente la regla sagrada de la lectura de las cartas del Tarot -nunca se debe utilizar la baraja de otra persona-, desatan sin saberlo un mal atrapado en las cartas malditas. Uno a uno, se enfrentan cara a cara al destino y acaban en una carrera contra la muerte para escapar del futuro que las cartas predicen.', '2024-05-10', './images/2024-05-07-20-26-23-Tarot.jpg', 'Una mano con una carta de tarot'),
 ('Valle de sombras', 'Cordillera del Himalaya, a&ntilde;o 1999. Quique, Clara y el peque&ntilde;o Lucas disfrutan de sus primeras vacaciones juntos en el norte de la India. Una noche, durmiendo al raso durante una tormenta, sufren un brutal ataque por unos bandidos. Horas despu&eacute;s, Quique es rescatado por un nativo y trasladado a una remota aldea aislada en las monta&ntilde;as', '2024-05-03', './images/2024-05-07-20-48-10-valle_de_sombras.jpg', 'Un hombre mirando a la nada');
 
+--
+-- Truncar tablas antes de insertar `resenyas`
+--
+
+TRUNCATE TABLE `resenyas`;
 --
 -- Volcado de datos para la tabla `resenyas`
 --
@@ -90,6 +118,11 @@ INSERT INTO `resenyas` (`contacto`, `pelicula`, `mensaje`) VALUES
 ('user1@gmail.com', 'Tarot', 'Perfecci&oacute;n (EDITADO)');
 
 --
+-- Truncar tablas antes de insertar `usuarios`
+--
+
+TRUNCATE TABLE `usuarios`;
+--
 -- Volcado de datos para la tabla `usuarios`
 --
 
@@ -101,6 +134,11 @@ INSERT INTO `usuarios` (`nombre`, `contacto`, `admin`, `pass`) VALUES
 ('user4', 'user4@gmail.com', 0, '$2y$10$kL1GaVHRkV1UzbiBpq5JMudhEz2HPY7ecl1wbUalLUwA23YhvyAI2'),
 ('user5', 'user5@gmail.com', 0, '$2y$10$qmVhLMDYv5RFx3CH0JVSHuauxoas0N6SFPiZbWDBS7/oR8IcCvxF2');
 
+--
+-- Truncar tablas antes de insertar `valoraciones`
+--
+
+TRUNCATE TABLE `valoraciones`;
 --
 -- Volcado de datos para la tabla `valoraciones`
 --
