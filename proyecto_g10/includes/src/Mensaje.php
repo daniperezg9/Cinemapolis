@@ -8,6 +8,33 @@ class Mensaje{
     private $mensaje;
     private $fecha_envio;
 
+    public function getIdForo()
+    {
+        return $this->idforo;
+    }
+
+    public function getContacto()
+    {
+        return $this->contacto;
+    }
+
+    public function getMensaje()
+    {
+        return $this->mensaje;
+    }
+
+    public function getFE()
+    {
+        return $this->fecha_envio;
+    }
+
+    private function __construct($idforo,$contacto,$mensaje, $fecha_envio) {
+        $this->idforo = $idforo;
+        $this->contacto = $contacto;
+        $this->mensaje = $mensaje;
+        $this->fecha_envio = $fecha_envio;
+    }
+
     public static function listaMensajes(){
         $app = Aplicacion::getInstance();
         $conn = $app->getConexionBd();
@@ -16,7 +43,19 @@ class Mensaje{
         }
         $idforo=$conn->real_escape_string($_POST['id_foro']);
         $query = "SELECT f.contacto AS contacto , f.fecha_envio AS fecha_envio ,f.mensaje AS mensaje FROM `foro` f join `lista_foros` lf ON f.id_foro=lf.id_foro WHERE lf.id_foro ='$idforo'";
-        $result = $conn->query($query);
+        $rs = $conn->query($query);
+        $result = [];
+        $i = 0;
+        if ($rs) {
+            foreach ($rs as $fila) {  
+                $result[$i] = new Mensaje($idforo, $fila['contacto'], $fila['mensaje'], $fila['fecha_envio']);
+                $i++;
+            }
+            $rs->free();
+        }
+        else {
+            error_log("Error BD ({$conn->errno}): $conn->error");
+        }
         return $result;
     }
 
