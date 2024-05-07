@@ -224,6 +224,11 @@
 		margin:10px;
 	}
 
+	table, table td, table th{
+
+		border: 3px solid rgb(218, 155, 62);
+	}
+
 	@media all and (max-width: 640px) { /* Cambios en la vista de la web para dispositivos móviles */
 		div#contenedor {
 			height : 100vh;
