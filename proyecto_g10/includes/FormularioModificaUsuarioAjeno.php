@@ -23,8 +23,8 @@ class FormularioModificaUsuarioAjeno extends Formulario{
 
         $muestraLista="<select name='contacto'><option value='nada'>Selecciona una cuenta</option>";
 
-        while($row=$listaUsers->fetch_array()){
-            $contacto=$row['contacto'];
+        foreach($listaUsers as $row){
+            $contacto=$row->get_contacto_usuario();
             $muestraLista.="<option value='$contacto'>$contacto</option>";
         }
 

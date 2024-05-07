@@ -2,17 +2,21 @@
 namespace cinemapolis;
 
 class Usuario{
-
-
-    public const ADMIN_ROLE = 1;
-
-    public const USER_ROLE = 0;
-
+    
+    
     private $contacto;
     private $nombre;
     private $esAdmin;
     private $password;
     
+    private function __construct($nombre,$contacto, $esAdministrador, $pass)
+    {
+        $this->contacto = $contacto;
+        $this->nombre = $nombre;
+        $this->password = $pass;
+        $this->esAdmin = $esAdministrador;
+    }
+
     public static function login($correoUsuario, $pass)
     {
         $usuario = self::buscaUserPorCorreo($correoUsuario);
@@ -22,14 +26,20 @@ class Usuario{
         return false;
     }
 
-
     public static function listaUserPorCorreo($contacto){
         $conn= Aplicacion::getInstance()->getConexionBd();
         if ($conn->connect_error){
             die("La conexión ha fallado" . $conn->connect_error);
         }
-        $query = "SELECT usuarios.contacto FROM usuarios WHERE contacto != '$contacto'";
-        $result = $conn->query($query);
+        $query = "SELECT * FROM usuarios WHERE contacto != '$contacto'";
+        $result=[];
+        $rs = $conn->query($query);
+        $i=0;
+        foreach($rs as $row){
+            $result[$i]=new Usuario($row['nombre'],$row['contacto'], $row['admin'],$row['pass']);
+            $i++;
+        }
+        $rs->free();
         return $result;
     }
 
@@ -216,13 +226,6 @@ class Usuario{
         return password_verify($password, $this->password);
     }
 
-    private function __construct($nombre,$contacto, $esAdministrador, $pass)
-    {
-        $this->contacto = $contacto;
-        $this->nombre = $nombre;
-        $this->password = $pass;
-        $this->esAdmin = $esAdministrador;
-    }
 
     public  function get_contacto_usuario(){
        return $this->contacto;

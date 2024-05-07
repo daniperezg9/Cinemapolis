@@ -18,12 +18,12 @@ class FormularioBorrarUsuarioAjeno extends Formulario{
 
         $correo=$_SESSION['contacto'];
 
-        $listaCorreos=Usuario::listaUserPorCorreo($correo); //no queremos que un admin pueda borrar su propia cuenta
+        $listaUsers=Usuario::listaUserPorCorreo($correo); //no queremos que un admin pueda borrar su propia cuenta
 
         $muestraLista="<select name='sel'><option value='nada'>Selecciona una cuenta</option>";
 
-        while($row=$listaCorreos->fetch_array()){
-            $contacto=$row['contacto'];
+        foreach($listaUsers as $row){
+            $contacto=$row->get_contacto_usuario();
             $muestraLista.="<option value='$contacto'>$contacto</option>";
         }
 
