@@ -61,11 +61,12 @@ class Foro{
         $query = "SELECT id_foro FROM lista_foros WHERE id_foro = '$i' AND contacto ='$c' ";
         $result = $conn->query($query);
 
-        if ($result->num_rows == 0){      
+        if ($result->num_rows == 0){    
+            $result->free();  
             $query = "INSERT INTO lista_foros (id_foro, contacto, descripcion) VALUES ('$i', '$c', '$d')";
             //seteamos con lo devuelto por la consulta
             $result = $conn->query($query);
-            $result->free();  
+              
         }
 
         $conn->close();
