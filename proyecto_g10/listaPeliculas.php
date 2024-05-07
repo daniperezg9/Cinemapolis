@@ -12,14 +12,12 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     // Preparamos el contenido principal
     if(isset($_SESSION['admin'])&&$_SESSION['admin']==0){
     $contenidoPrincipal = <<<EOS
-    <div id="contenedor">
-        <table id ="tablaListaPeliculas">
-            <tr><th>Imagen</th><th>Título</th><th>Descripción</th></tr>
+    <table id ="tablaListaPeliculas">
+        <tr><th>Imagen</th><th>Título</th><th>Descripción</th></tr>
     EOS;
     }
     else{
         $contenidoPrincipal = <<<EOS
-    <div id="contenedor">
         <table id ="tablaListaPeliculas">
             <tr><th>Imagen</th><th>Título</th><th>Descripción</th><th>Modificar pelicula</th><th>Borrar pelicula</th></tr>
     EOS;
@@ -59,7 +57,6 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
     }
     $contenidoPrincipal .= <<<EOS
         </table>
-    </div>
     EOS;
 
 }
