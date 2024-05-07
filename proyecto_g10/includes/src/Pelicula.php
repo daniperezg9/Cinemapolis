@@ -45,8 +45,8 @@ class Pelicula{
         } 
         
         $conn = Aplicacion::getInstance()->getConexionBd();
-
-        $t= $conn->real_escape_string($titulo);
+        $taux= filter_var($titulo, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $t= $conn->real_escape_string($taux);
 
         $query = "SELECT * FROM peliculas p JOIN `genero_peliculas` pg ON p.titulo = pg.titulo  WHERE p.titulo = '$t' ";
 
