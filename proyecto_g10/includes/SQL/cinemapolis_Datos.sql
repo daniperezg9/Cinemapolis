@@ -34,7 +34,7 @@ TRUNCATE TABLE `eventos`;
 INSERT INTO `eventos` (`creador_evento`, `nombre_evento`, `descripcion_evento`, `fecha_evento`, `fecha_creacion`) VALUES
 ('admin@admin.es', 'Quedada para hablar del valle de las sombras', 'Os espero en el Meet', '2024-05-12', '2024-05-07'),
 ('admin@admin.es', 'veamos nimona (EDITADO)', 'vamos a verlo 13 veces seguidas (EDITADO)', '2024-05-02', '2024-05-07'),
-('user4@gmail.com', 'Noche de pelis retro', 'Te invito a ver los mejores clásicos del cine', '2024-05-11', '2024-05-08');
+('admin@gmail.com', 'Noche de pelis retro', 'Te invito a ver los mejores clásicos del cine', '2024-05-11', '2024-05-08');
 
 --
 -- Truncar tablas antes de insertar `foro`
