@@ -121,7 +121,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                          </form>
                      EOS;
                      $contenidoPrincipal .= <<<EOS
-                         <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli">Editar Valoración</a></p>
+                         <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli&contacto=$contacto">Editar Valoración</a></p>
                      EOS;
                      $contenidoPrincipal .= "</td>"; 
                  }
@@ -135,7 +135,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                          </form>
                      EOS;
                      $contenidoPrincipal .= <<<EOS
-                         <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli">Editar Valoración</a></p>
+                         <p><a class="editaValoracion" href="editaValoraciones.php?titulo=$tituloPeli&contacto=$contacto">Editar Valoración</a></p>
                      EOS;
                      $contenidoPrincipal .= "</td>";
                  }
