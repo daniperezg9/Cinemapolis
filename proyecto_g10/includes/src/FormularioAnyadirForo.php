@@ -26,6 +26,7 @@ class FormularioAnyadirForo extends Formulario{
                 <label for="id_foro">Nombre del foro:</label>
                 <input required id="id_foro" type="text" name="id_foro" value="$id_foro"/>
                 <p>{$erroresCampos['id_foro']}</p>
+                <span id="validForo"><p id="foroOk">Foro disponible.</p><p id="foroMal">Este usuario ya tiene un foro con ese nombre.</p></span>
             </div>
             <div>
                 <label for="descripcion">Descripcion del foro</label>
