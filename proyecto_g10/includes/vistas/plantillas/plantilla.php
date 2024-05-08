@@ -26,5 +26,6 @@
 	<script type="text/javascript" src="JS/correo_registro.js"></script>
 	<script type="text/javascript" src="JS/check_pelicula.js"></script>
 	<script type="text/javascript" src="JS/modifica_pelicula.js"></script>
+	<script type="text/javascript" src="JS/check_foro.js"></script>
 </body>
 </html>
