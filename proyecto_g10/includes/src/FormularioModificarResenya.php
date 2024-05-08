@@ -14,7 +14,7 @@ class FormularioModificarResenya extends Formulario{
 
         $titulo = $_GET['titulo'] ?? '';
         $mensaje = $datos['mensaje'] ?? '';
-        $contacto = $_SESSION['contacto'] ?? '';
+        $contacto = $_GET['contacto'] ?? '';
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
         $erroresCampos = self::generaErroresCampos(['titulo','mensaje','contacto'],

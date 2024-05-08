@@ -68,7 +68,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                     </form>
                 EOS;
                 $contenidoPrincipal .= <<<EOS
-                        <p><a class="editaResenya" href="editaResenyas.php?titulo=$tituloPeli">Editar reseña</a></p>
+                        <p><a class="editaResenya" href="editaResenyas.php?titulo=$tituloPeli&contacto=$contacto">Editar reseña</a></p>
                     EOS;
             }
             else if($_SESSION['contacto']==$contacto){
@@ -82,7 +82,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']) {
                 EOS;
                 
                 $contenidoPrincipal .= <<<EOS
-                        <p><a class="editaResenya" href="editaResenyas.php?titulo=$tituloPeli">Editar reseña</a></p>
+                        <p><a class="editaResenya" href="editaResenyas.php?titulo=$tituloPeli&contacto=$contacto">Editar reseña</a></p>
                     EOS;
                 
                 $contenidoPrincipal .= "</td>";
