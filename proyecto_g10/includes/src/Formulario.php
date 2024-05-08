@@ -266,7 +266,6 @@ abstract class Formulario
 
         $htmlForm = <<<EOS
         <form method="{$this->method}" action="{$this->action}" id="{$this->formId}" {$classAtt} {$enctypeAtt}>
-            <input type="hidden" name="formId" value="{$this->formId}" />
             $htmlCamposFormularios
         </form>
 EOS;

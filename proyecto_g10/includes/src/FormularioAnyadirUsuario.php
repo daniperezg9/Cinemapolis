@@ -4,7 +4,7 @@ namespace cinemapolis\src;
 class FormularioAnyadirUsuario extends Formulario{
 
     public function __construct(){
-        parent::__construct('formanyadirusuario', ['urlRedireccion' => 'index.php']);
+        parent::__construct('formanyadirusuario', ['urlRedireccion' => 'index.php','enctype'=>'multipart/form-data']);
     }
 
     protected function generaCamposFormulario(&$datos){
@@ -25,18 +25,19 @@ class FormularioAnyadirUsuario extends Formulario{
             <div>
                 <label for="nombre">Nombre:</label>
                 <input id="nombre" type="text" name="nombre" value="$nombre" />
-                <p>{$erroresCampos['nombre']}
+                <p>{$erroresCampos['nombre']}</p>
             </div>
             <div>
                 <label for="correo">Correo:</label>
                 <input id="correo" type="email" name="correo" value="$correo" />
-                <p>{$erroresCampos['correo']}
+                <p>{$erroresCampos['correo']}</p>
+                <span id="validEmail"><p id="emailOk">Correo disponible para crear cuenta</p><p id="emailMal">Este correo no es valido.</p></span>
             </div>
             <div>
                 <label for="contra">Contraseña:</label>
                 </br></br>
                 <input id="contra" type="password" name="contra" value="$contra" />
-                <p>{$erroresCampos['contra']}
+                <p>{$erroresCampos['contra']}</p>
             </div>
             <button type="submit" name="Enviar">Crear usuario</button>
         </fieldset>

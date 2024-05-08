@@ -69,8 +69,7 @@ INSERT INTO `genero_peliculas` (`titulo`, `genero`) VALUES
 ('Tarot', 'Terror'),
 ('Valle de sombras', 'Ciencia ficci&oacute;n'),
 ('Mary Poppins', 'Fantasía'),
-('El bueno, el feo y el malo', 'Western'),
-('Vengadores: Endgame', 'Ciencia ficción');
+('El bueno, el feo y el malo', 'Western');
 
 --
 -- Truncar tablas antes de insertar `lista_foros`
@@ -104,8 +103,7 @@ INSERT INTO `peliculas` (`titulo`, `descripcion`, `fecha_estreno`, `direccion_fo
 ('Tarot', 'Cuando un grupo de amigos infringe de manera imprudente la regla sagrada de la lectura de las cartas del Tarot -nunca se debe utilizar la baraja de otra persona-, desatan sin saberlo un mal atrapado en las cartas malditas. Uno a uno, se enfrentan cara a cara al destino y acaban en una carrera contra la muerte para escapar del futuro que las cartas predicen.', '2024-05-10', './images/2024-05-07-20-26-23-Tarot.jpg', 'Una mano con una carta de tarot'),
 ('Valle de sombras', 'Cordillera del Himalaya, a&ntilde;o 1999. Quique, Clara y el peque&ntilde;o Lucas disfrutan de sus primeras vacaciones juntos en el norte de la India. Una noche, durmiendo al raso durante una tormenta, sufren un brutal ataque por unos bandidos. Horas despu&eacute;s, Quique es rescatado por un nativo y trasladado a una remota aldea aislada en las monta&ntilde;as', '2024-05-03', './images/2024-05-07-20-48-10-valle_de_sombras.jpg', 'Un hombre mirando a la nada'),
 ('Mary Poppins', 'La vida de dos niños rebeldes que pretenden llamar la atención de sus padres haciendo la vida imposible a todas las niñeras, se verá alterada con la llegada de Mary Poppins, una institutriz que baja de las nubes usando su paraguas como paracaídas.', '1965-12-02', './images/mary-poppins-portada.jpg', 'Mary Poppins volando'),
-('El bueno, el feo y el malo', 'Los protagonistas son tres cazadores de recompensas que buscan un tesoro que ninguno de ellos puede encontrar sin la ayuda de los otros dos. Así que los tres colaboran entre sí, al menos en apariencia.', '1968-08-07', './images/bueno-feo-y-malo.jpg', 'El bueno, el feo y el malo de pie'),
-('Vengadores: Endgame', 'Después de los eventos devastadores de "Vengadores: Infinity War", el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deberán reunirse una vez más para intentar detenerlo y restaurar el orden en el universo de una vez por todas.', '2019-04-26', './images/vengadores-endgame.jpg', 'Portada de los Vengadores: Endgame');
+('El bueno, el feo y el malo', 'Los protagonistas son tres cazadores de recompensas que buscan un tesoro que ninguno de ellos puede encontrar sin la ayuda de los otros dos. Así que los tres colaboran entre sí, al menos en apariencia.', '1968-08-07', './images/bueno-feo-y-malo.jpg', 'El bueno, el feo y el malo de pie');
 
 --
 -- Truncar tablas antes de insertar `resenyas`

@@ -22,5 +22,7 @@
 	require(RAIZ_APP.'/vistas/comun/pie.php');
 	?>
 	</div>
+	<script type="text/javascript" src="JS/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="JS/correo_registro.js"></script>
 </body>
 </html>
