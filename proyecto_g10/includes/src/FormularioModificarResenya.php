@@ -45,9 +45,8 @@ class FormularioModificarResenya extends Formulario{
         $this->errores = [];
 
         $mensaje =      filter_var($datos['mensaje'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $titulo =   filter_var($datos['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $contacto =   filter_var($datos['contacto'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+        $titulo =   filter_var($_GET['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $contacto =   filter_var($_GET['contacto'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if ( !$mensaje || empty($mensaje) ) {
             $this->errores['mensaje'] = 'Tienes que añadir una reseña';

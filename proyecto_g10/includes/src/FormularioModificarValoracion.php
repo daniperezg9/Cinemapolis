@@ -14,7 +14,7 @@ class FormularioModificarValoracion extends Formulario{
 
         $titulo = $_GET['titulo'] ?? '';
         $contacto = $_GET['contacto'] ?? '';
-        $puntuacion = $datos['puntuacion'] ?? '';
+        $puntuacion = $datos['puntuacion'] ?? 1;
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
         $erroresCampos = self::generaErroresCampos(['titulo','puntuacion','contacto'],

@@ -43,8 +43,6 @@ class Valoracion{
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
-        unset($_SESSION['valoracion_realizadas'][$pelicula]);
-        unset($_SESSION['valoracion_realizadas'][$pelicula][$contacto]);
         return true;
     }
 
