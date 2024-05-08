@@ -161,8 +161,8 @@ INSERT INTO `valoraciones` (`contacto`, `pelicula`, `puntuacion`) VALUES
 ('user1@gmail.com', 'El bueno, el feo y el malo', 1),
 ('user1@gmail.com', 'Tarot', 10),
 ('user2@gmail.com', 'El bueno, el feo y el malo', 10),
-('user5@gmail.com', 'Mary Poppins', 9);
-('user4@gmail.com', 'Mary Poppins', 10);
+('user5@gmail.com', 'Mary Poppins', 9),
+('user4@gmail.com', 'Mary Poppins', 10),
 ('user3@gmail.com', 'Shrek', 10);
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
