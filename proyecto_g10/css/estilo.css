@@ -1,250 +1,251 @@
-	body { /* Fondo de la página web */
-		background-color: #110a2c;
-		text-align: left;
-	}
+body { /* Fondo de la página web */
+	background-color: #110a2c;
+	text-align: left;
+}
 
-	h1, strong { /* Los títulos 1 y textos en negrita */
-		color: rgb(218, 155, 62);
-	}
+h1, strong { /* Los títulos 1 y textos en negrita */
+	color: rgb(218, 155, 62);
+}
 
-	div#contenedor { /* Contenedor que tiene la vista de la web*/
+div#contenedor { /* Contenedor que tiene la vista de la web*/
+	height : 100vh;
+	display : grid;
+	grid-template-columns: 20% auto 20%;
+	grid-template-rows: 25% 65% 10%;
+
+	margin : 0 auto;
+	border: 1px solid black;
+}
+
+header { /* Encabezado de la página */
+	display: flex;
+	grid-column: 1 / 4;
+	background-color: #110a2c;
+
+	grid-template-columns: 1fr 2fr;
+	grid-template-areas: "logo login";
+	align-items: center;
+}
+
+#cinemaPack { /* Imagen del cine */
+	width: 125px;
+	height: auto;
+	margin-right: 25px;
+}
+
+.logo-container { /* Contenedor del logo */
+	flex: 0 0 auto; /* Ajusta el tamaño del contenedor del logo para que no crezca */
+}
+
+.inicioSesion {
+	flex: 1; /* Permite que el contenedor de inicio de sesión ocupe el espacio restante */
+	text-align: left; /* Alinea el texto a la derecha */
+}
+
+header img { /* Imagenes del encabezado */
+	margin-right: 25px; 
+	width: 125px;
+	height: auto; 
+}
+
+header h1 { /* Título del encabezado */
+	color: white;
+	font-size: 2em;
+	grid-area: logo;
+}
+
+header a, header a:visited { /* Enlaces del encabezado de inicio de sesión */
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+header p { /* Texto del encabezado */
+	color: white;
+}
+
+header a:hover { /* Enlaces del encabezado al pasar el cursor */
+	color: rgb(218, 155, 62);
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+nav { /* Barra de navegación izquierda */
+	grid-column: 1;
+	grid-row: 2;
+	overflow: hidden;
+}
+
+nav h2, a { /* Enlaces de la barra de navegación izquierda */
+	color: white;
+}
+
+nav a:hover { /* Enlaces del encabezado al pasar el cursor */
+	color: rgb(218, 155, 62);
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#imgSideIzq{ /* Imagen de la barra lateral izquierda */
+	width: 80%;
+	height: auto;
+}
+
+aside { /* Barra de lateral derecha */
+	grid-column: 3;
+	grid-row: 2;
+	text-align: center;
+}
+
+aside img { /* Imagenes de la barra lateral derecha */
+	height: 80%;
+	width: auto;
+	margin-top: 10%;
+}
+
+main { /* Contenido principal de la página actual */
+	grid-column: 2;
+	grid-row: 2;
+	background-color: white;
+	overflow: scroll;
+}
+
+article{
+	padding: 5%;
+}
+
+main a, main a:visited { /*Enlaces del contenido principal */
+	color: rgb(0, 128, 255);
+	font-weight: bold;
+}
+
+main a:hover{ /* Enlaces del contenido principal al pasar el cursor */
+	color: rgb(218, 155, 62);
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#claquetaImg{ /* Imagen de la página principal */
+	width: 100px;
+	height: auto;
+}
+
+#cineImg{ /* Imagen de la página principal */
+	width: 100px;
+	height: auto;
+}
+
+main table{ /*tablas del main */
+	width: 49em;
+}
+
+#resenyas { /* Reseñas de las películas */
+	color: slateblue;
+}
+
+.borrarPeli { /* Botón de borrar película */
+	color : red;
+}
+
+footer { /* Pie de página */
+	grid-column: 1 / 4;
+	grid-row: 3;
+	text-align: right;
+}
+
+#instaImg, #facebookImg, #twiterImg{ /* Imagenes de las redes sociales */
+	width: 50px;
+	height: 50px;
+}
+
+fieldset { /* Formularios */
+	box-sizing: border-box;
+	border: 3px solid rgb(218, 155, 62);
+	width: 15em;
+	margin: 0 auto;
+	margin-top: 3%;
+}
+
+#loginFieldset { /* Formulario de login */
+	margin-top: 10%;
+}
+
+#modificaFieldset{/*Formulario de modificaUsuario*/
+	margin-top: 20%;
+	margin-bottom: 24%;
+}
+
+#signupFieldset { /* Formulario de Sign up */
+	margin-top: 5%;
+}
+
+legend { /* Leyenda de los formularios */
+	color: #fff;
+	background: rgb(218, 155, 62);
+	border: 3px solid rgb(218, 155, 62);
+	padding: 10px 15px;
+}
+
+#contenedorEvento{ /*Contenedor de todos los eventos */
+	border: 3px solid rgb(218, 155, 62);
+	padding:10px;
+	margin:10px;
+}
+
+#modificaEventoFieldset{ /* Formulario para modificar eventos */
+	border: 3px solid rgb(175, 14, 143);
+	padding:10px;
+	margin:10px;
+	width: 15em;
+}
+
+#modificaEventoLegend{ /* Leyenda para modificar eventos */
+	background: rgb(175, 14, 143);
+	border: 3px solid rgb(175, 14, 143);
+}
+
+#agregaEventoFieldset{ /* Formulario para agregar eventos */
+	border: 3px solid rgb(0, 128, 255);
+	padding:10px;
+	margin:10px;
+	width: 15em;
+}
+
+#agregaEventoLegend{ /* Leyenda para agregar eventos */
+	background: rgb(0, 128, 255);
+	border: 3px solid rgb(0, 128, 255);
+}
+
+#contenedorForo{
+	border: 3px solid rgb(157, 79, 0);
+	background-color: rgb(218, 155, 62);
+	color:white;
+	padding:10px;
+	margin:10px;
+}
+
+table, table td, table th{
+
+	border: 3px solid rgb(218, 155, 62);
+}
+
+@media all and (max-width: 640px) { /* Cambios en la vista de la web para dispositivos móviles */
+	div#contenedor {
 		height : 100vh;
 		display : grid;
-		grid-template-columns: 20% auto 20%;
-		grid-template-rows: 25% 65% 10%;
-
-		margin : 0 auto;
-		border: 1px solid black;
+		grid-template-rows: 20% 20% auto 10%;
+		grid-template-columns: 100%;
 	}
-
-	header { /* Encabezado de la página */
-		display: flex;
-		grid-column: 1 / 4;
-		background-color: #110a2c;
-
-		grid-template-columns: 1fr 2fr;
-		grid-template-areas: "logo login";
-		align-items: center;
+	header{
+		grid-row: 1;
 	}
-
-	#cinemaPack { /* Imagen del cine */
-		width: 125px;
-		height: auto;
-		margin-right: 25px;
-	}
-
-	.logo-container { /* Contenedor del logo */
-		flex: 0 0 auto; /* Ajusta el tamaño del contenedor del logo para que no crezca */
-	}
-
-	.inicioSesion {
-		flex: 1; /* Permite que el contenedor de inicio de sesión ocupe el espacio restante */
-		text-align: left; /* Alinea el texto a la derecha */
-	}
-	
-	header img { /* Imagenes del encabezado */
-		margin-right: 25px; 
-		width: 125px;
-		height: auto; 
-	}
-
-	header h1 { /* Título del encabezado */
-		color: white;
-		font-size: 2em;
-		grid-area: logo;
-	}
-
-	header a, header a:visited { /* Enlaces del encabezado de inicio de sesión */
-		color: white;
-		font-weight: bold;
-		text-decoration: none;
-	}
-
-	header p { /* Texto del encabezado */
-		color: white;
-	}
-
-	header a:hover { /* Enlaces del encabezado al pasar el cursor */
-		color: rgb(218, 155, 62);
-		font-weight: bold;
-		text-decoration: underline;
-	}
-
-	nav { /* Barra de navegación izquierda */
-		grid-column: 1;
+	nav{
 		grid-row: 2;
-		overflow: hidden;
 	}
-
-	nav h2, a { /* Enlaces de la barra de navegación izquierda */
-		color: white;
-	}
-
-	nav a:hover { /* Enlaces del encabezado al pasar el cursor */
-		color: rgb(218, 155, 62);
-		font-weight: bold;
-		text-decoration: underline;
-	}
-
-	#imgSideIzq{ /* Imagen de la barra lateral izquierda */
-		width: 80%;
-		height: auto;
-	}
-
-	aside { /* Barra de lateral derecha */
-		grid-column: 3;
-		grid-row: 2;
-		text-align: center;
-	}
-
-	aside img { /* Imagenes de la barra lateral derecha */
-		height: 80%;
-		width: auto;
-		margin-top: 10%;
-	}
-
-	main { /* Contenido principal de la página actual */
-		grid-column: 2;
-		grid-row: 2;
-		background-color: white;
-		overflow: scroll;
-	}
-
-	article{
-		padding: 5%;
-	}
-
-	main a, main a:visited { /*Enlaces del contenido principal */
-		color: rgb(0, 128, 255);
-		font-weight: bold;
-	}
-
-	main a:hover{ /* Enlaces del contenido principal al pasar el cursor */
-		color: rgb(218, 155, 62);
-		font-weight: bold;
-		text-decoration: underline;
-	}
-
-	#claquetaImg{ /* Imagen de la página principal */
-		width: 100px;
-		height: auto;
-	}
-
-	#cineImg{ /* Imagen de la página principal */
-		width: 100px;
-		height: auto;
-	}
-
-	main table{ /*tablas del main */
-		width: 49em;
-	}
-
-	#resenyas { /* Reseñas de las películas */
-		color: slateblue;
-	}
-
-	.borrarPeli { /* Botón de borrar película */
-		color : red;
-	}
-
-	footer { /* Pie de página */
-		grid-column: 1 / 4;
+	main{
 		grid-row: 3;
-		text-align: right;
 	}
-
-	#instaImg, #facebookImg, #twiterImg{ /* Imagenes de las redes sociales */
-		width: 50px;
-		height: 50px;
+	footer{
+		grid-row: 4;
 	}
-
-	fieldset { /* Formularios */
-		box-sizing: border-box;
-		border: 3px solid rgb(218, 155, 62);
-		width: 15em;
-		margin: 0 auto;
-		margin-top: 3%;
-	}
-
-	#loginFieldset { /* Formulario de login */
-		margin-top: 10%;
-	}
-
-	#modificaFieldset{/*Formulario de modificaUsuario*/
-		margin-top: 20%;
-		margin-bottom: 24%;
-	}
-
-	#signupFieldset { /* Formulario de Sign up */
-		margin-top: 5%;
-	}
-	
-	legend { /* Leyenda de los formularios */
-		color: #fff;
-		background: rgb(218, 155, 62);
-		border: 3px solid rgb(218, 155, 62);
-		padding: 10px 15px;
-	}
-
-	#contenedorEvento{ /*Contenedor de todos los eventos */
-		border: 3px solid rgb(218, 155, 62);
-		padding:10px;
-		margin:10px;
-	}
-
-	#modificaEventoFieldset{ /* Formulario para modificar eventos */
-		border: 3px solid rgb(175, 14, 143);
-		padding:10px;
-		margin:10px;
-		width: 15em;
-	}
-
-	#modificaEventoLegend{ /* Leyenda para modificar eventos */
-		background: rgb(175, 14, 143);
-		border: 3px solid rgb(175, 14, 143);
-	}
-
-	#agregaEventoFieldset{ /* Formulario para agregar eventos */
-		border: 3px solid rgb(0, 128, 255);
-		padding:10px;
-		margin:10px;
-		width: 15em;
-	}
-
-	#agregaEventoLegend{ /* Leyenda para agregar eventos */
-		background: rgb(0, 128, 255);
-		border: 3px solid rgb(0, 128, 255);
-	}
-
-	#contenedorForo{
-		border: 3px solid rgb(157, 79, 0);
-		background-color: rgb(218, 155, 62);
-		color:white;
-		padding:10px;
-		margin:10px;
-	}
-
-	table, table td, table th{
-
-		border: 3px solid rgb(218, 155, 62);
-	}
-
-	@media all and (max-width: 640px) { /* Cambios en la vista de la web para dispositivos móviles */
-		div#contenedor {
-			height : 100vh;
-			display : grid;
-			grid-template-rows: 20% 20% auto 10%;
-		}
-		header{
-			grid-row: 1;
-		}
-		nav{
-			grid-row: 2;
-		}
-		main{
-			grid-row: 3;
-		}
-		footer{
-			grid-row: 4;
-		}
-	}
+}
