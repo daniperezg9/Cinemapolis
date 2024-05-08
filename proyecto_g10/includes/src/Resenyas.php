@@ -27,8 +27,6 @@ class Resenyas{
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
-        unset($_SESSION['reseñas_realizadas'][$pelicula]);
-        unset($_SESSION['reseñas_realizadas'][$pelicula][$contacto]);
         return true;
     }
     public static function modificarResenyas($contacto,$pelicula,$resenya){
