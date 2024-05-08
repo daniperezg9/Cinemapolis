@@ -42,7 +42,7 @@ class Mensaje{
               die("La conexión ha fallado" . $conn->connect_error);
         }
         $idforo=$conn->real_escape_string($_POST['id_foro']);
-        $query = "SELECT f.contacto AS contacto , f.fecha_envio AS fecha_envio ,f.mensaje AS mensaje FROM `foro` f join `lista_foros` lf ON f.id_foro=lf.id_foro WHERE lf.id_foro ='$idforo'";
+        $query = "SELECT f.contacto AS contacto , f.fecha_envio AS fecha_envio ,f.mensaje AS mensaje FROM `foro` f join `lista_foros` lf ON f.id_foro=lf.id_foro WHERE lf.id_foro ='$idforo' ORDER BY f.fecha_envio";
         $rs = $conn->query($query);
         $result = [];
         $i = 0;

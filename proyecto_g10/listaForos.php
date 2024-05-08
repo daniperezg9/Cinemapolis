@@ -35,11 +35,8 @@ else {
       <p>Creador por: $contacto
       EOS;
       if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row->getContacto()){ //Si eres admin o el dueño puedes editarlo
-        $_SESSION['foroEditId'] = $idforo;
-        $_SESSION['foroEditCon'] = $contacto;
-        $_SESSION['foroEditDes'] = $descripcion;
         $contenidoPrincipal .= <<< EOS
-        <form action="signupEditForo.php" method="post" style="display: inline;">
+        <form action= "signupEditForo.php?foro={$idforo}&contacto={$contacto}" method="post" style="display: inline;">
         <p> Editar Foro:
             <button type="submit">Editar Foro</button>
         </form>

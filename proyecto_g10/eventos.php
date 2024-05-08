@@ -34,21 +34,18 @@ $contenidoPrincipal = '';
                     $contenidoPrincipal .= <<<EOS
                         <div id ='borrarEventoBoton'>
                             <form action='borrarEvento.php' method='post'>
-                                <input type='hidden' name='nombre_evento' value='{$row->getNE()}'>
-                                <input type='hidden' name='creador_evento' value='{$row->getCE()}'>
-                                <input type='hidden' name='fecha_evento' value='{$row->getFE()}'>
+                                <input type='hidden' name='nombre_evento' value='{$nombre}'>
+                                <input type='hidden' name='creador_evento' value='{$creador}'>
+                                <input type='hidden' name='fecha_evento' value='{$fecha}'>
                                 <input type='submit' value='Borrar Evento'>
                             </form>
                         </div>
                     EOS;
                 }
                 if(Admin::esAdmin($_SESSION)){ 
-                    $_SESSION['nEventoEdit'] = $nombre;
-                    $_SESSION['cEventoEdit'] = $creador;
-                    $_SESSION['fEventoEdit'] = $fecha;
                     $contenidoPrincipal .= <<<EOS
                     <div id ='ModificarEventoBoton'>
-                        <form action="./modificaEvento.php" method="post">
+                        <form action="./modificaEvento.php?oldn={$nombre}&oldc={$creador}&oldf={$fecha}" method="post">
                             <input type='submit' value='Modifica Evento'>                            
                         </form>
                     </div>

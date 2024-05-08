@@ -45,6 +45,9 @@ class FormularioModificarEvento extends Formulario{
 
     protected function procesaFormulario(&$datos)
     {
+        $oldn = $_GET['oldn'];
+        $oldf = $_GET['oldf'];
+        $oldc = $_GET['oldc'];
         $this->errores = [];
 
         $nombre_evento = trim($datos['nombre_evento'] ?? '');
@@ -67,10 +70,7 @@ class FormularioModificarEvento extends Formulario{
 
         if (count($this->errores) === 0) {
             $fecha_creacion = date("Y-m-d");
-            $evento = Evento::modificarEvento($nombre_evento,$descripcion_evento,$fecha_evento,$_SESSION['nEventoEdit'],$_SESSION['fEventoEdit'],$_SESSION['cEventoEdit']);
-            unset($_SESSION['nEventoEdit']);
-            unset($_SESSION['fEventoEdit']);
-            unset($_SESSION['cEventoEdit']);
+            $evento = Evento::modificarEvento($nombre_evento,$descripcion_evento,$fecha_evento,$oldn,$oldf,$oldc);
         }
     }
 }

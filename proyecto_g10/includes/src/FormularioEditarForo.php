@@ -7,17 +7,16 @@ class FormularioEditarForo extends Formulario{
         parent::__construct('formeditarforo', ['urlRedireccion' => 'listaForos.php', 'enctype' => 'multipart/form-data']);
     }
 
+    
+
     protected function generaCamposFormulario(&$datos){
 
-        $id_foro = $datos['id_foro'] ?? '';
-        $contacto = $datos['contacto'] ?? '';
         $descripcion = $datos['descripcion'] ?? '';
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-        $erroresCampos = self::generaErroresCampos(['id_foro', 'contacto', 'descripcion'],
+        $erroresCampos = self::generaErroresCampos(['descripcion'],
                                                     $this->errores, 'span', array('class' => 'error'));
         
-
         $html = <<<EOF
         $htmlErroresGlobales
         <fieldset>
@@ -35,6 +34,8 @@ class FormularioEditarForo extends Formulario{
 
     protected function procesaFormulario(&$datos)
     {
+        $foro = ($_GET['foro']);
+        $con = ($_GET['contacto']);
         $this->errores = [];
 
         $descripcion = trim($datos['descripcion'] ?? '');
@@ -45,11 +46,8 @@ class FormularioEditarForo extends Formulario{
 
         if (count($this->errores) === 0) {
 
-            Foro::modificarForo($_SESSION['foroEditId'],$_SESSION['foroEditCon'],$descripcion);
+            Foro::modificarForo($foro,$con,$descripcion);
 
-            unset($_SESSION['foroEditId']);
-            unset($_SESSION['foroEditCon']);
-            unset($_SESSION['foroEditDes']);
         }
     }
 }
