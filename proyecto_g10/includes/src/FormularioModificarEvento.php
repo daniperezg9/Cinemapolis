@@ -25,17 +25,17 @@ class FormularioModificarEvento extends Formulario{
             <div>
                 <label for="nombre_evento">Nombre del evento:</label>
                 <input id="nombre_evento" type="text" name="nombre_evento" value="$nombre_evento" />
-                <p>{$erroresCampos['nombre_evento']}
+                <p>{$erroresCampos['nombre_evento']}</p>
             </div>
             <div>
                 <label for="descripcion_evento">Descripcion del evento</label>
                 <input id="descripcion_evento" type="text" name="descripcion_evento" value="$descripcion_evento" />
-                <p>{$erroresCampos['descripcion_evento']}
+                <p>{$erroresCampos['descripcion_evento']}</p>
             </div>      
             <div>
                 <label for="fecha_evento">Fecha del evento</label>
                 <input id="fecha_evento" type="date" name="fecha_evento" value="$fecha_evento" />
-                <p>{$erroresCampos['fecha_evento']}
+                <p>{$erroresCampos['fecha_evento']}</p>
             </div>       
         <button type="submit" name="Enviar">Modificar Evento</button>
         </fieldset>

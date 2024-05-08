@@ -28,33 +28,33 @@ class FormularioAnyadirPelicula extends Formulario{
             <div>
                 <label for="archivo">Imagen de la película:</label>
                 <input id="archivo" type="file" name="archivo" value="$archivo" />
-                <p>{$erroresCampos['archivo']}
+                <p>{$erroresCampos['archivo']}</p>
             </div>
             <div>
                 <label for="alt">Descripcion de la imagen:</label>
                 <input id="alt" type="text" name="alt" value="$alt" />
-                <p>{$erroresCampos['alt']}
+                <p>{$erroresCampos['alt']}</p>
             </div>
             <div>
                 <label for="titulo_nueva">Titulo de la pelicula:</label>
                 <input id="titulo_nueva" type="text" name="titulo_nueva" value="$titulo" />
-                <p>{$erroresCampos['titulo_nueva']}
+                <p>{$erroresCampos['titulo_nueva']}</p>
                 <span id="validTitulo"><p id="titulo_nueva_Ok">El título de esta pelicula está disponible.</p><p id="titulo_nueva_Mal">El título de esta pelicula no está disponible.</p></span>
             </div>
             <div>
                 <label for="desc">Descripcion de la pelicula:</label>
                 <input id="desc" type="text" name="desc" value="$desc" />
-                <p>{$erroresCampos['desc']}
+                <p>{$erroresCampos['desc']}</p>
             </div>
             <div>
                 <label for="fecha_estreno">Fecha de estreno de la pelicula:</label>
                 <input id="fecha_estreno" type="date" name="fecha_estreno" value="$fecha_estreno" />
-                <p>{$erroresCampos['fecha_estreno']}
+                <p>{$erroresCampos['fecha_estreno']}</p>
             </div>
             <div>
                 <label for="genero">Genero de la pelicula:</label>
                 <input id="genero" type="text" name="genero" value="$genero" />
-                <p>{$erroresCampos['genero']}
+                <p>{$erroresCampos['genero']}</p>
             </div>
             <button type="submit" name="Enviar">Añadir</button>
         </fieldset>

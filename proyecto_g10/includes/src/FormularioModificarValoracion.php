@@ -28,11 +28,11 @@ class FormularioModificarValoracion extends Formulario{
             <div>
             <label for="puntuacion">Valoración (1-10):</label>
             <input required id="puntuacion" type="number" name="puntuacion" min="1" max="10" required value="$puntuacion" />
-                <p>{$erroresCampos['puntuacion']}
+                <p>{$erroresCampos['puntuacion']}</p>
                 <input type="hidden" name="contacto" value="$contacto">
-                <p>{$erroresCampos['contacto']}
+                <p>{$erroresCampos['contacto']}</p>
                 <input type="hidden" name="titulo" value="$titulo">
-                <p>{$erroresCampos['titulo']}
+                <p>{$erroresCampos['titulo']}</p>
                 
             </div>
             <button type="submit" name="Enviar">Modificar valoracion</button>

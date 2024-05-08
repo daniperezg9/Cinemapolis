@@ -28,11 +28,11 @@ class FormularioModificarResenya extends Formulario{
             <div>
                 <label for="titulo">Reseña:</label>
                 <input required id="titulo" type="text" name="mensaje" value="$mensaje" />
-                <p>{$erroresCampos['mensaje']}
+                <p>{$erroresCampos['mensaje']}</p>
                 <input type="hidden" name="contacto" value="$contacto">
-                <p>{$erroresCampos['contacto']}
+                <p>{$erroresCampos['contacto']}</p>
                 <input type="hidden" name="titulo" value="$titulo">
-                <p>{$erroresCampos['titulo']}
+                <p>{$erroresCampos['titulo']}</p>
             </div>
             <button type="submit" name="Enviar">Editar reseña</button>
         </fieldset>

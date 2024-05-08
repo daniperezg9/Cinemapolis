@@ -36,11 +36,11 @@ class FormularioBorrarUsuarioAjeno extends Formulario{
             <div>
                 <label for="sel">Correo a borrar:</label>
                 $muestraLista
-                <p>{$erroresCampos['sel']}
+                <p>{$erroresCampos['sel']}</p>
                 <p>Escribe el correo seleccionado para borrar la cuenta</p>
                 <label for="conf">Confirmación:</label>
                 <input id="conf" type="text" name="conf" value="$conf" />
-                <p>{$erroresCampos['conf']}
+                <p>{$erroresCampos['conf']}</p>
             </div>
             <button type="submit" name="Enviar">Borrar usuario</button>
         </fieldset>

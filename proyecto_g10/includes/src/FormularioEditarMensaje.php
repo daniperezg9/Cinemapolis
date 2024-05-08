@@ -26,7 +26,7 @@ class FormularioEditarMensaje extends Formulario{
             <div>
                 <label for="mensaje">Mensaje Editado</label>
                 <input id="mensaje" type="text" name="mensaje" value="$mensaje" />
-                <p>{$erroresCampos['mensaje']}
+                <p>{$erroresCampos['mensaje']}</p>
             </div>
         <button type="submit" name="Enviar">Editar</button>
         </fieldset>

@@ -26,7 +26,7 @@ class FormularioBorrarUsuarioPropio extends Formulario{
                 <p>Escribe tu correo [ $correo ] para borrar la cuenta</p>
                 <label for="conf">Confirmación:</label>
                 <input id="conf" type="text" name="conf" value="$conf" />
-                <p>{$erroresCampos['conf']}
+                <p>{$erroresCampos['conf']}</p>
             </div>
             <button type="submit" name="Enviar">Borrar usuario</button>
         </fieldset>
