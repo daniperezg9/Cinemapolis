@@ -67,7 +67,7 @@ EOS;
   $contenidoPrincipal .= <<<EOS
   </table>
   <form action="signupMensaje.php" method="post" style="display: inline;">
-    <p>Añadir mensaje al foro:
+    <p>Añadir mensaje al foro:</p>
     <button type="submit">Mensaje Nuevo</button>
   </form>
   EOS;

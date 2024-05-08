@@ -27,7 +27,7 @@ else {
       $contenidoPrincipal .= <<< EOS
       <div id ="contenedorForo">
       <form action="foros.php" method="post" style="display: inline;">
-      <p> Foro:
+      <p>Foro:</p>
           <input type="hidden" name="id_foro" value="$idforo">
           <button type="submit">$idforo</button>
       </form>
@@ -37,7 +37,7 @@ else {
       if(Admin::esAdmin($_SESSION) || $_SESSION["contacto"] == $row->getContacto()){ //Si eres admin o el dueño puedes editarlo
         $contenidoPrincipal .= <<< EOS
         <form action= "signupEditForo.php?foro={$idforo}&contacto={$contacto}" method="post" style="display: inline;">
-        <p> Editar Foro:
+        <p> Editar Foro:</p>
             <button type="submit">Editar Foro</button>
         </form>
         EOS;
@@ -45,7 +45,7 @@ else {
       if(Admin::esAdmin($_SESSION)){ //Si eres admin puedes borrarlo.
         $contenidoPrincipal .= <<< EOS
           <form action="borrarForo.php" method="post" style="display: inline;">
-          <p> Deseas borrar este foro (NO HAY VUELTA ATRÁS):
+          <p> Deseas borrar este foro (NO HAY VUELTA ATRÁS):</p>
               <input type="hidden" name="id_foro" value="$idforo">
               <input type="hidden" name="contacto" value="$contacto">
               <button type="submit">Borrar Foro</button>
