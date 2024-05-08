@@ -15,14 +15,15 @@ EOS;
     foreach($result as $row) {
       $con = $row->getContacto();
       $fe = $row->getFE();
+      $m = $row->getMensaje();
       $contenidoPrincipal .= <<<EOS
         <tr>
-        <td>{$row->getMensaje()}</td>
-        <td>{$row->getContacto()}</td>
-        <td>{$row->getFE()}</td>
+        <td>{$m}</td>
+        <td>{$con}</td>
+        <td>{$fe}</td>
       EOS;
-        if($row->getContacto() == $_SESSION['contacto'] || $_SESSION['admin']=='1'){
-        $_SESSION['msgEditFE'] = $row->getFE();
+        if($con == $_SESSION['contacto'] || $_SESSION['admin']=='1'){
+        $_SESSION['msgEditFE'] = $fe;
         $contenidoPrincipal .= <<<EOS
           <td>
           <form action="signupMensajeEdit.php" method="post" style="display: inline;">
@@ -36,7 +37,7 @@ EOS;
           <td> </td>
         EOS;
         }
-        if($row->getContacto() == $_SESSION['contacto'] || $_SESSION['admin']=='1'){  //Si creas el foro o tienes poderes de administración, puedes borar y editar los mensajes dentro de los mismos
+        if($con == $_SESSION['contacto'] || $_SESSION['admin']=='1'){  //Si creas el foro o tienes poderes de administración, puedes borar y editar los mensajes dentro de los mismos
           $contenidoPrincipal .= <<<EOS
           <td>
           <form action="borraMensaje.php" method="post" style="display: inline;">

@@ -17,7 +17,7 @@ if (!isset($_SESSION['login'])) {
 }
 else {
   $contenidoPrincipal = <<< EOS
-    <h1>Bienvenido al foro: interactúa con quien quieras!</h1>
+    <h1>Bienvenido al foro!</h1>
   EOS;
   if($result!=null){
     foreach($result as $row) {
