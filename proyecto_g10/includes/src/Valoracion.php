@@ -59,7 +59,7 @@ class Valoracion{
         $p=$conn->real_escape_string($pelicula);
         $v=$conn->real_escape_string($valoracion);
 
-        $query = "UPDATE valoraciones SET puntuacion = '$v (EDITADO)' WHERE  contacto = '$c' AND pelicula = '$p'";
+        $query = "UPDATE valoraciones SET puntuacion = '$v' WHERE  contacto = '$c' AND pelicula = '$p'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;

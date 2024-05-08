@@ -2,7 +2,7 @@
 namespace cinemapolis\src;
 require_once __DIR__.'/includes/config.php';
 
-$tituloPagina = 'Agrega pelicula';
+$tituloPagina = 'Editar Evento';
 
 $contenidoPrincipal = '';
 
