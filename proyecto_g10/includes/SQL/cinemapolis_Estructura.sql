@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2024 a las 21:31:53
+-- Tiempo de generación: 08-05-2024 a las 18:49:49
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -160,6 +160,12 @@ ALTER TABLE `genero_peliculas`
   ADD KEY `titulo` (`titulo`);
 
 --
+-- Indices de la tabla `lista_foros`
+--
+ALTER TABLE `lista_foros`
+  ADD KEY `lista_foros->foros` (`id_foro`);
+
+--
 -- Indices de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
@@ -196,12 +202,6 @@ ALTER TABLE `valoraciones`
 --
 ALTER TABLE `eventos`
   ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`creador_evento`) REFERENCES `usuarios` (`contacto`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `foro`
---
-ALTER TABLE `foro`
-  ADD CONSTRAINT `foro_ibfk_1` FOREIGN KEY (`contacto`) REFERENCES `usuarios` (`contacto`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `resenyas`
