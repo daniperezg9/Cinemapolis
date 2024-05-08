@@ -8,15 +8,12 @@ $(document).ready(function() {
 	$("#titulo_mod").change(function(){
 
 		var url="check_titulo_mod.php?titulo_peli_mod="+$("#titulo_mod").val()+"&titulo_peli_pre="+$("#tituloprem").val();
-		console.log('La url es ' + url);
 		$.get(url,peliculaExiste);
 	  }
   );
 
 	function peliculaExiste(data,status) {
 		if(status== 'success'){
-			
-			console.log('data es ' + data + ' status es ' + status);
 			if (data == 'existe') {
                 alert("Titulo ya usado por otra pelicula");
 				$("#titulo_mod").focus(); //Devuelvo el foco

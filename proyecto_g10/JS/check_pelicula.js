@@ -8,7 +8,6 @@ $(document).ready(function() {
 	$("#titulo_nueva").change(function(){
 
 		var url="check_titulo.php?titulo_nueva="+$("#titulo_nueva").val();
-		console.log('La url es ' + url);
 		$.get(url,peliculaExiste);
 	  }
   );
@@ -16,7 +15,6 @@ $(document).ready(function() {
 	function peliculaExiste(data,status) {
 		if(status== 'success'){
 			
-			console.log('data es ' + data + ' status es ' + status);
 			if (data == 'existe') {
 				$("#titulo_nueva").focus(); //Devuelvo el foco
 				$("#titulo_nueva_Ok").hide();
