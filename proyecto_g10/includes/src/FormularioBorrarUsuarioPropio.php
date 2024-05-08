@@ -4,7 +4,7 @@ namespace cinemapolis\src;
 class FormularioBorrarUsuarioPropio extends Formulario{
 
     public function __construct(){
-        parent::__construct('formborrauserpropio', ['urlRedireccion' => 'index.php']);
+        parent::__construct('formborrauserpropio', ['urlRedireccion' => 'index.php', 'enctype' => 'multipart/form-data']);
     }
 
     protected function generaCamposFormulario(&$datos){

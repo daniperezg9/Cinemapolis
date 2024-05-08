@@ -4,7 +4,7 @@ namespace cinemapolis\src;
 class FormularioEditarForo extends Formulario{
 
     public function __construct(){
-        parent::__construct('formeditarforo', ['urlRedireccion' => 'listaForos.php']);
+        parent::__construct('formeditarforo', ['urlRedireccion' => 'listaForos.php', 'enctype' => 'multipart/form-data']);
     }
 
     protected function generaCamposFormulario(&$datos){

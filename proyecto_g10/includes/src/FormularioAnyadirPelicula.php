@@ -11,13 +11,13 @@ class FormularioAnyadirPelicula extends Formulario{
 
         $archivo= $datos['archivo'] ?? '';
         $alt = $datos['alt'] ?? '';
-        $titulo = $datos['titulo'] ?? '';
+        $titulo = $datos['titulo_nueva'] ?? '';
         $desc = $datos['desc'] ?? '';
         $fecha_estreno = $datos['fecha_estreno'] ?? '';
         $genero = $datos['genero'] ?? '';
         
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-        $erroresCampos = self::generaErroresCampos(['archivo', 'alt','titulo', 'desc','fecha_estreno','genero'],
+        $erroresCampos = self::generaErroresCampos(['archivo', 'alt','titulo_nueva', 'desc','fecha_estreno','genero'],
                                                     $this->errores, 'span', array('class' => 'error'));
         
 
@@ -36,9 +36,10 @@ class FormularioAnyadirPelicula extends Formulario{
                 <p>{$erroresCampos['alt']}
             </div>
             <div>
-                <label for="titulo">Titulo de la pelicula:</label>
-                <input id="titulo" type="text" name="titulo" value="$titulo" />
-                <p>{$erroresCampos['titulo']}
+                <label for="titulo_nueva">Titulo de la pelicula:</label>
+                <input id="titulo_nueva" type="text" name="titulo_nueva" value="$titulo" />
+                <p>{$erroresCampos['titulo_nueva']}
+                <span id="validTitulo"><p id="titulo_nueva_Ok">El título de esta pelicula está disponible.</p><p id="titulo_nueva_Mal">El título de esta pelicula no está disponible.</p></span>
             </div>
             <div>
                 <label for="desc">Descripcion de la pelicula:</label>
@@ -67,7 +68,7 @@ class FormularioAnyadirPelicula extends Formulario{
 
         $archivo= $_FILES['archivo']['name']; //FALTA procesar que sea png y el tamaño
         $alt =      filter_var($datos['alt'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $titulo =   filter_var($datos['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $titulo =   filter_var($datos['titulo_nueva'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $desc =     filter_var($datos['desc'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $fecha_estreno = $datos['fecha_estreno'];
         $genero =   filter_var($datos['genero'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -80,7 +81,7 @@ class FormularioAnyadirPelicula extends Formulario{
             $this->errores['alt'] = 'La descripción de la imagen no puede ser vacía.';
         }
         if ( ! $titulo || empty($titulo) ) {
-            $this->errores['titulo'] = 'El titulo no puede estar vacío.';
+            $this->errores['titulo_nueva'] = 'El titulo no puede estar vacío.';
         }
         if ( ! $desc || empty($desc) ) {
             $this->errores['desc'] = 'La descripción de la pelicula no puede ser vacía.';
@@ -94,7 +95,7 @@ class FormularioAnyadirPelicula extends Formulario{
 
         if (count($this->errores) === 0) {
 
-            $peli = Pelicula::buscaPelicula($datos['titulo']);
+            $peli = Pelicula::buscaPelicula($datos['titulo_nueva']);
             
             if($peli){
                 $this->errores[] = "La pelicula ya esta registrada en la base de datos";

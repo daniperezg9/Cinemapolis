@@ -4,7 +4,7 @@ use SplFileInfo;
 class FormularioModificaUsuarioAjeno extends Formulario{
 
     public function __construct(){
-        parent::__construct('formmodifuserajeno', ['urlRedireccion' => 'index.php']);
+        parent::__construct('formmodifuserajeno', ['urlRedireccion' => 'index.php', 'enctype' => 'multipart/form-data']);
     }
 
     protected function generaCamposFormulario(&$datos){

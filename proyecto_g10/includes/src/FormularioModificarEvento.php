@@ -4,7 +4,7 @@ namespace cinemapolis\src;
 class FormularioModificarEvento extends Formulario{
 
     public function __construct(){
-        parent::__construct('formmodevento', ['urlRedireccion' => 'eventos.php']);        	
+        parent::__construct('formmodevento', ['urlRedireccion' => 'eventos.php', 'enctype' => 'multipart/form-data']);        	
     }
 
     protected function generaCamposFormulario(&$datos){

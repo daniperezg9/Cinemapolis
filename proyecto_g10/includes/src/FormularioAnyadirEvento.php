@@ -4,7 +4,7 @@ namespace cinemapolis\src;
 class FormularioAnyadirEvento extends Formulario{
 
     public function __construct(){
-        parent::__construct('formañadirevento', ['urlRedireccion' => 'eventos.php']);        	
+        parent::__construct('formañadirevento', ['urlRedireccion' => 'eventos.php', 'enctype' => 'multipart/form-data']);        	
     }
 
     protected function generaCamposFormulario(&$datos){

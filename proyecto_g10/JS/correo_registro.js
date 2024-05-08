@@ -3,7 +3,6 @@ $(document).ready(function() {
 	$("#emailMal").hide();
 	
 	$("#correo").change(function(){
-		console.log("cambio de JS\n");
 		const campo = $("#correo"); // referencia jquery al campo
 		campo[0].setCustomValidity(""); // limpia validaciones previas
 
@@ -35,7 +34,7 @@ $(document).ready(function() {
 	
 	$("#correo").change(function(){
 		var url="check_user.php?correo="+$("#correo").val();
-		console.log('La url es ' + url);
+		//console.log('La url es ' + url);
 		$.get(url,usuarioExiste);
 	  }
   );

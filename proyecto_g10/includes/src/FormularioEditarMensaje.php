@@ -4,7 +4,7 @@ namespace cinemapolis\src;
 class FormularioEditarMensaje extends Formulario{
 
     public function __construct(){
-        parent::__construct('formeditarmsg', ['urlRedireccion' => 'listaForos.php']);
+        parent::__construct('formeditarmsg', ['urlRedireccion' => 'listaForos.php', 'enctype' => 'multipart/form-data']);
     }
 
     protected function generaCamposFormulario(&$datos){

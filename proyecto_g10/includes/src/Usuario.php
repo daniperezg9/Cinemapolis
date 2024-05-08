@@ -157,24 +157,9 @@ class Usuario{
         } 
 
         $conn = Aplicacion::getInstance()->getConexionBd();
-
-        //CHAT DE USUARIO
-        $query =sprintf("DELETE FROM chat WHERE `remitente` = '%s' OR `receptor` ='s'"
-        , $conn->real_escape_string($correoUsuario), $conn->real_escape_string($correoUsuario));
-        $conn->query($query);
-
-        //USUARIO EN EVENTO
-        $query =sprintf("DELETE FROM usuario_en_evento WHERE `contacto` = '%s'"
-        , $conn->real_escape_string($correoUsuario));
-        $conn->query($query);
         
         //EVENTOS CREADOS POR EL USUARIO
         $query =sprintf("DELETE FROM eventos WHERE `creador_evento` = '%s'"
-        , $conn->real_escape_string($correoUsuario));
-        $conn->query($query);
-
-        //ELIMINAMOS AL USER YA QUE NO EXISTE DE LA LISTA
-        $query =sprintf("DELETE FROM usuario_en_foro WHERE `contacto` = '%s'"
         , $conn->real_escape_string($correoUsuario));
         $conn->query($query);
         

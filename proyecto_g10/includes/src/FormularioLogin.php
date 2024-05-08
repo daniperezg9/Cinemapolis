@@ -4,7 +4,7 @@ namespace cinemapolis\src;
 class FormularioLogin extends Formulario{
 
     public function __construct(){
-        parent::__construct('formlogin', ['urlRedireccion' => 'index.php']);
+        parent::__construct('formlogin', ['urlRedireccion' => 'index.php', 'enctype' => 'multipart/form-data']);
     }
 
     protected function generaCamposFormulario(&$datos){

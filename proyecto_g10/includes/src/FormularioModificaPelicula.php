@@ -9,16 +9,18 @@ class FormularioModificaPelicula extends Formulario{
 
     protected function generaCamposFormulario(&$datos){
         
+        $peli = Pelicula::buscaPelicula($_GET['titulo']);
+
         $archivo= $datos['archivo'] ?? '';
-        $alt = $datos['alt'] ?? '';
-        $titulo = $datos['titulo'] ?? '';
+        $alt = $datos['alt'] ?? $peli->get_alt();
+        $titulo = $datos['titulo_mod'] ?? $_GET['titulo'];
         $tituloprem =$_GET['titulo']??'';
-        $desc = $datos['desc'] ?? '';
-        $fecha_estreno = $datos['fecha_estreno'] ?? '';
-        $genero = $datos['genero'] ?? '';
+        $desc = $datos['desc'] ?? $peli->get_descripcion();
+        $fecha_estreno = $datos['fecha_estreno'] ?? $peli->get_fecha_estreno();
+        $genero = $datos['genero'] ?? $peli->get_genero();
         
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-        $erroresCampos = self::generaErroresCampos(['archivo', 'alt','titulo', 'desc','fecha_estreno','genero','tituloprem'],
+        $erroresCampos = self::generaErroresCampos(['archivo', 'alt','titulo_mod', 'desc','fecha_estreno','genero','tituloprem'],
                                                     $this->errores, 'span', array('class' => 'error'));
         
 
@@ -44,9 +46,10 @@ class FormularioModificaPelicula extends Formulario{
                 <p>{$erroresCampos['alt']}</p>
             </div>
             <div>
-                <label for="titulo">Titulo de la pelicula:</label>
-                <input id="titulo" type="text" name="titulo" value="$titulo" />
+                <label for="titulo_mod">Titulo de la pelicula:</label>
+                <input id="titulo_mod" type="text" name="titulo_mod" value="$titulo" />
                 <p>{$erroresCampos['titulo']}</p>
+                <span id="validTitulo"><p id="titulo_mod_Ok">El título se puede usar.</p><p id="titulo_mod_Mal">Este título lo tiene ya otra pelicula</p></span>
             </div>
             <div>
                 <label for="desc">Descripcion de la pelicula:</label>
@@ -78,7 +81,7 @@ class FormularioModificaPelicula extends Formulario{
         $archivo=   $_FILES['archivo']['name']; 
         
         $alt =      filter_var($datos['alt'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $titulo =   filter_var($datos['titulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $titulo =   filter_var($datos['titulo_mod'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $desc =     filter_var($datos['desc'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $fecha_estreno = $datos['fecha_estreno'] ?? false;
         $genero =   filter_var($datos['genero'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);

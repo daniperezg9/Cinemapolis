@@ -116,6 +116,8 @@ class Pelicula{
             $a=$conn->real_escape_string($alt);
             $f=$conn->real_escape_string($fecha_estreno);
             $g=$conn->real_escape_string($genero);
+
+
             if($temp===$dir){
 
                 $query = "UPDATE peliculas  SET titulo = '$t', descripcion = '$d', fecha_estreno='$f',alt='$a' where titulo ='$tp' ";

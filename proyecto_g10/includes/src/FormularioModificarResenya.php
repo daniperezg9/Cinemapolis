@@ -7,7 +7,7 @@ class FormularioModificarResenya extends Formulario{
     public function __construct(){
         $titulo = $_GET['titulo'] ?? '';
         $url_destino = './resenyasYvaloraciones.php?titulo=' . urlencode($titulo);
-        parent::__construct('formmodificarresesenya', ['urlRedireccion' => $url_destino]);
+        parent::__construct('formmodificarresesenya', ['urlRedireccion' => $url_destino, 'enctype' => 'multipart/form-data']);
     }
 
     protected function generaCamposFormulario(&$datos){
