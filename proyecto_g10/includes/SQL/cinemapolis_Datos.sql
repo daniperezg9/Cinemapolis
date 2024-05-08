@@ -33,7 +33,8 @@ TRUNCATE TABLE `eventos`;
 
 INSERT INTO `eventos` (`creador_evento`, `nombre_evento`, `descripcion_evento`, `fecha_evento`, `fecha_creacion`) VALUES
 ('admin@admin.es', 'Quedada para hablar del valle de las sombras', 'Os espero en el Meet', '2024-05-12', '2024-05-07'),
-('admin@admin.es', 'veamos nimona (EDITADO)', 'vamos a verlo 13 veces seguidas (EDITADO)', '2024-05-02', '2024-05-07');
+('admin@admin.es', 'veamos nimona (EDITADO)', 'vamos a verlo 13 veces seguidas (EDITADO)', '2024-05-02', '2024-05-07'),
+('user4@gmail.com', 'Noche de pelis retro', 'Te invito a ver los mejores clásicos del cine', '2024-05-11', '2024-05-08');
 
 --
 -- Truncar tablas antes de insertar `foro`
@@ -69,7 +70,8 @@ INSERT INTO `genero_peliculas` (`titulo`, `genero`) VALUES
 ('Valle de sombras', 'Ciencia ficción'),
 ('Mary Poppins', 'Fantasía'),
 ('El bueno, el feo y el malo', 'Western'),
-('Shrek', 'Animación');
+('Shrek', 'Animación'),
+('Los juegos del hambre', 'Acción');
 
 --
 -- Truncar tablas antes de insertar `lista_foros`
@@ -104,7 +106,9 @@ INSERT INTO `peliculas` (`titulo`, `descripcion`, `fecha_estreno`, `direccion_fo
 ('Valle de sombras', 'Cordillera del Himalaya, año 1999. Quique, Clara y el pequeño Lucas disfrutan de sus primeras vacaciones juntos en el norte de la India. Una noche, durmiendo al raso durante una tormenta, sufren un brutal ataque por unos bandidos. Horas después, Quique es rescatado por un nativo y trasladado a una remota aldea aislada en las montañas.', '2024-05-03', './images/2024-05-07-20-48-10-valle_de_sombras.jpg', 'Un hombre mirando a la nada'),
 ('Mary Poppins', 'La vida de dos niños rebeldes que pretenden llamar la atención de sus padres haciendo la vida imposible a todas las niñeras, se verá alterada con la llegada de Mary Poppins, una institutriz que baja de las nubes usando su paraguas como paracaídas.', '1965-12-02', './images/mary-poppins-portada.jpg', 'Mary Poppins volando'),
 ('El bueno, el feo y el malo', 'Los protagonistas son tres cazadores de recompensas que buscan un tesoro que ninguno de ellos puede encontrar sin la ayuda de los otros dos. Así que los tres colaboran entre sí, al menos en apariencia.', '1968-08-07', './images/bueno-feo-y-malo.jpg', 'El bueno, el feo y el malo de pie'),
-('Shrek', 'Hace mucho tiempo, en una lejana ciénaga, vivía un ogro llamado Shrek. Un día, su preciada soledad se ve interrumpida por un montón de personajes de cuento de hadas que invaden su casa. Todos fueron desterrados de su reino por el malvado Lord Farquaad.', '2001-07-13', './images/shrek.jpg', 'Shrek, Asno, Fiona y Lord Farquaad');
+('Shrek', 'Hace mucho tiempo, en una lejana ciénaga, vivía un ogro llamado Shrek. Un día, su preciada soledad se ve interrumpida por un montón de personajes de cuento de hadas que invaden su casa. Todos fueron desterrados de su reino por el malvado Lord Farquaad.', '2001-07-13', './images/shrek.jpg', 'Shrek, Asno, Fiona y Lord Farquaad'),
+('Los juegos del hambre', 'Para demostrar su poder, el régimen del estado totalitario de Panem organiza cada año "Los juegos del hambre". En ellos, 24 jóvenes compiten el uno contra el otro en una batalla en la que solo puede haber un superviviente. La joven Katniss se ofrece voluntaria para participar en los juegos para salvar a su hermana.', '2012-04-20', './images/los-juegos-del-hambre.jpg', 'Katniss apuntando con el arco');
+
 --
 -- Truncar tablas antes de insertar `resenyas`
 --
