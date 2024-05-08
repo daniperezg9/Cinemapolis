@@ -100,7 +100,7 @@ class Evento{
         $c=$conn->real_escape_string($creador_evento_old);
         $feo=$conn->real_escape_string($fecha_evento_old);
 
-        $query = "UPDATE eventos SET nombre_evento = '$n (EDITADO)', descripcion_evento='$d (EDITADO)',fecha_evento = '$fe (EDITADO)' WHERE creador_evento = '$c' AND nombre_evento ='$no' AND fecha_evento = '$feo'";
+        $query = "UPDATE eventos SET nombre_evento = '$n (EDITADO)', descripcion_evento='$d (EDITADO)',fecha_evento = '$fe' WHERE creador_evento = '$c' AND nombre_evento ='$no' AND fecha_evento = '$feo'";
         if ( !$conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
