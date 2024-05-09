@@ -26,7 +26,6 @@ $contenidoPrincipal = <<<EOS
         <li><strong>Explorar reseñas:</strong> Lee las opiniones de otros cinéfilos antes de tomar una decisión. ¿Es esa película de acción realmente épica o solo un fiasco? Descúbrelo con las reseñas de la comunidad.</li>
         <li><strong>Valorar las reseñas de otros usuarios:</strong> ¿No estás de acuerdo con una reseña? ¡Valórala para que otros usuarios vean cuan fiable es esa reseña!</li>
         <li><strong>Participar en foros:</strong> Únete a discusiones apasionantes sobre tus películas favoritas, comparte tus teorías y descubre nuevas perspectivas. 🗣️🎞️</li>
-        <li><strong>Chatear con otros usuarios:</strong> ¿Quieres hablar en privado con un amigo sobre una película o simplemente pasar un buen rato? Utiliza nuestra funcionalidad de chat para conectar con otros amantes del cine. 💬👥</li>
     </ul>
 
     <p>En <strong>Cinemapolis.io</strong>, la magia del cine se combina con la comodidad de la tecnología. ¡Únete a nuestra comunidad y descubre la mejor película para tu próxima quedada! 🎬🍿</p>
